@@ -1,0 +1,12 @@
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb

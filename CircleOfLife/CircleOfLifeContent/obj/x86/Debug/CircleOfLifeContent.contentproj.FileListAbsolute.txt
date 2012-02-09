@@ -1,0 +1,2 @@
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
