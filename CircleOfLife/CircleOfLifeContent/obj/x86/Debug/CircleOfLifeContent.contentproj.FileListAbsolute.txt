@@ -1,2 +1,3 @@
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache

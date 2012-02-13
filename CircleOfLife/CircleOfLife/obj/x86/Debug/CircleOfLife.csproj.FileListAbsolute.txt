@@ -10,3 +10,18 @@ C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyRef
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\dragon.xnb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\hudFont.xnb
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb

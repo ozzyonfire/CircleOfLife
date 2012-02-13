@@ -107,9 +107,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CircleOfLifeGame.cs" />
+    <Compile Include="Creature.cs" />
+    <Compile Include="Ecosystem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Species.cs" />
   </ItemGroup>
   <ItemGroup>

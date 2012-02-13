@@ -10,7 +10,7 @@ namespace CircleOfLife
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (CircleOfLifeGame game = new CircleOfLifeGame())
             {
                 game.Run();
             }

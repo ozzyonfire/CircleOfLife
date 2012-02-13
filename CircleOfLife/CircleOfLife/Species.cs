@@ -3,41 +3,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
     class Species
     {
-        // Properties of Species
+        private string name;
+        private short population;
+        private Ecosystem.speciesStats stats;
+        private List<Creature> creatures = new List<Creature>(100);
 
-        // User defined attributes
-        string Name;
-        float Population;
-        Texture2D Graphic;
-        float Size;
-        float Sight;
-        float Speed;
-        // Not sure if we will have these as base stats or just part of perks
-        float Attack;
-        float Defence;
+        //accesors
+        public Ecosystem.speciesStats Stats { get { return stats; } }
+        public List<Creature> Creatures { get { return creatures; } }
 
-        // Non-user defined attributes
-        float Hunger;
-        float Thirst;
-        float Energy;
-        // add perks
 
-        public void Initialize()
+        //graphics
+
+        //perks?
+        
+        
+        //Extras???
+        private short generations;
+
+        public Species(String speciesName, Ecosystem.speciesStats speciesStats, short xPos, short yPos)
         {
+            name = speciesName;
+            population = 1;
+            stats = speciesStats;
+            creatures.Add(new Creature(xPos, yPos, speciesStats));
         }
 
-        public void Update()
+        public void update()
         {
+            for (int i = 0; i < creatures.Count; i++)
+            {
+                creatures[i].update();
+            }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
         {
+            for (int i = 0; i < creatures.Count; i++)
+            {
+                creatures[i].draw(ref graphics, ref spriteBatch, ref spriteSheet);
+            }
         }
+
+
+        
+
     }
 }
