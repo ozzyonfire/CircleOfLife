@@ -23,7 +23,6 @@ namespace CircleOfLife
         public Ecosystem.speciesStats Stats { get { return stats; } }
         public List<Creature> Creatures { get { return creatures; } }
 
-
         //graphics
 
         //perks?

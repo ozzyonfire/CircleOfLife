@@ -23,6 +23,7 @@ namespace CircleOfLife
         private short energyCap;
         private short foodCap;
         private short waterCap;
+        private short energyValue;
 
         //creature state
         private byte state;    //temporary way of doing this
@@ -43,7 +44,7 @@ namespace CircleOfLife
         //accesors
 
         public Vector2 Position { get { return position; } }
-
+        public short EnergyValue { get { return energyValue; } }
 
         //constructor
         public Creature(short xPos, short yPos, Ecosystem.speciesStats stats)
@@ -55,6 +56,7 @@ namespace CircleOfLife
             energyCap = stats.energyCap;
             foodCap = stats.foodCap;
             waterCap = stats.waterCap;
+            energyValue = stats.energyValue;
 
             position = new Vector2(xPos, yPos);
             orientation = new float();
@@ -64,7 +66,6 @@ namespace CircleOfLife
             water = waterCap;
             energy = energyCap;
         }
-
 
         public void update()
         {
@@ -79,8 +80,8 @@ namespace CircleOfLife
 
                 position += heading * 3.0f;
             }
-        }
 
+        }
 
         public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
         {
@@ -91,10 +92,6 @@ namespace CircleOfLife
 
         }
 
-
-
-
-        
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
             ref float orientation, float turnSpeed)
         {
@@ -137,8 +134,6 @@ namespace CircleOfLife
                 turnToCenterSpeed);
         }
 
-        
-
         /// <summary>
         /// Calculates the angle that an object should face, given its position, its
         /// target's position, its current angle, and its maximum turning speed.
@@ -178,7 +173,10 @@ namespace CircleOfLife
             return radians;
         }
 
-
-
+        // mutator
+        public void Feed(short value)
+        {
+            this.food += value;
+        }
     }
 }

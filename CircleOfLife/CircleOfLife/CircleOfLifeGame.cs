@@ -123,6 +123,7 @@ namespace CircleOfLife
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
+                    stats.energyValue = 20;
                     ecosystem.addSpecies("mouse", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }
@@ -140,6 +141,7 @@ namespace CircleOfLife
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
+                    stats.energyValue = 20;
                     ecosystem.addSpecies("cat", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }

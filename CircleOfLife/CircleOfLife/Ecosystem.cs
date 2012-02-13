@@ -28,14 +28,19 @@ namespace CircleOfLife
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
         //incredibly sloppy
+        // we should iterate through all the creatures and perform the necessary tasks
+        // so feed, check to reproduce, etc.
         public void update()
         {
             //temporary method for killing off species
             bool kill;
+
+            // iterate through all species and all creatures for each species
+
             for (int i = 0; i < species.Count; i++)
             {
                 kill = false;
-                if (species[i].Stats.diet == 0)
+                if (species[i].Stats.diet == 0) // herbivore
                 {
                     for (int j = 0; j < species.Count; j++)
                     {
@@ -44,6 +49,8 @@ namespace CircleOfLife
                             Vector2.Distance(species[i].Creatures[0].Position, species[j].Creatures[0].Position) < 30)
                         {
                             kill = true;
+                            // consume dead creature for food
+                            species[j].Creatures[0].Feed(species[i].Creatures[0].EnergyValue);
                             break;
                         }
                     }
@@ -84,6 +91,7 @@ namespace CircleOfLife
             public short energyCap;
             public short foodCap;
             public short waterCap;
+            public short energyValue; // this is how much the creature is "worth" when it is turned into food
         }
 
     }
