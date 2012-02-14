@@ -76,7 +76,7 @@ namespace CircleOfLife
         {
             if (state == 1) // chase
             {
-                Chase(position, ref prey, ref orientation, 0.2f);
+                Chase(position, ref prey, ref orientation, 0.15f);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed;
             }
@@ -86,12 +86,12 @@ namespace CircleOfLife
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
-                position += heading * 0.25f *speed;
+                position += heading * 0.15f *speed;
             }
             else if (state == 2) // evade
             {
                 // temporary way of doing this for now
-                Wander(position, ref goalDirection, ref orientation, 0.2f);
+                Wander(position, ref goalDirection, ref orientation, 0.3f);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed; // max speed

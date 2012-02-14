@@ -79,6 +79,12 @@ namespace CircleOfLife
                                 // its a prey
                                 prey = true;
                             }
+                            else
+                            {
+                                // nothing to do for now
+                                //species[i].Creatures[j].state = 0;
+                                //break; // this causes a bug which sometimes gets predators stuck in the chase state
+                            }
 
                             if (detected)
                             {
@@ -91,7 +97,7 @@ namespace CircleOfLife
                                         species[i].Creatures[j].state = 1;
                                         species[i].Creatures[j].Prey = species[k].Creatures[l];
                                     }
-                                    else if (pred) // temp
+                                    else if (pred)
                                     {
                                         // start evading
                                         species[i].Creatures[j].state = 2;
@@ -113,6 +119,11 @@ namespace CircleOfLife
                                          // todo: feed
                                         // doing the feeding in here for now
                                     }
+                                    // another creature could have killed the prey
+                                    if (species[i].Creatures[j].Prey.state == 4)
+                                    {
+                                        species[i].Creatures[j].state = 0;
+                                    }
                                 }
                                 else if (species[i].Creatures[j].state == 2) // evading
                                 {
@@ -122,7 +133,7 @@ namespace CircleOfLife
                                     {
                                         // keep evading
                                     }
-                                    else if (species[k].Creatures[l].diet == 1)
+                                    else if (pred)
                                     {
                                         float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position);
                                         if (distanceAway < predDistance)
@@ -154,6 +165,12 @@ namespace CircleOfLife
                                     if (species[i].Creatures[j].Prey == species[k].Creatures[l])
                                     {
                                         // killed it or it escaped
+                                        species[i].Creatures[j].state = 0;
+                                    }
+                                    // or another creature killed it, so it needs to stop chasing
+                                    if (species[i].Creatures[j].Prey.state == 4)
+                                    {
+                                        // stop chasing
                                         species[i].Creatures[j].state = 0;
                                     }
                                 }

@@ -117,7 +117,7 @@ namespace CircleOfLife
                     stats.diet = 0;
                     stats.size = 5;
                     stats.detection = 1;
-                    stats.speed = 7;
+                    stats.speed = 5;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
@@ -135,7 +135,7 @@ namespace CircleOfLife
                     stats.diet = 1;
                     stats.size = 10;
                     stats.detection = 1;
-                    stats.speed = 6;
+                    stats.speed = 4;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
