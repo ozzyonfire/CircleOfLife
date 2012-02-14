@@ -67,7 +67,7 @@ namespace CircleOfLife
             orientation = new float();
 
             state = 0; //wander
-            food = foodCap;
+            food = 0;
             water = waterCap;
             energy = energyCap;
         }
@@ -86,7 +86,15 @@ namespace CircleOfLife
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
-                position += heading * 0.25f*speed;
+                position += heading * 0.25f *speed;
+            }
+            else if (state == 2) // evade
+            {
+                // temporary way of doing this for now
+                Wander(position, ref goalDirection, ref orientation, 0.1f);
+                Vector2 heading = new Vector2(
+                   (float)Math.Cos(orientation), (float)Math.Sin(orientation));
+                position += heading * speed; // max speed
             }
 
         }
@@ -102,8 +110,7 @@ namespace CircleOfLife
 
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
-            Vector2 preyVector = prey.position - position;
-            orientation = TurnToFace(position, preyVector, orientation, .15f * turnSpeed);
+            orientation = TurnToFace(position, prey.position, orientation, .15f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,

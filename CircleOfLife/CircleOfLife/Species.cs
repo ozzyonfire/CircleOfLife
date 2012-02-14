@@ -57,8 +57,10 @@ namespace CircleOfLife
             }
         }
 
-
-        
+        public void reproduce(Creature parent)
+        {
+            creatures.Add(new Creature((short)parent.Position.X,(short)parent.Position.Y, stats));
+        }
 
     }
 }

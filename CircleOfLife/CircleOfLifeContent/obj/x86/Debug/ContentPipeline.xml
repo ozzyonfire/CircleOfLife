@@ -7,10 +7,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>Q:\226\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
-      <LoggerRootDirectory>Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
-      <IntermediateDirectory>Q:\226\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
