@@ -27,6 +27,7 @@ namespace CircleOfLife
         {
             //Check if valid input
             species.Add(new Species(name,stats,x,y));
+            rescanSpecies();
         }
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
@@ -35,6 +36,10 @@ namespace CircleOfLife
         // so feed, check to reproduce, etc.
         public void update()
         {
+            bool kill = false;
+            bool detected = false;
+            bool pred = false;
+            bool prey = false;
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -51,30 +56,42 @@ namespace CircleOfLife
                                 break;
                             }
 
-                            // check if species is prey or predator
-                            // iterate through behaviour lists                
-
                             // check surroundings
                             float distanceAway = Vector2.Distance(species[i].Creatures[j].Position, species[k].Creatures[l].Position);
 
-                            bool detected = false;
+                            detected = false;
                             // random detection roll
                             // distanceAway, detection, random
                             if (distanceAway < 150)
                                 detected = true;
+
+                            // check if species is prey or predator
+                            // iterate through behaviour lists   
+                            pred = false;
+                            prey = false;
+                            if (species[i].predators.Contains(species[k]))
+                            {
+                                // its a predator
+                                pred = true;
+                            }
+                            else if (species[i].prey.Contains(species[k]))
+                            {
+                                // its a prey
+                                prey = true;
+                            }
 
                             if (detected)
                             {
                                 // check state
                                 if (species[i].Creatures[j].state == 0) // wandering
                                 {
-                                    if (species[k].Creatures[l].diet == 0) // temp
+                                    if (prey)
                                     {
                                         // start chasing
                                         species[i].Creatures[j].state = 1;
                                         species[i].Creatures[j].Prey = species[k].Creatures[l];
                                     }
-                                    else if (species[k].Creatures[l].diet == 1) // temp
+                                    else if (pred) // temp
                                     {
                                         // start evading
                                         species[i].Creatures[j].state = 2;
@@ -85,13 +102,13 @@ namespace CircleOfLife
                                 {
                                     if (species[i].Creatures[j].Prey == species[k].Creatures[l])
                                     {
-                                        if (distanceAway < 30)
+                                        if (distanceAway < 15) // change this to an intersection
                                         {
                                             // killed it
                                             species[i].Creatures[j].state = 0;
                                             species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
-                                            species[k].Creatures.RemoveAt(l);
-                                            l--;
+                                            kill = true;
+                                            species[k].Creatures[l].state = 4; // dead
                                         }
                                          // todo: feed
                                         // doing the feeding in here for now
@@ -142,13 +159,13 @@ namespace CircleOfLife
                                 }
                                 else if (species[i].Creatures[j].state == 2) // evading
                                 {
+                                    // check what it is evading
+                                    // if its the target then it escaped set state to wander
                                     if (species[i].Creatures[j].Predator == species[k].Creatures[l])
                                     {
                                         // evaded it
                                         species[i].Creatures[j].state = 0;
                                     }
-                                    // check what it is evading
-                                    // if its the target then it escaped set state to wander
                                 }
                                 else if (species[i].Creatures[j].state == 3) // feeding
                                 {
@@ -171,38 +188,49 @@ namespace CircleOfLife
                 }
             }
 
-            /*
-
+            if (kill)
+            {
                 for (int i = 0; i < species.Count; i++)
                 {
-                    kill = false;
-                    if (species[i].Stats.diet == 0) // herbivore
+                    for (int j = 0; j < species[i].Creatures.Count; j++)
                     {
-                        for (int j = 0; j < species.Count; j++)
+                        if (species[i].Creatures[j].state == 4)
                         {
-                            float test = Vector2.Distance(species[i].Creatures[0].Position, species[j].Creatures[0].Position);
-                            if (species[j].Stats.diet == 1 &&
-                                Vector2.Distance(species[i].Creatures[0].Position, species[j].Creatures[0].Position) < 30)
-                            {
-                                kill = true;
-                                // consume dead creature for food
-                                species[j].Creatures[0].Feed(species[i].Creatures[0].EnergyValue);
-                                break;
-                            }
-                        }
-                        if (kill)
-                        {
-                            species.RemoveAt(i);
-                            i--; //change index so species isn't skipped
+                            // dead
+                            species[i].Creatures.RemoveAt(j);
+                            j--;
                         }
                     }
-
                 }
-             */
+                kill = false;
+            }
 
             for (int i = 0; i < species.Count; i++)
             {
                 species[i].update();
+            }
+        }
+
+        public void rescanSpecies()
+        {
+            // this method iterates through the species and sets what is prey and what is predator
+            for (int i = 0; i < species.Count; i++)
+            {
+                for (int j = 0; j < species.Count; j++)
+                {
+                    // check prey
+                    if (species[i].Stats.size > species[j].Stats.size)
+                    {
+                        // it can feed on the other species
+                        species[i].prey.Add(species[j]);
+                    }
+                    else if (species[i].Stats.size < species[j].Stats.size)
+                    {
+                        // it will be hunted by the other species
+                        species[i].predators.Add(species[j]);
+                    }
+                    // if its equal then they are not predator nor prey
+                }
             }
         }
 

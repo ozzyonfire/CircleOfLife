@@ -115,7 +115,7 @@ namespace CircleOfLife
                     //Creature creation done here for now
                     Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
                     stats.diet = 0;
-                    stats.size = 1;
+                    stats.size = 5;
                     stats.detection = 1;
                     stats.speed = 7;
                     stats.energyCap = 100;
@@ -133,7 +133,7 @@ namespace CircleOfLife
                     //Creature creation done here for now
                     Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
                     stats.diet = 1;
-                    stats.size = 1;
+                    stats.size = 10;
                     stats.detection = 1;
                     stats.speed = 6;
                     stats.energyCap = 100;

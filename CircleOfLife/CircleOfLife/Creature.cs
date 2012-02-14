@@ -76,7 +76,7 @@ namespace CircleOfLife
         {
             if (state == 1) // chase
             {
-                Chase(position, ref prey, ref orientation, 0.1f);
+                Chase(position, ref prey, ref orientation, 0.2f);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed;
             }
@@ -91,7 +91,7 @@ namespace CircleOfLife
             else if (state == 2) // evade
             {
                 // temporary way of doing this for now
-                Wander(position, ref goalDirection, ref orientation, 0.1f);
+                Wander(position, ref goalDirection, ref orientation, 0.2f);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed; // max speed
@@ -111,7 +111,7 @@ namespace CircleOfLife
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
 
-            orientation = TurnToFace(position, prey.position, orientation, .25f * turnSpeed);
+            orientation = TurnToFace(position, prey.position, orientation, .15f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
@@ -130,7 +130,7 @@ namespace CircleOfLife
             }
 
             orientation = TurnToFace(position, position + wanderDirection, orientation,
-                .25f * turnSpeed);
+                .15f * turnSpeed);
 
 
             // next, we'll turn the characters back towards the center of the screen, to
