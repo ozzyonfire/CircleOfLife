@@ -88,14 +88,13 @@ namespace CircleOfLife
                                         if (distanceAway < 30)
                                         {
                                             // killed it
+                                            species[i].Creatures[j].state = 0;
+                                            species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
                                             species[k].Creatures.RemoveAt(l);
                                             l--;
-                                            species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
-
                                         }
-                                        species[i].Creatures[j].state = 0; // todo: feed
+                                         // todo: feed
                                         // doing the feeding in here for now
-                                        
                                     }
                                 }
                                 else if (species[i].Creatures[j].state == 2) // evading
@@ -164,7 +163,8 @@ namespace CircleOfLife
                             if (species[i].Creatures[j].food >= species[i].Creatures[j].foodCap)
                             {
                                 // reproduce
-                                //species[i].reproduce( species[i].Creatures[j] );
+                                species[i].reproduce( species[i].Creatures[j] );
+                                species[i].Creatures[j].food = 0;
                             }
                         }
                     }

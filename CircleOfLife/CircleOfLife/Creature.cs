@@ -110,7 +110,8 @@ namespace CircleOfLife
 
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
-            orientation = TurnToFace(position, prey.position, orientation, .15f * turnSpeed);
+
+            orientation = TurnToFace(position, prey.position, orientation, .25f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
@@ -129,7 +130,7 @@ namespace CircleOfLife
             }
 
             orientation = TurnToFace(position, position + wanderDirection, orientation,
-                .15f * turnSpeed);
+                .25f * turnSpeed);
 
 
             // next, we'll turn the characters back towards the center of the screen, to
