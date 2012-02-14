@@ -24,6 +24,7 @@ namespace CircleOfLife
         public short foodCap;
         private short waterCap;
         private short energyValue;
+        private float agility;
 
         //creature state
         public byte state;    //temporary way of doing this
@@ -38,7 +39,7 @@ namespace CircleOfLife
         //position
         private Vector2 position;
         private float orientation;
-        private Vector2 goalDirection;
+        private Vector2 goalPosition;
 
 
         //Random :}
@@ -62,8 +63,10 @@ namespace CircleOfLife
             foodCap = stats.foodCap;
             waterCap = stats.waterCap;
             energyValue = stats.energyValue;
+            agility = stats.agility;
 
             position = new Vector2(xPos, yPos);
+            goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
             orientation = new float();
 
             state = 0; //wander
@@ -76,13 +79,13 @@ namespace CircleOfLife
         {
             if (state == 1) // chase
             {
-                Chase(position, ref prey, ref orientation, 0.2f);
+                Chase(position, ref prey, ref orientation, agility);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed;
             }
             else if (state == 0) // wander
             {
-                Wander(position, ref goalDirection, ref orientation, 0.1f);
+                Wander(position, ref goalPosition, ref orientation, agility);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
@@ -90,7 +93,7 @@ namespace CircleOfLife
             }
             else if (state == 2) // evade
             {
-                Evade(position, ref predator, ref orientation, 0.2f);                
+                Evade(position, ref predator, ref orientation, agility);                
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed; // max speed
@@ -110,34 +113,21 @@ namespace CircleOfLife
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
         {
             Vector2 predPosition = pred.position;
-            Vector2 seekPosition = 2 * position - predPosition;
-            orientation = TurnToFace(position, seekPosition, orientation, turnSpeed);
-
-            // next, we'll turn the characters back towards the center of the screen, to
-            // prevent them from getting stuck on the edges of the screen.
-            Vector2 screenCenter = Vector2.Zero;
-            screenCenter.X = 512;   //hard coded for now
-            screenCenter.Y = 384;
-
-            float distanceFromScreenCenter = Vector2.Distance(screenCenter, position);
-            float MaxDistanceFromScreenCenter =
-                Math.Min(screenCenter.Y, screenCenter.X);
-
-            float normalizedDistance =
-                distanceFromScreenCenter / MaxDistanceFromScreenCenter;
-
-            float turnToCenterSpeed = .6f * normalizedDistance * normalizedDistance *
-                turnSpeed;
-
-            // once we've calculated how much we want to turn towards the center, we can
-            // use the TurnToFace function to actually do the work.
-            orientation = TurnToFace(position, screenCenter, orientation,
-                turnToCenterSpeed);
+            Vector2 seekPosition = 2 * position - predPosition; // optimal direction to run away (not very exciting)
+            float distanceToGoal = Vector2.Distance(position, goalPosition);
+            
+            if (distanceToGoal < 350)
+            {
+                // assign a new random goal position
+                goalPosition.X = (float)random.NextDouble() * 1024;
+                goalPosition.Y = (float)random.NextDouble() * 768;
+            }
         }
 
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
-            orientation = TurnToFace(position, prey.position, orientation, .75f * turnSpeed);
+            Vector2 preyPosition = prey.position;
+            orientation = TurnToFace(position, preyPosition, orientation, .8f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
@@ -167,19 +157,22 @@ namespace CircleOfLife
             
 
             float distanceFromScreenCenter = Vector2.Distance(screenCenter, position);
-            float MaxDistanceFromScreenCenter =
-                Math.Min(screenCenter.Y, screenCenter.X);
+            if (distanceFromScreenCenter > 500)
+            {
+                float MaxDistanceFromScreenCenter =
+                    Math.Min(screenCenter.Y, screenCenter.X);
 
-            float normalizedDistance =
-                distanceFromScreenCenter / MaxDistanceFromScreenCenter;
+                float normalizedDistance =
+                    distanceFromScreenCenter / MaxDistanceFromScreenCenter;
 
-            float turnToCenterSpeed = .25f * normalizedDistance * normalizedDistance *
-                turnSpeed;
+                float turnToCenterSpeed = .25f * normalizedDistance * normalizedDistance *
+                    turnSpeed;
 
-            // once we've calculated how much we want to turn towards the center, we can
-            // use the TurnToFace function to actually do the work.
-            orientation = TurnToFace(position, screenCenter, orientation,
-                turnToCenterSpeed);
+                // once we've calculated how much we want to turn towards the center, we can
+                // use the TurnToFace function to actually do the work.
+                orientation = TurnToFace(position, screenCenter, orientation,
+                    turnToCenterSpeed);
+            }
         }
 
         /// <summary>

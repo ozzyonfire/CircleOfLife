@@ -292,6 +292,7 @@ namespace CircleOfLife
             public short foodCap;
             public short waterCap;
             public short energyValue; // this is how much the creature is "worth" when it is turned into food
+            public float agility;
         }
 
     }
