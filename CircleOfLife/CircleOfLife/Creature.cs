@@ -16,21 +16,24 @@ namespace CircleOfLife
     class Creature
     {
         //species characteristics
-        private byte diet;
+        public byte diet;
         private short size;
         private short detection;
         private short speed;
         private short energyCap;
-        private short foodCap;
+        public short foodCap;
         private short waterCap;
         private short energyValue;
 
         //creature state
-        private byte state;    //temporary way of doing this
-        private short food;
+        public byte state;    //temporary way of doing this
+        public short food;
         private short water;
         private short energy;
 
+        //creatures
+        private Creature predator;
+        private Creature prey;
 
         //position
         private Vector2 position;
@@ -45,6 +48,8 @@ namespace CircleOfLife
 
         public Vector2 Position { get { return position; } }
         public short EnergyValue { get { return energyValue; } }
+        public Creature Predator { get { return predator; } set { predator = value; } }
+        public Creature Prey { get { return prey; } set { prey = value; } }
 
         //constructor
         public Creature(short xPos, short yPos, Ecosystem.speciesStats stats)
@@ -69,16 +74,19 @@ namespace CircleOfLife
 
         public void update()
         {
-            if (state == 1)
+            if (state == 1) // chase
             {
+                Chase(position, ref prey, ref orientation, 0.1f);
+                Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
+                position += heading * speed;
             }
-            else
+            else if (state == 0) // wander
             {
                 Wander(position, ref goalDirection, ref orientation, 0.1f);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
-                position += heading * 3.0f;
+                position += heading * 0.25f*speed;
             }
 
         }
@@ -90,6 +98,12 @@ namespace CircleOfLife
             else
                 spriteBatch.Draw(spriteSheet, position, null, Color.White, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
 
+        }
+
+        private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
+        {
+            Vector2 preyVector = prey.position - position;
+            orientation = TurnToFace(position, preyVector, orientation, .15f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,

@@ -25,3 +25,15 @@ C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\Reso
 C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
 C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb

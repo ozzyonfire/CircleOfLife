@@ -30,8 +30,6 @@ namespace CircleOfLife
         //Initialize ecosystem
         Ecosystem ecosystem = new Ecosystem();
 
-
-
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -119,7 +117,7 @@ namespace CircleOfLife
                     stats.diet = 0;
                     stats.size = 1;
                     stats.detection = 1;
-                    stats.speed = 2;
+                    stats.speed = 7;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
@@ -137,7 +135,7 @@ namespace CircleOfLife
                     stats.diet = 1;
                     stats.size = 1;
                     stats.detection = 1;
-                    stats.speed = 2;
+                    stats.speed = 6;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;

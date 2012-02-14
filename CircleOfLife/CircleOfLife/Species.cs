@@ -18,6 +18,8 @@ namespace CircleOfLife
         private short population;
         private Ecosystem.speciesStats stats;
         private List<Creature> creatures = new List<Creature>(100);
+        public List<Species> predators = new List<Species>(10);
+        public List<Species> prey = new List<Species>(10);
 
         //accesors
         public Ecosystem.speciesStats Stats { get { return stats; } }

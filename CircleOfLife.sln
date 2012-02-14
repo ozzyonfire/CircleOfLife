@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleOfLife", "CircleOfLife\CircleOfLife\CircleOfLife.csproj", "{17E888A4-1BEB-4C06-A762-217CFBCC77BB}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "CircleOfLifeContent", "CircleOfLife\CircleOfLifeContent\CircleOfLifeContent.contentproj", "{ABF70EB5-E5D5-40BD-B4C6-63774D361B88}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,8 +13,6 @@ Global
 		{17E888A4-1BEB-4C06-A762-217CFBCC77BB}.Debug|x86.Build.0 = Debug|x86
 		{17E888A4-1BEB-4C06-A762-217CFBCC77BB}.Release|x86.ActiveCfg = Release|x86
 		{17E888A4-1BEB-4C06-A762-217CFBCC77BB}.Release|x86.Build.0 = Release|x86
-		{ABF70EB5-E5D5-40BD-B4C6-63774D361B88}.Debug|x86.ActiveCfg = Debug|x86
-		{ABF70EB5-E5D5-40BD-B4C6-63774D361B88}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
