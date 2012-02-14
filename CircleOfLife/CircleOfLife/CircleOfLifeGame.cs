@@ -36,8 +36,8 @@ namespace CircleOfLife
             Content.RootDirectory = "Content";
 
             //Sets window size
-            graphics.PreferredBackBufferWidth = 860;
-            graphics.PreferredBackBufferHeight = 480;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 768;
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace CircleOfLife
                     Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
                     stats.diet = 0;
                     stats.size = 5;
-                    stats.detection = 1;
+                    stats.detection = 100;
                     stats.speed = 5;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
@@ -134,8 +134,8 @@ namespace CircleOfLife
                     Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
                     stats.diet = 1;
                     stats.size = 10;
-                    stats.detection = 1;
-                    stats.speed = 4;
+                    stats.detection = 110;
+                    stats.speed = 6;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;

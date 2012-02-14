@@ -36,6 +36,7 @@ namespace CircleOfLife
         // so feed, check to reproduce, etc.
         public void update()
         {
+            // detection is based on the hysteresis methods to make transitions smoother
             bool kill = false;
             bool detected = false;
             bool pred = false;
@@ -62,8 +63,25 @@ namespace CircleOfLife
                             detected = false;
                             // random detection roll
                             // distanceAway, detection, random
-                            if (distanceAway < 150)
-                                detected = true;
+                            // if it was already chasing something it wants to keep chasing
+                            // if it was already evading it wants to get as far away as possible
+                            if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator == species[k].Creatures[l])
+                            {
+                                // currently getting chased
+                                if (distanceAway < species[i].Creatures[j].detection + 0.30 * species[i].Creatures[j].detection)
+                                    detected = true;
+                            }
+                            else if (species[i].Creatures[j].state == 1 && species[i].Creatures[j].Prey == species[k].Creatures[l]) // fixme
+                            {
+                                // currently chasing something
+                                if (distanceAway < species[i].Creatures[j].detection + 0.10 * species[i].Creatures[j].detection)
+                                    detected = true;
+                            }
+                            else
+                            {
+                                if (distanceAway < species[i].Creatures[j].detection)
+                                    detected = true;
+                            }
 
                             // check if species is prey or predator
                             // iterate through behaviour lists   

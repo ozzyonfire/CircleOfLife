@@ -18,7 +18,7 @@ namespace CircleOfLife
         //species characteristics
         public byte diet;
         private short size;
-        private short detection;
+        public short detection;
         private short speed;
         private short energyCap;
         public short foodCap;
@@ -76,7 +76,7 @@ namespace CircleOfLife
         {
             if (state == 1) // chase
             {
-                Chase(position, ref prey, ref orientation, 0.15f);
+                Chase(position, ref prey, ref orientation, 0.2f);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed;
             }
@@ -90,8 +90,7 @@ namespace CircleOfLife
             }
             else if (state == 2) // evade
             {
-                // temporary way of doing this for now
-                Wander(position, ref goalDirection, ref orientation, 0.3f);
+                Evade(position, ref predator, ref orientation, 0.2f);                
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
                 position += heading * speed; // max speed
@@ -108,10 +107,37 @@ namespace CircleOfLife
 
         }
 
+        private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
+        {
+            Vector2 predPosition = pred.position;
+            Vector2 seekPosition = 2 * position - predPosition;
+            orientation = TurnToFace(position, seekPosition, orientation, turnSpeed);
+
+            // next, we'll turn the characters back towards the center of the screen, to
+            // prevent them from getting stuck on the edges of the screen.
+            Vector2 screenCenter = Vector2.Zero;
+            screenCenter.X = 512;   //hard coded for now
+            screenCenter.Y = 384;
+
+            float distanceFromScreenCenter = Vector2.Distance(screenCenter, position);
+            float MaxDistanceFromScreenCenter =
+                Math.Min(screenCenter.Y, screenCenter.X);
+
+            float normalizedDistance =
+                distanceFromScreenCenter / MaxDistanceFromScreenCenter;
+
+            float turnToCenterSpeed = .6f * normalizedDistance * normalizedDistance *
+                turnSpeed;
+
+            // once we've calculated how much we want to turn towards the center, we can
+            // use the TurnToFace function to actually do the work.
+            orientation = TurnToFace(position, screenCenter, orientation,
+                turnToCenterSpeed);
+        }
+
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
-
-            orientation = TurnToFace(position, prey.position, orientation, .15f * turnSpeed);
+            orientation = TurnToFace(position, prey.position, orientation, .75f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
@@ -136,8 +162,8 @@ namespace CircleOfLife
             // next, we'll turn the characters back towards the center of the screen, to
             // prevent them from getting stuck on the edges of the screen.
             Vector2 screenCenter = Vector2.Zero;
-            screenCenter.X = 430;   //hard coded for now
-            screenCenter.Y = 240;
+            screenCenter.X = 512;   //hard coded for now
+            screenCenter.Y = 384;
             
 
             float distanceFromScreenCenter = Vector2.Distance(screenCenter, position);
@@ -147,7 +173,7 @@ namespace CircleOfLife
             float normalizedDistance =
                 distanceFromScreenCenter / MaxDistanceFromScreenCenter;
 
-            float turnToCenterSpeed = .3f * normalizedDistance * normalizedDistance *
+            float turnToCenterSpeed = .25f * normalizedDistance * normalizedDistance *
                 turnSpeed;
 
             // once we've calculated how much we want to turn towards the center, we can
