@@ -86,7 +86,7 @@ namespace CircleOfLife
 
                 if (currSpeed < speed)
                 {
-                    currSpeed += 0.10f * currSpeed;
+                    currSpeed += 0.05f * currSpeed;
                 }
 
                 position += heading * currSpeed;
@@ -97,9 +97,9 @@ namespace CircleOfLife
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
-                if (currSpeed > 0.15f * speed)
+                if (currSpeed > 0.25f * speed)
                 {
-                    currSpeed -= 0.10f * currSpeed;
+                    currSpeed -= 0.05f * currSpeed;
                 }
 
                 position += heading * currSpeed;
@@ -112,7 +112,7 @@ namespace CircleOfLife
 
                 if (currSpeed < speed)
                 {
-                    currSpeed += 0.10f * currSpeed;
+                    currSpeed += 0.05f * currSpeed;
                 }
                 position += heading * currSpeed;
             }
@@ -144,8 +144,8 @@ namespace CircleOfLife
 
             if (distanceToPred < 50)
             {
-                // high priority choose optimal
-                orientation = TurnToFace(position, seekPosition, orientation, turnSpeed);
+                // high priority choose optimal, can't have full turn speed
+                orientation = TurnToFace(position, seekPosition, orientation, 0.20f * turnSpeed);
             }
             else
             {
@@ -157,7 +157,7 @@ namespace CircleOfLife
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
             Vector2 preyPosition = prey.position;
-            orientation = TurnToFace(position, preyPosition, orientation, .8f * turnSpeed);
+            orientation = TurnToFace(position, preyPosition, orientation, .6f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
@@ -187,7 +187,7 @@ namespace CircleOfLife
             */
 
             orientation = TurnToFace(position, wanderDirection, orientation,
-                .15f * turnSpeed);
+                .05f * turnSpeed);
 
             /*
             // next, we'll turn the characters back towards the center of the screen, to

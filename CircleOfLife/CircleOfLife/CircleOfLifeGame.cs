@@ -141,7 +141,7 @@ namespace CircleOfLife
                     stats.foodCap = 100;
                     stats.waterCap = 100;
                     stats.energyValue = 50;
-                    stats.agility = 0.10f;
+                    stats.agility = 0.15f;
                     ecosystem.addSpecies("cat", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }
