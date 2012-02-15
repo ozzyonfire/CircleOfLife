@@ -88,7 +88,7 @@ namespace CircleOfLife
                 this.Exit();
 
             updateInput();
-            updateEcosystem();
+            updateEcosystem(gameTime);
 
             base.Update(gameTime);
         }
@@ -152,8 +152,9 @@ namespace CircleOfLife
                 {
                     // add a shrub
                     Ecosystem.floraStats stats = new Ecosystem.floraStats();
-                    stats.foodValue = 20;
+                    stats.foodValue = 10;
                     stats.size = 100;
+                    stats.energyValue = 20;
                     ecosystem.addFlora("shrub", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }
@@ -163,9 +164,9 @@ namespace CircleOfLife
         }
 
 
-        private void updateEcosystem()
+        private void updateEcosystem(GameTime gameTime)
         {
-            ecosystem.update();
+            ecosystem.update(gameTime);
         }
 
 

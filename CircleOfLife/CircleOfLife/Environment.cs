@@ -19,12 +19,14 @@ namespace CircleOfLife
         public short size;
         public Vector2 position;
         public short state;
+        public short energyValue;
 
-        public Environment(String name, short foodValue, short size, short xPos, short yPos)
+        public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos)
         {
             this.name = name;
             this.foodValue = foodValue;
             this.size = size;
+            this.energyValue = energyValue;
             this.position = new Vector2((float)xPos, (float)yPos);
         }
 

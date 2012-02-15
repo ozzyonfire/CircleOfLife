@@ -30,7 +30,7 @@ namespace CircleOfLife
         public byte state;    //temporary way of doing this
         public short food;
         private short water;
-        private short energy;
+        public short energy;
         private float currSpeed;
 
         //creatures
@@ -138,7 +138,7 @@ namespace CircleOfLife
 
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
         {
-            Vector2 predPosition = pred.position;
+            Vector2 predPosition = pred.position; // bug here, because they can die now
             Vector2 seekPosition = 2 * position - predPosition; // optimal direction to run away (not very exciting)
             float distanceToGoal = Vector2.Distance(position, goalPosition);
             float distanceToPred = Vector2.Distance(position, pred.position);

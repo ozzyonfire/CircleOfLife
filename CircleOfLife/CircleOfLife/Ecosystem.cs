@@ -17,6 +17,8 @@ namespace CircleOfLife
         private List<Species> species= new List<Species>(50);
         private List<Environment> flora = new List<Environment>(50);
 
+        private double deathTimer = 0;
+
         //Random :}
         Random random = new Random();
 
@@ -33,20 +35,22 @@ namespace CircleOfLife
 
         public void addFlora(String name, floraStats stats, short x, short y)
         {
-            flora.Add(new Environment(name, stats.foodValue, stats.size, x, y));
+            flora.Add(new Environment(name, stats.foodValue, stats.energyValue, stats.size, x, y));
         }
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
         //incredibly sloppy
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
-        public void update()
+        public void update(GameTime gameTime)
         {
             // detection is based on the hysteresis methods to make transitions smoother
             bool kill = false;
             bool detected = false;
             bool pred = false;
             bool prey = false;
+
+            deathTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -60,6 +64,20 @@ namespace CircleOfLife
                             if (species[i].Creatures[j] == species[k].Creatures[l])
                             {
                                 // this is the creature
+                                /*
+                                if (deathTimer >= 5)
+                                {
+                                    // all creatures lose energy
+                                    species[i].Creatures[j].energy -= 40;
+                                    if (species[i].Creatures[j].energy <= 0)
+                                    {
+                                        // dies
+                                        kill = true;
+                                        species[i].Creatures[j].state = 4;
+                                    }
+                                    deathTimer -= 5;
+                                }
+                                 */ 
                                 break;
                             }
 
@@ -137,6 +155,7 @@ namespace CircleOfLife
                                             // killed it
                                             species[i].Creatures[j].state = 0;
                                             species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
+                                            species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
                                             kill = true;
                                             species[k].Creatures[l].state = 4; // dead
                                         }
@@ -258,6 +277,7 @@ namespace CircleOfLife
                                         // its eating a plant
                                         species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
                                         species[i].Creatures[j].flora.size--;
+                                        species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
                                         if (species[i].Creatures[j].flora.size <= 0)
                                         {
                                             // kill the plant
@@ -272,7 +292,7 @@ namespace CircleOfLife
                                     }
                                 }
                             }
-                               
+
                             // reproduction
                             // check food vs foodCap
                             if (species[i].Creatures[j].food >= species[i].Creatures[j].foodCap)
@@ -284,6 +304,33 @@ namespace CircleOfLife
                         }
                     }
                 }
+            }
+
+            if (deathTimer >= 2)
+            {
+                for (int i = 0; i < species.Count; i++)
+                {
+                    for (int j = 0; j < species[i].Creatures.Count; j++)
+                    {
+                        // all creatures lose energy
+                        // need to balance this
+                        if (species[i].Creatures[j].diet == 0)
+                        {
+                            species[i].Creatures[j].energy -= 10;
+                        }
+                        else
+                        {
+                            species[i].Creatures[j].energy -= 25;
+                        }
+                        if (species[i].Creatures[j].energy <= 0)
+                        {
+                            // dies
+                            kill = true;
+                            species[i].Creatures[j].state = 4;
+                        }
+                    }
+                }
+                deathTimer -= 2;
             }
 
             if (kill)
@@ -377,6 +424,7 @@ namespace CircleOfLife
         {
             public short foodValue;
             public short size;
+            public short energyValue;
         }
 
     }
