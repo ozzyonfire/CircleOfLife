@@ -15,6 +15,7 @@ namespace CircleOfLife
     class Ecosystem
     {
         private List<Species> species= new List<Species>(50);
+        private List<Environment> flora = new List<Environment>(50);
 
         //Random :}
         Random random = new Random();
@@ -28,6 +29,11 @@ namespace CircleOfLife
             //Check if valid input
             species.Add(new Species(name,stats,x,y));
             rescanSpecies();
+        }
+
+        public void addFlora(String name, floraStats stats, short x, short y)
+        {
+            flora.Add(new Environment(name, stats.foodValue, stats.size, x, y));
         }
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
@@ -177,14 +183,43 @@ namespace CircleOfLife
                                 {
                                     // add energyValue to food
                                     // abandon food if predator
+                                    if (pred)
+                                    {
+                                        // abandon food
+                                        species[i].Creatures[j].state = 2;
+                                    }
                                 }
                             }
-                            else
+                            else // not detected
                             {
                                 // check state
                                 if (species[i].Creatures[j].state == 0) // wandering
                                 {
-                                    // find food or water
+                                    // find closest food or water
+                                    if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
+                                    {
+                                        if (species[i].Creatures[j].flora == null)
+                                        {
+                                            species[i].Creatures[j].flora = flora[0];
+                                        }
+                                        float floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
+
+                                        if (floraDistance < 15)
+                                        {
+                                            // start feeding
+                                            species[i].Creatures[j].state = 3;
+                                        }
+
+                                        for (int m = 0; m < flora.Count; m++)
+                                        {
+                                            float newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[m].position);
+                                            if (newDistance < floraDistance)
+                                            {
+                                                // new target
+                                                species[i].Creatures[j].flora = flora[m];
+                                            }
+                                        }
+                                    }
                                 }
                                 else if (species[i].Creatures[j].state == 1) // chasing
                                 {
@@ -210,6 +245,7 @@ namespace CircleOfLife
                                     if (species[i].Creatures[j].Predator == species[k].Creatures[l])
                                     {
                                         // evaded it
+                                        species[i].Creatures[j].Predator = null;
                                         species[i].Creatures[j].state = 0;
                                     }
                                 }
@@ -217,7 +253,23 @@ namespace CircleOfLife
                                 {
                                     // add energyValue to food
                                     // keep eating!
-                                    species[i].Creatures[j].state = 0;
+                                    if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state != 1)
+                                    {
+                                        // its eating a plant
+                                        species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
+                                        species[i].Creatures[j].flora.size--;
+                                        if (species[i].Creatures[j].flora.size <= 0)
+                                        {
+                                            // kill the plant
+                                            species[i].Creatures[j].flora.state = 1;
+                                        }
+                                    }
+                                    else if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state == 1)
+                                    {
+                                        // stop feeding look for more food
+                                        species[i].Creatures[j].state = 0;
+                                        species[i].Creatures[j].flora = null;
+                                    }
                                 }
                             }
                                
@@ -249,6 +301,17 @@ namespace CircleOfLife
                     }
                 }
                 kill = false;
+            }
+
+            // update flora
+            for (int i = 0; i < flora.Count; i++)
+            {
+                if (flora[i].state == 1)
+                {
+                    // dead
+                    flora.RemoveAt(i);
+                    i--;
+                }
             }
 
             for (int i = 0; i < species.Count; i++)
@@ -286,6 +349,10 @@ namespace CircleOfLife
             {
                 species[i].draw(ref graphics, ref spriteBatch, ref spriteSheet);
             }
+            for (int i = 0; i < flora.Count; i++)
+            {
+                flora[i].draw(ref graphics, ref spriteBatch, ref spriteSheet);
+            }
         }
 
         // static functions used to model the ecosystems behaviour
@@ -304,6 +371,12 @@ namespace CircleOfLife
             public short waterCap;
             public short energyValue; // this is how much the creature is "worth" when it is turned into food
             public float agility;
+        }
+
+        public struct floraStats
+        {
+            public short foodValue;
+            public short size;
         }
 
     }

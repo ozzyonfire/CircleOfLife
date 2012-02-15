@@ -37,6 +37,9 @@ namespace CircleOfLife
         private Creature predator;
         private Creature prey;
 
+        // flora
+        public Environment flora;
+
         //position
         private Vector2 position;
         private float orientation;
@@ -93,6 +96,11 @@ namespace CircleOfLife
             }
             else if (state == 0) // wander
             {
+                if (flora != null && this.diet == 0)
+                {
+                    goalPosition = flora.position;
+                }
+
                 Wander(position, ref goalPosition, ref orientation, agility);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
@@ -150,26 +158,35 @@ namespace CircleOfLife
             else
             {
                 // choose random point to run to
-                orientation = TurnToFace(position, goalPosition, orientation, turnSpeed);
+                orientation = TurnToFace(position, goalPosition, orientation, 0.9f * turnSpeed);
             }
         }
 
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
             Vector2 preyPosition = prey.position;
-            orientation = TurnToFace(position, preyPosition, orientation, .6f * turnSpeed);
+            
+            // we may want to include a flocking algorithm so multiple predators dont get stuck behind the same prey
+            /*
+            if (prey.Predator != null)
+            {
+                Vector2 otherPredPosition = position - prey.Predator.position;
+                orientation = TurnToFace(position, otherPredPosition, orientation, .5f * turnSpeed);
+            }
+            */
+
+            orientation = TurnToFace(position, preyPosition, orientation, 0.75f * turnSpeed);
         }
 
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
             ref float orientation, float turnSpeed)
         {
             float distanceFromGoal = Vector2.Distance(wanderDirection, position);
-            if (distanceFromGoal < 10)
+            if (distanceFromGoal < 200 && this.flora == null)
             {
                 // new random goal position
                 wanderDirection.X = (float)random.NextDouble() * 1024;
                 wanderDirection.Y = (float)random.NextDouble() * 768;
-                //Console.WriteLine("new goal: x {0} y {1}", goalPosition.X, goalPosition.Y);
             }
 
             // makes them a little inaccurate
@@ -187,7 +204,7 @@ namespace CircleOfLife
             */
 
             orientation = TurnToFace(position, wanderDirection, orientation,
-                .05f * turnSpeed);
+                .15f * turnSpeed);
 
             /*
             // next, we'll turn the characters back towards the center of the screen, to

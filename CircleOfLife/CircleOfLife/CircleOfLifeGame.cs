@@ -117,7 +117,7 @@ namespace CircleOfLife
                     stats.diet = 0;
                     stats.size = 5;
                     stats.detection = 100;
-                    stats.speed = 5;
+                    stats.speed = 7;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
@@ -145,6 +145,18 @@ namespace CircleOfLife
                     ecosystem.addSpecies("cat", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }
+            else if (newMS.MiddleButton.Equals(ButtonState.Pressed))
+            {
+                // If not down last update, key has just been pressed.
+                if (!oldMS.MiddleButton.Equals(ButtonState.Pressed))
+                {
+                    // add a shrub
+                    Ecosystem.floraStats stats = new Ecosystem.floraStats();
+                    stats.foodValue = 20;
+                    stats.size = 100;
+                    ecosystem.addFlora("shrub", stats, (short)newMS.X, (short)newMS.Y);
+                }
+            }
             // Update saved state.
             oldKS = newKS;
             oldMS = newMS;
@@ -169,7 +181,6 @@ namespace CircleOfLife
 
             //Ecosystem class calls the draw function of every creature
             ecosystem.draw(ref graphics, ref spriteBatch, ref preyTexture);
-
 
             spriteBatch.End();
 
