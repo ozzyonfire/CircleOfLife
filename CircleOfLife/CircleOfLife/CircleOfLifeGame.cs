@@ -136,12 +136,12 @@ namespace CircleOfLife
                     stats.diet = 1;
                     stats.size = 10;
                     stats.detection = 110;
-                    stats.speed = 5;
+                    stats.speed = 4;
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
                     stats.energyValue = 50;
-                    stats.agility = 0.15f;
+                    stats.agility = 0.10f;
                     ecosystem.addSpecies("cat", stats, (short)newMS.X, (short)newMS.Y);
                 }
             }

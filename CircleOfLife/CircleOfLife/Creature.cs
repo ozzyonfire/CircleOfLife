@@ -115,12 +115,24 @@ namespace CircleOfLife
             Vector2 predPosition = pred.position;
             Vector2 seekPosition = 2 * position - predPosition; // optimal direction to run away (not very exciting)
             float distanceToGoal = Vector2.Distance(position, goalPosition);
+            float distanceToPred = Vector2.Distance(position, pred.position);
             
-            if (distanceToGoal < 350)
+            if (distanceToGoal < 300)
             {
                 // assign a new random goal position
                 goalPosition.X = (float)random.NextDouble() * 1024;
                 goalPosition.Y = (float)random.NextDouble() * 768;
+            }
+
+            if (distanceToPred < 50)
+            {
+                // high priority choose optimal
+                orientation = TurnToFace(position, seekPosition, orientation, turnSpeed);
+            }
+            else
+            {
+                // choose random point to run to
+                orientation = TurnToFace(position, goalPosition, orientation, turnSpeed);
             }
         }
 

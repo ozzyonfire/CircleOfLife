@@ -68,7 +68,7 @@ namespace CircleOfLife
                             if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator == species[k].Creatures[l])
                             {
                                 // currently getting chased
-                                if (distanceAway < species[i].Creatures[j].detection + 0.30 * species[i].Creatures[j].detection)
+                                if (distanceAway < species[i].Creatures[j].detection + 0.50 * species[i].Creatures[j].detection)
                                     detected = true;
                             }
                             else if (species[i].Creatures[j].state == 1 && species[i].Creatures[j].Prey == species[k].Creatures[l]) // fixme
@@ -124,9 +124,9 @@ namespace CircleOfLife
                                 }
                                 else if (species[i].Creatures[j].state == 1) // chasing
                                 {
-                                    if (species[i].Creatures[j].Prey == species[k].Creatures[l])
+                                    if (species[i].Creatures[j].Prey == species[k].Creatures[l]) // this is the target
                                     {
-                                        if (distanceAway < 15) // change this to an intersection
+                                        if (distanceAway < 10) // change this to an intersection
                                         {
                                             // killed it
                                             species[i].Creatures[j].state = 0;
@@ -136,6 +136,17 @@ namespace CircleOfLife
                                         }
                                          // todo: feed
                                         // doing the feeding in here for now
+                                    }
+                                    else if (prey)
+                                    {
+                                        float preyDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Prey.Position);
+                                        if (distanceAway < preyDistance)
+                                        {
+                                            // new prey
+                                            // not sure if we should have this or not? 
+                                            // this makes it easier for prey to escape, but easier for pred to sneak up on prey
+                                            species[i].Creatures[j].Prey = species[k].Creatures[l];
+                                        }
                                     }
                                     // another creature could have killed the prey
                                     if (species[i].Creatures[j].Prey.state == 4)
