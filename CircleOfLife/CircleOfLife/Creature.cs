@@ -67,6 +67,8 @@ namespace CircleOfLife
 
             position = new Vector2(xPos, yPos);
             goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
+            Console.WriteLine("goal: x {0} y {1}", goalPosition.X, goalPosition.Y);
+            Console.WriteLine("start: x {0} y {1}", xPos, yPos);
             orientation = new float();
 
             state = 0; //wander
@@ -120,8 +122,8 @@ namespace CircleOfLife
             if (distanceToGoal < 300)
             {
                 // assign a new random goal position
-                goalPosition.X = (float)random.NextDouble() * 1024;
-                goalPosition.Y = (float)random.NextDouble() * 768;
+                goalPosition.X = (float)random.NextDouble() * 1024f;
+                goalPosition.Y = (float)random.NextDouble() * 768f;
             }
 
             if (distanceToPred < 50)
@@ -145,22 +147,33 @@ namespace CircleOfLife
         private void Wander(Vector2 position, ref Vector2 wanderDirection,
             ref float orientation, float turnSpeed)
         {
+            float distanceFromGoal = Vector2.Distance(wanderDirection, position);
+            if (distanceFromGoal < 10)
+            {
+                // new random goal position
+                wanderDirection.X = (float)random.NextDouble() * 1024;
+                wanderDirection.Y = (float)random.NextDouble() * 768;
+                //Console.WriteLine("new goal: x {0} y {1}", goalPosition.X, goalPosition.Y);
+            }
 
+            // makes them a little inaccurate
             wanderDirection.X +=
-                MathHelper.Lerp(-.25f, .25f, (float)random.NextDouble());
+                MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
             wanderDirection.Y +=
-                MathHelper.Lerp(-.25f, .25f, (float)random.NextDouble());
+                MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
 
+            /*
             // we'll renormalize the wander direction, ...
             if (wanderDirection != Vector2.Zero)
             {
                 wanderDirection.Normalize();
             }
+            */
 
-            orientation = TurnToFace(position, position + wanderDirection, orientation,
+            orientation = TurnToFace(position, wanderDirection, orientation,
                 .15f * turnSpeed);
 
-
+            /*
             // next, we'll turn the characters back towards the center of the screen, to
             // prevent them from getting stuck on the edges of the screen.
             Vector2 screenCenter = Vector2.Zero;
@@ -184,7 +197,9 @@ namespace CircleOfLife
                 // use the TurnToFace function to actually do the work.
                 orientation = TurnToFace(position, screenCenter, orientation,
                     turnToCenterSpeed);
+
             }
+             */
         }
 
         /// <summary>
