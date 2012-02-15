@@ -31,6 +31,7 @@ namespace CircleOfLife
         public short food;
         private short water;
         private short energy;
+        private float currSpeed;
 
         //creatures
         private Creature predator;
@@ -67,14 +68,13 @@ namespace CircleOfLife
 
             position = new Vector2(xPos, yPos);
             goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
-            Console.WriteLine("goal: x {0} y {1}", goalPosition.X, goalPosition.Y);
-            Console.WriteLine("start: x {0} y {1}", xPos, yPos);
             orientation = new float();
 
             state = 0; //wander
             food = 0;
             water = waterCap;
             energy = energyCap;
+            currSpeed = 1f;
         }
 
         public void update()
@@ -83,7 +83,13 @@ namespace CircleOfLife
             {
                 Chase(position, ref prey, ref orientation, agility);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
-                position += heading * speed;
+
+                if (currSpeed < speed)
+                {
+                    currSpeed += 0.10f * currSpeed;
+                }
+
+                position += heading * currSpeed;
             }
             else if (state == 0) // wander
             {
@@ -91,14 +97,24 @@ namespace CircleOfLife
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
-                position += heading * 0.15f *speed;
+                if (currSpeed > 0.15f * speed)
+                {
+                    currSpeed -= 0.10f * currSpeed;
+                }
+
+                position += heading * currSpeed;
             }
             else if (state == 2) // evade
             {
                 Evade(position, ref predator, ref orientation, agility);                
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
-                position += heading * speed; // max speed
+
+                if (currSpeed < speed)
+                {
+                    currSpeed += 0.10f * currSpeed;
+                }
+                position += heading * currSpeed;
             }
 
         }
