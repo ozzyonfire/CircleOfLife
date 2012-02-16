@@ -51,6 +51,33 @@ namespace CircleOfLife
             //Set mouse visibility
             this.IsMouseVisible = true;
             base.Initialize();
+
+            // set up species in here for now
+            Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
+            preyStats.diet = 0;
+            preyStats.size = 5;
+            preyStats.detection = 100;
+            preyStats.speed = 7;
+            preyStats.energyCap = 100;
+            preyStats.foodCap = 100;
+            preyStats.waterCap = 100;
+            preyStats.energyValue = 20;
+            preyStats.agility = 0.15f;
+            ecosystem.addSpecies("mouse", preyStats);
+
+            Ecosystem.speciesStats predStats = new Ecosystem.speciesStats();
+            predStats.diet = 1;
+            predStats.size = 10;
+            predStats.detection = 110;
+            predStats.speed = 4;
+            predStats.energyCap = 100;
+            predStats.foodCap = 100;
+            predStats.waterCap = 100;
+            predStats.energyValue = 50;
+            predStats.agility = 0.15f;
+            ecosystem.addSpecies("cat", predStats);
+
+
         }
 
         /// <summary>
@@ -111,17 +138,7 @@ namespace CircleOfLife
                 if (!oldMS.LeftButton.Equals(ButtonState.Pressed))
                 {
                     //Creature creation done here for now
-                    Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
-                    stats.diet = 0;
-                    stats.size = 5;
-                    stats.detection = 100;
-                    stats.speed = 7;
-                    stats.energyCap = 100;
-                    stats.foodCap = 100;
-                    stats.waterCap = 100;
-                    stats.energyValue = 20;
-                    stats.agility = 0.15f;
-                    ecosystem.addSpecies("mouse", stats, (short)newMS.X, (short)newMS.Y);
+                    ecosystem.addCreature(0, (short)newMS.X, (short)newMS.Y);
                 }
             }
             else if (newMS.RightButton.Equals(ButtonState.Pressed))
@@ -130,17 +147,7 @@ namespace CircleOfLife
                 if (!oldMS.RightButton.Equals(ButtonState.Pressed))
                 {
                     //Creature creation done here for now
-                    Ecosystem.speciesStats stats = new Ecosystem.speciesStats();
-                    stats.diet = 1;
-                    stats.size = 10;
-                    stats.detection = 110;
-                    stats.speed = 4;
-                    stats.energyCap = 100;
-                    stats.foodCap = 100;
-                    stats.waterCap = 100;
-                    stats.energyValue = 50;
-                    stats.agility = 0.15f;
-                    ecosystem.addSpecies("cat", stats, (short)newMS.X, (short)newMS.Y);
+                    ecosystem.addCreature(1, (short)newMS.X, (short)newMS.Y);
                 }
             }
             else if (newMS.MiddleButton.Equals(ButtonState.Pressed))

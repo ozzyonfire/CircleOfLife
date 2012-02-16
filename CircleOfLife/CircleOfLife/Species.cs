@@ -33,12 +33,16 @@ namespace CircleOfLife
         //Extras???
         private short generations;
 
-        public Species(String speciesName, Ecosystem.speciesStats speciesStats, short xPos, short yPos)
+        public Species(String speciesName, Ecosystem.speciesStats speciesStats)
         {
             name = speciesName;
             population = 1;
             stats = speciesStats;
-            creatures.Add(new Creature(xPos, yPos, speciesStats));
+        }
+
+        public void addCreature(short xPos, short yPos)
+        {
+            creatures.Add(new Creature(xPos, yPos, stats));
         }
 
         public void update(GameTime gameTime)

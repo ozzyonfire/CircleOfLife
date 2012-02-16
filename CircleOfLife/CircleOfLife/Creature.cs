@@ -223,7 +223,7 @@ namespace CircleOfLife
 
             seekPosition.Normalize();
 
-            position += seekPosition * currSpeed;
+            position += seekPosition * currSpeed/2;
         }
 
         /// <summary>

@@ -24,11 +24,16 @@ namespace CircleOfLife
         {
         }
         
-        public void addSpecies(String name, speciesStats stats, short x, short y)
+        public void addSpecies(String name, speciesStats stats)
         {
             //Check if valid input
-            species.Add(new Species(name,stats,x,y));
+            species.Add(new Species(name,stats));
             rescanSpecies();
+        }
+
+        public void addCreature(short n, short x, short y)
+        {
+            species[n].addCreature(x, y);
         }
 
         public void addFlora(String name, floraStats stats, short x, short y)
@@ -104,7 +109,7 @@ namespace CircleOfLife
                                 // its a prey
                                 prey = true;
                             }
-                            else if (species[i].name == species[j].name) // fix me!: shouldn't be name but this causes a bug
+                            else if (species[i].name == species[k].name) 
                             {
                                 same = true;
                             }
