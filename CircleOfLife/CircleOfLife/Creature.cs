@@ -27,7 +27,7 @@ namespace CircleOfLife
         public float agility;
 
         //creature state
-        public byte state;    //temporary way of doing this
+        public byte state;
         public short food;
         private short water;
         public short energy;
@@ -146,15 +146,26 @@ namespace CircleOfLife
 
         public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
         {
-            if(diet==1)
+            if(state == 1)
                 spriteBatch.Draw(spriteSheet, position, null, Color.Red, orientation, new Vector2(0),0.3f,SpriteEffects.None,0.0f);
+            else if (state == 2)
+                spriteBatch.Draw(spriteSheet, position, null, Color.Blue, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+            else if (state == 3)
+                spriteBatch.Draw(spriteSheet, position, null, Color.Green, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+            else if (state == 4)
+                spriteBatch.Draw(spriteSheet, position, null, Color.Gray, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
             else
                 spriteBatch.Draw(spriteSheet, position, null, Color.White, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
-
         }
 
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
         {
+            if (pred == null || pred.state == 4)
+            {
+                // it died
+                this.state = 0;
+                return;
+            }
             Vector2 predPosition = pred.position; // bug here, because they can die now
             Vector2 seekPosition = 2 * position - predPosition; // optimal direction to run away (not very exciting)
             float distanceToGoal = Vector2.Distance(position, goalPosition);
@@ -180,6 +191,11 @@ namespace CircleOfLife
 
         private void Chase(Vector2 position, ref Creature prey, ref float orientation, float turnSpeed)
         {
+            if (prey == null || prey.state == 4)
+            {
+                this.state = 0;
+                return;
+            }
             Vector2 preyPosition = prey.position;
             
             // we may want to include a flocking algorithm so multiple predators dont get stuck behind the same prey
@@ -223,7 +239,7 @@ namespace CircleOfLife
 
             seekPosition.Normalize();
 
-            position += seekPosition * currSpeed/2;
+            position += seekPosition * currSpeed;
         }
 
         /// <summary>

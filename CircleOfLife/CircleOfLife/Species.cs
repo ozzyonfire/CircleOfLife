@@ -26,6 +26,7 @@ namespace CircleOfLife
         public List<Creature> Creatures { get { return creatures; } }
 
         //graphics
+        public Texture2D spriteSheet;
 
         //perks?
         
@@ -33,11 +34,12 @@ namespace CircleOfLife
         //Extras???
         private short generations;
 
-        public Species(String speciesName, Ecosystem.speciesStats speciesStats)
+        public Species(String speciesName, Ecosystem.speciesStats speciesStats, Texture2D sprite)
         {
             name = speciesName;
             population = 1;
             stats = speciesStats;
+            this.spriteSheet = sprite;
         }
 
         public void addCreature(short xPos, short yPos)

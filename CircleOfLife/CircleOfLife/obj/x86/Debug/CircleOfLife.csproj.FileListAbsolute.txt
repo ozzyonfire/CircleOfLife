@@ -37,3 +37,5 @@ Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyRefer
 Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
 Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb

@@ -24,10 +24,10 @@ namespace CircleOfLife
         {
         }
         
-        public void addSpecies(String name, speciesStats stats)
+        public void addSpecies(String name, speciesStats stats, Texture2D spriteSheet)
         {
             //Check if valid input
-            species.Add(new Species(name,stats));
+            species.Add(new Species(name, stats, spriteSheet));
             rescanSpecies();
         }
 
@@ -36,9 +36,9 @@ namespace CircleOfLife
             species[n].addCreature(x, y);
         }
 
-        public void addFlora(String name, floraStats stats, short x, short y)
+        public void addFlora(String name, Texture2D sprite, floraStats stats, short x, short y)
         {
-            flora.Add(new Environment(name, stats.foodValue, stats.energyValue, stats.size, x, y));
+            flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
         }
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
@@ -80,7 +80,7 @@ namespace CircleOfLife
                             if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator == species[k].Creatures[l])
                             {
                                 // currently getting chased
-                                if (distanceAway < species[i].Creatures[j].detection + 0.50 * species[i].Creatures[j].detection)
+                                if (distanceAway < species[i].Creatures[j].detection + 0.30 * species[i].Creatures[j].detection)
                                     detected = true;
                             }
                             else if (species[i].Creatures[j].state == 1 && species[i].Creatures[j].Prey == species[k].Creatures[l]) // fixme
@@ -356,13 +356,14 @@ namespace CircleOfLife
 
         public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
         {
+            // draw the species then the plants
             for (int i = 0; i < species.Count; i++)
             {
-                species[i].draw(ref graphics, ref spriteBatch, ref spriteSheet);
+                species[i].draw(ref graphics, ref spriteBatch, ref species[i].spriteSheet);
             }
             for (int i = 0; i < flora.Count; i++)
             {
-                flora[i].draw(ref graphics, ref spriteBatch, ref spriteSheet);
+                flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
             }
         }
 
