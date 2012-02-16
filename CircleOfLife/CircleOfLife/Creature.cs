@@ -24,7 +24,7 @@ namespace CircleOfLife
         public short foodCap;
         private short waterCap;
         private short energyValue;
-        private float agility;
+        public float agility;
 
         //creature state
         public byte state;    //temporary way of doing this
@@ -204,52 +204,8 @@ namespace CircleOfLife
                 randomGoal();
             }
 
-            /*
-            // makes them a little inaccurate
-            wanderDirection.X +=
-                MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
-            wanderDirection.Y +=
-                MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
-            */
-
-            /*
-            // we'll renormalize the wander direction, ...
-            if (wanderDirection != Vector2.Zero)
-            {
-                wanderDirection.Normalize();
-            }
-            */
-
             orientation = TurnToFace(position, wanderDirection, orientation,
                 .25f * turnSpeed);
-
-            /*
-            // next, we'll turn the characters back towards the center of the screen, to
-            // prevent them from getting stuck on the edges of the screen.
-            Vector2 screenCenter = Vector2.Zero;
-            screenCenter.X = 512;   //hard coded for now
-            screenCenter.Y = 384;
-            
-
-            float distanceFromScreenCenter = Vector2.Distance(screenCenter, position);
-            if (distanceFromScreenCenter > 500)
-            {
-                float MaxDistanceFromScreenCenter =
-                    Math.Min(screenCenter.Y, screenCenter.X);
-
-                float normalizedDistance =
-                    distanceFromScreenCenter / MaxDistanceFromScreenCenter;
-
-                float turnToCenterSpeed = .25f * normalizedDistance * normalizedDistance *
-                    turnSpeed;
-
-                // once we've calculated how much we want to turn towards the center, we can
-                // use the TurnToFace function to actually do the work.
-                orientation = TurnToFace(position, screenCenter, orientation,
-                    turnToCenterSpeed);
-
-            }
-             */
         }
 
         public void randomGoal()
@@ -257,6 +213,17 @@ namespace CircleOfLife
             // new random goal position
             goalPosition.X = (float)random.NextDouble() * 1024;
             goalPosition.Y = (float)random.NextDouble() * 768;
+        }
+
+        public void avoid(Vector2 otherPosition)
+        {
+            // this is used to control crowding of creatures of the same type
+            // works pretty well but a little choppy
+            Vector2 seekPosition = position - otherPosition;
+
+            seekPosition.Normalize();
+
+            position += seekPosition * currSpeed;
         }
 
         /// <summary>

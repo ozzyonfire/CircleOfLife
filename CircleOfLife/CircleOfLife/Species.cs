@@ -14,7 +14,7 @@ namespace CircleOfLife
 {
     class Species
     {
-        private string name;
+        public string name;
         private short population;
         private Ecosystem.speciesStats stats;
         private List<Creature> creatures = new List<Creature>(100);

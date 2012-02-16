@@ -46,6 +46,7 @@ namespace CircleOfLife
             bool detected = false;
             bool pred = false;
             bool prey = false;
+            bool same = false;
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -102,6 +103,16 @@ namespace CircleOfLife
                             {
                                 // its a prey
                                 prey = true;
+                            }
+                            else if (species[i].name == species[j].name) // fix me!: shouldn't be name but this causes a bug
+                            {
+                                same = true;
+                            }
+
+                            // avoid other creatures of the same type to prevent crowding, except when getting chased
+                            if (same && distanceAway < 50 && species[i].Creatures[j].state != 2)
+                            {
+                                species[i].Creatures[j].avoid(species[k].Creatures[l].Position);
                             }
 
                             if (detected)
