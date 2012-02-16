@@ -17,8 +17,6 @@ namespace CircleOfLife
         private List<Species> species= new List<Species>(50);
         private List<Environment> flora = new List<Environment>(50);
 
-        private double deathTimer = 0;
-
         //Random :}
         Random random = new Random();
 
@@ -45,12 +43,9 @@ namespace CircleOfLife
         public void update(GameTime gameTime)
         {
             // detection is based on the hysteresis methods to make transitions smoother
-            bool kill = false;
             bool detected = false;
             bool pred = false;
             bool prey = false;
-
-            deathTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -64,20 +59,7 @@ namespace CircleOfLife
                             if (species[i].Creatures[j] == species[k].Creatures[l])
                             {
                                 // this is the creature
-                                /*
-                                if (deathTimer >= 5)
-                                {
-                                    // all creatures lose energy
-                                    species[i].Creatures[j].energy -= 40;
-                                    if (species[i].Creatures[j].energy <= 0)
-                                    {
-                                        // dies
-                                        kill = true;
-                                        species[i].Creatures[j].state = 4;
-                                    }
-                                    deathTimer -= 5;
-                                }
-                                 */ 
+                                // FIXME: this causes a minor bug: if there is only 1 creature they wont do anything
                                 break;
                             }
 
@@ -156,7 +138,6 @@ namespace CircleOfLife
                                             species[i].Creatures[j].state = 0;
                                             species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
                                             species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
-                                            kill = true;
                                             species[k].Creatures[l].state = 4; // dead
                                         }
                                          // todo: feed
@@ -306,48 +287,10 @@ namespace CircleOfLife
                 }
             }
 
-            if (deathTimer >= 2)
+            // update species and creatures
+            for (int i = 0; i < species.Count; i++)
             {
-                for (int i = 0; i < species.Count; i++)
-                {
-                    for (int j = 0; j < species[i].Creatures.Count; j++)
-                    {
-                        // all creatures lose energy
-                        // need to balance this
-                        if (species[i].Creatures[j].diet == 0)
-                        {
-                            species[i].Creatures[j].energy -= 10;
-                        }
-                        else
-                        {
-                            species[i].Creatures[j].energy -= 25;
-                        }
-                        if (species[i].Creatures[j].energy <= 0)
-                        {
-                            // dies
-                            kill = true;
-                            species[i].Creatures[j].state = 4;
-                        }
-                    }
-                }
-                deathTimer -= 2;
-            }
-
-            if (kill)
-            {
-                for (int i = 0; i < species.Count; i++)
-                {
-                    for (int j = 0; j < species[i].Creatures.Count; j++)
-                    {
-                        if (species[i].Creatures[j].state == 4)
-                        {
-                            // dead
-                            species[i].Creatures.RemoveAt(j);
-                            j--;
-                        }
-                    }
-                }
-                kill = false;
+                species[i].update(gameTime);
             }
 
             // update flora
@@ -359,11 +302,6 @@ namespace CircleOfLife
                     flora.RemoveAt(i);
                     i--;
                 }
-            }
-
-            for (int i = 0; i < species.Count; i++)
-            {
-                species[i].update();
             }
         }
 

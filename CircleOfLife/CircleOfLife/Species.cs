@@ -41,11 +41,17 @@ namespace CircleOfLife
             creatures.Add(new Creature(xPos, yPos, speciesStats));
         }
 
-        public void update()
+        public void update(GameTime gameTime)
         {
             for (int i = 0; i < creatures.Count; i++)
             {
-                creatures[i].update();
+                creatures[i].update(gameTime);
+                if (creatures[i].state == 4)
+                {
+                    // dead
+                    creatures.RemoveAt(i);
+                    i--;
+                }
             }
         }
 

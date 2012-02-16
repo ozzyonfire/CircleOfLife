@@ -97,8 +97,6 @@ namespace CircleOfLife
         {
             KeyboardState newKS = Keyboard.GetState();
             MouseState newMS = Mouse.GetState();
-            
-
 
             // Check for exit.
             if (newKS.IsKeyDown(Keys.Escape))

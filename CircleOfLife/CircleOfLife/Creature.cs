@@ -45,6 +45,8 @@ namespace CircleOfLife
         private float orientation;
         private Vector2 goalPosition;
 
+        // timer
+        TimeSpan deathtimer;
 
         //Random :}
         Random random = new Random();
@@ -78,9 +80,10 @@ namespace CircleOfLife
             water = waterCap;
             energy = energyCap;
             currSpeed = 1f;
+            deathtimer = new TimeSpan(0, 0, 0);
         }
 
-        public void update()
+        public void update(GameTime gameTime)
         {
             if (state == 1) // chase
             {
@@ -123,6 +126,20 @@ namespace CircleOfLife
                     currSpeed += 0.05f * currSpeed;
                 }
                 position += heading * currSpeed;
+            }
+
+            deathtimer += gameTime.ElapsedGameTime;
+
+            // remove energy
+            if (deathtimer > TimeSpan.FromSeconds(1))
+            {
+                this.energy -= 5;
+                if (energy < 0)
+                {
+                    // kill the creature
+                    this.state = 4;
+                }
+                deathtimer = TimeSpan.Zero;
             }
 
         }
@@ -189,11 +206,13 @@ namespace CircleOfLife
                 wanderDirection.Y = (float)random.NextDouble() * 768;
             }
 
+            /*
             // makes them a little inaccurate
             wanderDirection.X +=
                 MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
             wanderDirection.Y +=
                 MathHelper.Lerp(-20f, 20f, (float)random.NextDouble());
+            */
 
             /*
             // we'll renormalize the wander direction, ...
@@ -204,7 +223,7 @@ namespace CircleOfLife
             */
 
             orientation = TurnToFace(position, wanderDirection, orientation,
-                .15f * turnSpeed);
+                .25f * turnSpeed);
 
             /*
             // next, we'll turn the characters back towards the center of the screen, to
