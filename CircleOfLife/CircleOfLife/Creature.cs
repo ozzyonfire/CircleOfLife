@@ -43,7 +43,7 @@ namespace CircleOfLife
         //position
         private Vector2 position;
         private float orientation;
-        private Vector2 goalPosition;
+        public Vector2 goalPosition;
 
         // timer
         TimeSpan deathtimer;
@@ -163,8 +163,7 @@ namespace CircleOfLife
             if (distanceToGoal < 300)
             {
                 // assign a new random goal position
-                goalPosition.X = (float)random.NextDouble() * 1024f;
-                goalPosition.Y = (float)random.NextDouble() * 768f;
+                randomGoal();
             }
 
             if (distanceToPred < 50)
@@ -202,8 +201,7 @@ namespace CircleOfLife
             if (distanceFromGoal < 200 && this.flora == null)
             {
                 // new random goal position
-                wanderDirection.X = (float)random.NextDouble() * 1024;
-                wanderDirection.Y = (float)random.NextDouble() * 768;
+                randomGoal();
             }
 
             /*
@@ -252,6 +250,13 @@ namespace CircleOfLife
 
             }
              */
+        }
+
+        public void randomGoal()
+        {
+            // new random goal position
+            goalPosition.X = (float)random.NextDouble() * 1024;
+            goalPosition.Y = (float)random.NextDouble() * 768;
         }
 
         /// <summary>

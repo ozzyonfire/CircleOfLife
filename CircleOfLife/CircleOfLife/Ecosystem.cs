@@ -103,12 +103,6 @@ namespace CircleOfLife
                                 // its a prey
                                 prey = true;
                             }
-                            else
-                            {
-                                // nothing to do for now
-                                //species[i].Creatures[j].state = 0;
-                                //break; // this causes a bug which sometimes gets predators stuck in the chase state
-                            }
 
                             if (detected)
                             {
@@ -126,6 +120,12 @@ namespace CircleOfLife
                                         // start evading
                                         species[i].Creatures[j].state = 2;
                                         species[i].Creatures[j].Predator = species[k].Creatures[l];
+                                    }
+                                    else if (species[i].Creatures[j].flora != null && species[i].Creatures[j].flora.state == 1)
+                                    {
+                                        // new random goal
+                                        species[i].Creatures[j].flora = null;
+                                        species[i].Creatures[j].randomGoal();
                                     }
                                 }
                                 else if (species[i].Creatures[j].state == 1) // chasing
@@ -196,6 +196,12 @@ namespace CircleOfLife
                                 if (species[i].Creatures[j].state == 0) // wandering
                                 {
                                     // find closest food or water
+                                    if (species[i].Creatures[j].flora != null && species[i].Creatures[j].flora.state == 1)
+                                    {
+                                        // new random goal
+                                        species[i].Creatures[j].flora = null;
+                                        species[i].Creatures[j].randomGoal();
+                                    }
                                     if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
                                     {
                                         if (species[i].Creatures[j].flora == null)
@@ -219,6 +225,10 @@ namespace CircleOfLife
                                                 species[i].Creatures[j].flora = flora[m];
                                             }
                                         }
+                                    }
+                                    else if (species[i].Creatures[j].diet == 1)
+                                    {
+                                        // look for water
                                     }
                                 }
                                 else if (species[i].Creatures[j].state == 1) // chasing

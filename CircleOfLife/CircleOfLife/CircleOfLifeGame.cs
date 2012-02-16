@@ -119,7 +119,7 @@ namespace CircleOfLife
                     stats.energyCap = 100;
                     stats.foodCap = 100;
                     stats.waterCap = 100;
-                    stats.energyValue = 50;
+                    stats.energyValue = 20;
                     stats.agility = 0.15f;
                     ecosystem.addSpecies("mouse", stats, (short)newMS.X, (short)newMS.Y);
                 }
@@ -151,7 +151,7 @@ namespace CircleOfLife
                     // add a shrub
                     Ecosystem.floraStats stats = new Ecosystem.floraStats();
                     stats.foodValue = 10;
-                    stats.size = 100;
+                    stats.size = 50;
                     stats.energyValue = 20;
                     ecosystem.addFlora("shrub", stats, (short)newMS.X, (short)newMS.Y);
                 }
