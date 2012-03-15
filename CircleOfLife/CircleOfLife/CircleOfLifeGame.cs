@@ -39,8 +39,8 @@ namespace CircleOfLife
             graphics = new GraphicsDeviceManager(this);
           
             //set resolution
-            //graphics.PreferredBackBufferWidth = 480;
-            //graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
 
            
@@ -59,8 +59,6 @@ namespace CircleOfLife
         /// </summary>
         protected override void Initialize()
         {
-
-
             //Initialize ecosystem
             ecosystem = new Ecosystem(this);
             //Initialize user interface system
@@ -80,7 +78,6 @@ namespace CircleOfLife
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             spriteSheet = Content.Load<Texture2D>("test_sheet2");
-            //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
         }
 
