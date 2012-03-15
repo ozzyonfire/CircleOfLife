@@ -130,7 +130,7 @@ namespace CircleOfLife
                             }
 
                             // avoid other creatures of the same type to prevent crowding, except when getting chased
-                            if (same && distanceAway < 50 && species[i].Creatures[j].state != 2)
+                            if (same && distanceAway < 5 && species[i].Creatures[j].state != 2)
                             {
                                 species[i].Creatures[j].avoid(species[k].Creatures[l].Position);
                             }

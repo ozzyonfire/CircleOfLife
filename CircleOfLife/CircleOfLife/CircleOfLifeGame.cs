@@ -82,31 +82,6 @@ namespace CircleOfLife
             spriteSheet = Content.Load<Texture2D>("test_sheet2");
             //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
-
-            // set up species in here for now
-            Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
-            preyStats.diet = 0;
-            preyStats.size = 5;
-            preyStats.detection = 100;
-            preyStats.speed = 7;
-            preyStats.energyCap = 100;
-            preyStats.foodCap = 100;
-            preyStats.waterCap = 100;
-            preyStats.energyValue = 20;
-            preyStats.agility = 0.15f;
-           // ecosystem.addSpecies("mouse", preyStats, spriteSheet);
-
-            Ecosystem.speciesStats predStats = new Ecosystem.speciesStats();
-            predStats.diet = 1;
-            predStats.size = 10;
-            predStats.detection = 150;
-            predStats.speed = 5;
-            predStats.energyCap = 100;
-            predStats.foodCap = 100;
-            predStats.waterCap = 100;
-            predStats.energyValue = 50;
-            predStats.agility = 0.15f;
-           // ecosystem.addSpecies("cat", predStats, spriteSheet);
         }
 
         /// <summary>
@@ -127,52 +102,6 @@ namespace CircleOfLife
         {
 
             ecosystem.Update(gameTime);
-            // Allows the game to exit
-           // if (newKS.IsKeyDown(Keys.Escape))
-           //     this.Exit();
-
-          /*  if (newMS.LeftButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (!oldMS.LeftButton.Equals(ButtonState.Pressed))
-                {
-                    //Creature creation done here for now
-                    if (newMS.X > 0 && newMS.X < graphics.PreferredBackBufferWidth
-                        && newMS.Y > 0 && newMS.Y < graphics.PreferredBackBufferHeight)
-                    {
-                        ecosystem.addCreature(0, (short)newMS.X, (short)newMS.Y);
-                    }
-                }
-            }
-            else if (newMS.RightButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (oldMS.RightButton.Equals(ButtonState.Pressed))
-                {
-                    if (newMS.X > 0 && newMS.X < graphics.PreferredBackBufferWidth
-                        && newMS.Y > 0 && newMS.Y < graphics.PreferredBackBufferHeight)
-                    {
-                        //Creature creation done here for now
-                        ecosystem.addCreature(1, (short)newMS.X, (short)newMS.Y);
-                    }
-                }
-            }
-            else if (newMS.MiddleButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (!oldMS.MiddleButton.Equals(ButtonState.Pressed))
-                {
-                    // add a shrub
-                    Ecosystem.floraStats stats = new Ecosystem.floraStats();
-                    stats.foodValue = 10;
-                    stats.size = 50;
-                    stats.energyValue = 20;
-                    ecosystem.addFlora("shrub", bushTexture, stats, (short)newMS.X, (short)newMS.Y);
-                }
-            }
-            // Update saved state.
-            oldKS = newKS;
-            oldMS = newMS;*/
             base.Update(gameTime);
         }
 
