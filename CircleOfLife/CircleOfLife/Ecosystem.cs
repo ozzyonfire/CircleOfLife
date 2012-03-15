@@ -14,21 +14,32 @@ namespace CircleOfLife
 {
     class Ecosystem
     {
-        private List<Species> species= new List<Species>(50);
+        //references
+        Game game;
+
+        private List<Species> species = new List<Species>(50);
+        private List<Species> speciesTemp = new List<Species>(50);
         private List<Environment> flora = new List<Environment>(50);
 
         //Random :}
         Random random = new Random();
 
-        public Ecosystem()
+        public Ecosystem(Game game)
         {
+            //assign references
+            this.game = game;
+            //this.COL = (CircleOfLifeGame)game;
+
         }
-        
-        public void addSpecies(String name, speciesStats stats, Texture2D spriteSheet)
+
+        public Species addSpecies(String name, speciesStats stats)
         {
             //Check if valid input
-            species.Add(new Species(name, stats, spriteSheet));
+            Species newSpecies = new Species(name, stats);
+            speciesTemp.Add(newSpecies);
             rescanSpecies();
+
+            return newSpecies;
         }
 
         public void addCreature(short n, short x, short y)
@@ -41,13 +52,17 @@ namespace CircleOfLife
             flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
         }
 
+
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
         //incredibly sloppy
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
-        public void update(GameTime gameTime)
-        {
-            // detection is based on the hysteresis methods to make transitions smoother
+        public void  Update(GameTime gameTime)
+{
+
+    species = speciesTemp;
+
+             // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
             bool prey = false;
@@ -329,7 +344,7 @@ namespace CircleOfLife
                     i--;
                 }
             }
-        }
+}
 
         public void rescanSpecies()
         {
@@ -354,17 +369,25 @@ namespace CircleOfLife
             }
         }
 
-        public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
         {
+
             // draw the species then the plants
             for (int i = 0; i < species.Count; i++)
             {
-                species[i].draw(ref graphics, ref spriteBatch, ref species[i].spriteSheet);
+                species[i].draw(gameTime, spriteBatch, spriteSheet);
             }
             for (int i = 0; i < flora.Count; i++)
             {
-                flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
+                //flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
             }
+
+
+        }
+  
+        public void clearEcosystem()
+        {
+            speciesTemp.Clear();
         }
 
         // static functions used to model the ecosystems behaviour
@@ -383,6 +406,7 @@ namespace CircleOfLife
             public short waterCap;
             public short energyValue; // this is how much the creature is "worth" when it is turned into food
             public float agility;
+            public Color color;
         }
 
         public struct floraStats

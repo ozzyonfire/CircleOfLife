@@ -11,26 +11,31 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
+
 namespace CircleOfLife
 {
     class Creature
     {
         //species characteristics
         public byte diet;
-        private short size;
-        public short detection;
-        private short speed;
-        private short energyCap;
-        public short foodCap;
-        private short waterCap;
-        private short energyValue;
+        private int size;
+        public int detection;
+        private int speed;
+        private int energyCap;
+        public int foodCap;
+        private int waterCap;
+        private int energyValue;
         public float agility;
+        public Color color;
+
+        //sprite location base
+        Rectangle spriteRectangle;
 
         //creature state
         public byte state;
-        public short food;
-        private short water;
-        public short energy;
+        public int food;
+        private int water;
+        public int energy;
         private float currSpeed;
 
         //creatures
@@ -54,14 +59,26 @@ namespace CircleOfLife
         //accesors
 
         public Vector2 Position { get { return position; } }
-        public short EnergyValue { get { return energyValue; } }
+        public int EnergyValue { get { return energyValue; } }
         public Creature Predator { get { return predator; } set { predator = value; } }
         public Creature Prey { get { return prey; } set { prey = value; } }
 
         //constructor
-        public Creature(short xPos, short yPos, Ecosystem.speciesStats stats)
+        public Creature(int xPos, int yPos, Ecosystem.speciesStats stats)
         {
             diet = stats.diet;
+            switch (diet)
+            {
+                case 0:
+                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    break;
+                case 1:
+                    spriteRectangle = new Rectangle(100, 0, 100, 100);
+                    break;
+                default:
+                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    break;
+            }
             size = stats.size;
             detection = stats.detection;
             speed = stats.speed;
@@ -70,6 +87,8 @@ namespace CircleOfLife
             waterCap = stats.waterCap;
             energyValue = stats.energyValue;
             agility = stats.agility;
+
+            color = stats.color;
 
             position = new Vector2(xPos, yPos);
             goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
@@ -144,19 +163,19 @@ namespace CircleOfLife
 
         }
 
-        public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
         {
-            if(state == 1)
-                spriteBatch.Draw(spriteSheet, position, null, Color.Red, orientation, new Vector2(0),0.3f,SpriteEffects.None,0.0f);
+            if (state == 1)
+                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else if (state == 2)
-                spriteBatch.Draw(spriteSheet, position, null, Color.Blue, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else if (state == 3)
-                spriteBatch.Draw(spriteSheet, position, null, Color.Green, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else if (state == 4)
-                spriteBatch.Draw(spriteSheet, position, null, Color.Gray, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else
-                spriteBatch.Draw(spriteSheet, position, null, Color.White, orientation, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
-        }
+                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
+        }       
 
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
         {
@@ -282,7 +301,7 @@ namespace CircleOfLife
         }
 
         // mutator
-        public void Feed(short value)
+        public void Feed(int value)
         {
             this.food += value;
         }

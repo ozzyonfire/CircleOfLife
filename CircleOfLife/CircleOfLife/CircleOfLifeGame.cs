@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Nuclex.UserInterface;
+using Nuclex.Input;
+using Nuclex.Game;
+
 
 namespace CircleOfLife
 {
@@ -18,27 +22,33 @@ namespace CircleOfLife
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
+        //graphics fields
+        Texture2D spriteSheet;
+        Texture2D bushTexture;
 
-        //User Input history
+        Ecosystem ecosystem;
+        User user;
+
         KeyboardState oldKS;
         MouseState oldMS;
 
-        //graphics fields
-        public Texture2D preyTexture;
-        Texture2D predatorTexture;
-        Texture2D bushTexture;
-
-        //Initialize ecosystem
-        Ecosystem ecosystem = new Ecosystem();
 
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+          
+            //set resolution
+            //graphics.PreferredBackBufferWidth = 480;
+            //graphics.PreferredBackBufferHeight = 800;
+            graphics.IsFullScreen = true;
 
-            //Sets window size
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 768;
+           
+            KeyboardState oldKS = Keyboard.GetState();
+            MouseState oldMS = Mouse.GetState();
+
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -49,9 +59,29 @@ namespace CircleOfLife
         /// </summary>
         protected override void Initialize()
         {
-            //Set mouse visibility
-            this.IsMouseVisible = true;
+
+
+            //Initialize ecosystem
+            ecosystem = new Ecosystem(this);
+            //Initialize user interface system
+            user = new User(this, ecosystem);
+
             base.Initialize();
+        }
+
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            spriteSheet = Content.Load<Texture2D>("test_sheet2");
+            //predatorTexture = Content.Load<Texture2D>("dragon");
+            bushTexture = Content.Load<Texture2D>("bush");
 
             // set up species in here for now
             Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
@@ -64,7 +94,7 @@ namespace CircleOfLife
             preyStats.waterCap = 100;
             preyStats.energyValue = 20;
             preyStats.agility = 0.15f;
-            ecosystem.addSpecies("mouse", preyStats, preyTexture);
+           // ecosystem.addSpecies("mouse", preyStats, spriteSheet);
 
             Ecosystem.speciesStats predStats = new Ecosystem.speciesStats();
             predStats.diet = 1;
@@ -76,21 +106,7 @@ namespace CircleOfLife
             predStats.waterCap = 100;
             predStats.energyValue = 50;
             predStats.agility = 0.15f;
-            ecosystem.addSpecies("cat", predStats, predatorTexture);
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            preyTexture = Content.Load<Texture2D>("panda");
-            predatorTexture = Content.Load<Texture2D>("dragon");
-            bushTexture = Content.Load<Texture2D>("bush");
+           // ecosystem.addSpecies("cat", predStats, spriteSheet);
         }
 
         /// <summary>
@@ -109,29 +125,13 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            ecosystem.Update(gameTime);
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+           // if (newKS.IsKeyDown(Keys.Escape))
+           //     this.Exit();
 
-            updateInput();
-            updateEcosystem(gameTime);
-
-            base.Update(gameTime);
-        }
-
-        private void updateInput()
-        {
-            KeyboardState newKS = Keyboard.GetState();
-            MouseState newMS = Mouse.GetState();
-
-            // Check for exit.
-            if (newKS.IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
-
-
-            if (newMS.LeftButton.Equals(ButtonState.Pressed))
+          /*  if (newMS.LeftButton.Equals(ButtonState.Pressed))
             {
                 // If not down last update, key has just been pressed.
                 if (!oldMS.LeftButton.Equals(ButtonState.Pressed))
@@ -172,15 +172,9 @@ namespace CircleOfLife
             }
             // Update saved state.
             oldKS = newKS;
-            oldMS = newMS;
+            oldMS = newMS;*/
+            base.Update(gameTime);
         }
-
-
-        private void updateEcosystem(GameTime gameTime)
-        {
-            ecosystem.update(gameTime);
-        }
-
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -190,14 +184,43 @@ namespace CircleOfLife
         {
             GraphicsDevice.Clear(Color.White);
 
-            spriteBatch.Begin(/*SpriteSortMode.BackToFront, BlendState.AlphaBlend*/);
-
-            //Ecosystem class calls the draw function of every creature
-            ecosystem.draw(ref graphics, ref spriteBatch, ref preyTexture);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            ecosystem.draw(gameTime, spriteBatch, spriteSheet);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
     }
+
+
+    //nothing..game state template
+    public class TitleState : Nuclex.Game.States.DrawableGameState
+    {
+
+        GraphicsDevice graphicsDevice;
+
+        SpriteBatch spriteBatch;
+
+        public TitleState(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        {
+            this.graphicsDevice = graphicsDevice;
+            this.spriteBatch = spriteBatch;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            graphicsDevice.Clear(Color.Brown);
+
+            //base.Draw(gameTime);
+        }
+    }
+
 }
+

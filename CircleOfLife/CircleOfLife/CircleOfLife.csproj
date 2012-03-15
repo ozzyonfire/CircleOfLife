@@ -90,6 +90,33 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Nuclex.Audio">
+      <HintPath>Nuclex\Nuclex.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Fonts">
+      <HintPath>Nuclex\Nuclex.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Game">
+      <HintPath>Nuclex\Nuclex.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Graphics">
+      <HintPath>Nuclex\Nuclex.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Input, Version=4.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex\Nuclex.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Support, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex\Nuclex.Support.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.UserInterface, Version=4.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex\Nuclex.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Windows.Forms">
+      <HintPath>Nuclex\Nuclex.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
@@ -108,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircleOfLifeGame.cs" />
+    <Compile Include="User.cs" />
+    <Content Include="CircleOfLifeGame2.txt" />
     <Compile Include="Creature.cs" />
     <Compile Include="Ecosystem.cs" />
     <Compile Include="Environment.cs" />
