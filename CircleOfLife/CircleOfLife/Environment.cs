@@ -20,21 +20,29 @@ namespace CircleOfLife
         public Vector2 position;
         public short state;
         public short energyValue;
+        Random random = new Random();
         public Texture2D sprite;
 
-        public Environment(String name, Texture2D sprite, short foodValue, short energyValue, short size, short xPos, short yPos)
+        public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos)
         {
             this.name = name;
             this.foodValue = foodValue;
             this.size = size;
             this.energyValue = energyValue;
             this.position = new Vector2((float)xPos, (float)yPos);
-            this.sprite = sprite;
         }
 
-        public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
         {
             spriteBatch.Draw(spriteSheet, position, null, Color.White, 0, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+        }
+
+        public Environment grow()
+        {
+            float x = (float)random.Next(10);
+            float y = (float)random.Next(10);
+
+            return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y));
         }
     }
 }

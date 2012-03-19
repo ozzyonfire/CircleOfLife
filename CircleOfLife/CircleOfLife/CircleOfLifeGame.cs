@@ -42,7 +42,6 @@ namespace CircleOfLife
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
-
            
             KeyboardState oldKS = Keyboard.GetState();
             MouseState oldMS = Mouse.GetState();

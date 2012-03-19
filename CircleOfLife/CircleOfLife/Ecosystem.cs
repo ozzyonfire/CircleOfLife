@@ -49,7 +49,7 @@ namespace CircleOfLife
 
         public void addFlora(String name, Texture2D sprite, floraStats stats, short x, short y)
         {
-            flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
+            //flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
         }
 
 
@@ -58,11 +58,10 @@ namespace CircleOfLife
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
         public void  Update(GameTime gameTime)
-{
+        {
+            species = speciesTemp;
 
-    species = speciesTemp;
-
-             // detection is based on the hysteresis methods to make transitions smoother
+            // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
             bool prey = false;
