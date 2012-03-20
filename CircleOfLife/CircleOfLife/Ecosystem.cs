@@ -70,13 +70,13 @@ namespace CircleOfLife
             //Navigation scrolling section
             //the values need to be tuned to make scrolling smooth
             if(scrollLeft)
-                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollRight)
                 userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollRight)
+                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
             if (scrollUp)
-                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollDown)
                 userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollDown)
+                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
 
 
 
