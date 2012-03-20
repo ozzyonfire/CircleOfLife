@@ -24,20 +24,12 @@ namespace CircleOfLife
         //Random :}
         Random random = new Random();
 
-        //temporary variable for implementing map scrolling
-        public Vector2 userView;
-        public bool scrollLeft = false;
-        public bool scrollRight = false;
-        public bool scrollDown = false;
-        public bool scrollUp = false;
 
         
         public Ecosystem(Game game)
         {
             //assign references
             this.game = game;
-            //this.COL = (CircleOfLifeGame)game;
-            userView = new Vector2(0, 0);
         }
 
         public Species addSpecies(String name, speciesStats stats)
@@ -67,16 +59,6 @@ namespace CircleOfLife
         // so feed, check to reproduce, etc.
         public void  Update(GameTime gameTime)
 {
-            //Navigation scrolling section
-            //the values need to be tuned to make scrolling smooth
-            if(scrollLeft)
-                userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollRight)
-                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollUp)
-                userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollDown)
-                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
 
 
 
@@ -389,13 +371,13 @@ namespace CircleOfLife
             }
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
         {
 
             // draw the species then the plants
             for (int i = 0; i < species.Count; i++)
             {
-                species[i].draw(gameTime, spriteBatch, spriteSheet,userView);
+                species[i].draw(gameTime, spriteBatch, spriteSheet, offset);
             }
             for (int i = 0; i < flora.Count; i++)
             {

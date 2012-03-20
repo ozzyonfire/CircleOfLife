@@ -17,6 +17,7 @@ namespace CircleOfLife
     {
         Ecosystem ecosystem;    //reference to ecosystem class
         Game game;
+        CircleOfLifeGame baseGame;
         Viewport viewport;
 
         //Nuclex Stuff
@@ -31,17 +32,14 @@ namespace CircleOfLife
         //temporary dialog
         SpeciesDialog speciesDialog;
 
-        //scroll stuff
-        //DateTime lastInput = DateTime.Now;    //used to make sure position does not change too quickly
-        bool scrolling = false;
-        float maxScrollSpeed = 10;
-        float scrollAcceleration = 1.5f;
-        float scrollSpeed = 0;
+
 
         public User(Game game, Ecosystem ecosystem)
         {
             this.ecosystem = ecosystem;
             this.game = game;
+            this.baseGame = (CircleOfLifeGame)game;
+
             //Initialize Nuclex Managers
             state = new Nuclex.Game.States.GameStateManager(game.Services);
             input = new InputManager(game.Services);
@@ -102,27 +100,27 @@ namespace CircleOfLife
                 return;
             //check to see if the mouse has been moved to a position that indicates the user wants to scroll
             if (x < viewport.Width * 0.05)
-                ecosystem.scrollLeft = true;
+                baseGame.scrollLeft = true;
             else if (x > viewport.Width * 0.95)
-                ecosystem.scrollRight = true;
-            else if (ecosystem.scrollLeft || ecosystem.scrollRight)
+                baseGame.scrollRight = true;
+            else if (baseGame.scrollLeft || baseGame.scrollRight)
             {
                 if (!ks.IsKeyDown(Keys.Left))
-                    ecosystem.scrollLeft = false;
+                    baseGame.scrollLeft = false;
                 if (!ks.IsKeyDown(Keys.Right))
-                    ecosystem.scrollRight = false;
+                    baseGame.scrollRight = false;
             }
 
             if (y < viewport.Height * 0.05)
-                ecosystem.scrollDown = true;
+                baseGame.scrollDown = true;
             else if (y > viewport.Height * 0.95)
-                ecosystem.scrollUp = true;
-            else if (ecosystem.scrollUp || ecosystem.scrollDown)
+                baseGame.scrollUp = true;
+            else if (baseGame.scrollUp || baseGame.scrollDown)
             {
                 if (!ks.IsKeyDown(Keys.Up))
-                    ecosystem.scrollUp = false;
+                    baseGame.scrollUp = false;
                 if (!ks.IsKeyDown(Keys.Down))
-                    ecosystem.scrollDown = false;
+                    baseGame.scrollDown = false;
             }
 
 
@@ -191,7 +189,7 @@ namespace CircleOfLife
                 preyStats.diet = 0;
 
             Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
-            newSpecies.addCreature(ms.X - (int)ecosystem.userView.X, ms.Y - (int)ecosystem.userView.Y);
+            newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y);
         }
 
 
@@ -204,13 +202,13 @@ namespace CircleOfLife
             //stop scrolling if mouse is in the middle
             MouseState ms = mouse.GetState();
             if (key.Equals(Keys.Right) && !(ms.X > viewport.Width * 0.95))
-                ecosystem.scrollRight = false;
+                baseGame.scrollRight = false;
             if (key.Equals(Keys.Left) && !(ms.X < viewport.Width * 0.05))
-                ecosystem.scrollLeft = false;
+                baseGame.scrollLeft = false;
             if (key.Equals(Keys.Up) && !(ms.Y < viewport.Height * 0.05))
-                ecosystem.scrollUp = false;
+                baseGame.scrollUp = false;
             if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
-                ecosystem.scrollDown = false;
+                baseGame.scrollDown = false;
             
         }
 
@@ -223,13 +221,13 @@ namespace CircleOfLife
             if (key.Equals(Keys.Left) || key.Equals(Keys.Right) || key.Equals(Keys.Down) || key.Equals(Keys.Up))
             {
                 if (key.Equals(Keys.Left))
-                    ecosystem.scrollLeft = true;
+                    baseGame.scrollLeft = true;
                 if (key.Equals(Keys.Right))
-                    ecosystem.scrollRight = true;
+                    baseGame.scrollRight = true;
                 if (key.Equals(Keys.Up))
-                    ecosystem.scrollUp = true;
+                    baseGame.scrollUp = true;
                 if (key.Equals(Keys.Down))
-                    ecosystem.scrollDown = true;
+                    baseGame.scrollDown = true;
             }
         }
 

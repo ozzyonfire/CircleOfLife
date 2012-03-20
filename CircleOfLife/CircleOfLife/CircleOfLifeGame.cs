@@ -32,7 +32,14 @@ namespace CircleOfLife
 
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually
-        Vector2 mapSize;    //not used currently
+        //Vector2 mapSize;    //not used currently
+
+        //temporary variable for implementing map scrolling
+        public Vector2 userView;
+        public bool scrollLeft = false;
+        public bool scrollRight = false;
+        public bool scrollDown = false;
+        public bool scrollUp = false;
 
         public CircleOfLifeGame()
         {
@@ -43,9 +50,8 @@ namespace CircleOfLife
             //graphics.PreferredBackBufferHeight = 800;
             graphics.IsFullScreen = true;
 
-           
-            KeyboardState oldKS = Keyboard.GetState();
-            MouseState oldMS = Mouse.GetState();
+            //initialize
+            userView = new Vector2(0, 0);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -127,54 +133,20 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             ecosystem.Update(gameTime);
-            // Allows the game to exit
-           // if (newKS.IsKeyDown(Keys.Escape))
-           //     this.Exit();
 
-          /*  if (newMS.LeftButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (!oldMS.LeftButton.Equals(ButtonState.Pressed))
-                {
-                    //Creature creation done here for now
-                    if (newMS.X > 0 && newMS.X < graphics.PreferredBackBufferWidth
-                        && newMS.Y > 0 && newMS.Y < graphics.PreferredBackBufferHeight)
-                    {
-                        ecosystem.addCreature(0, (short)newMS.X, (short)newMS.Y);
-                    }
-                }
-            }
-            else if (newMS.RightButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (oldMS.RightButton.Equals(ButtonState.Pressed))
-                {
-                    if (newMS.X > 0 && newMS.X < graphics.PreferredBackBufferWidth
-                        && newMS.Y > 0 && newMS.Y < graphics.PreferredBackBufferHeight)
-                    {
-                        //Creature creation done here for now
-                        ecosystem.addCreature(1, (short)newMS.X, (short)newMS.Y);
-                    }
-                }
-            }
-            else if (newMS.MiddleButton.Equals(ButtonState.Pressed))
-            {
-                // If not down last update, key has just been pressed.
-                if (!oldMS.MiddleButton.Equals(ButtonState.Pressed))
-                {
-                    // add a shrub
-                    Ecosystem.floraStats stats = new Ecosystem.floraStats();
-                    stats.foodValue = 10;
-                    stats.size = 50;
-                    stats.energyValue = 20;
-                    ecosystem.addFlora("shrub", bushTexture, stats, (short)newMS.X, (short)newMS.Y);
-                }
-            }
-            // Update saved state.
-            oldKS = newKS;
-            oldMS = newMS;*/
+
+            //Navigation scrolling section
+            //the values need to be tuned to make scrolling smooth
+            if (scrollLeft)
+                userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollRight)
+                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollUp)
+                userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollDown)
+                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+
             base.Update(gameTime);
         }
 
@@ -187,8 +159,8 @@ namespace CircleOfLife
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            ecosystem.draw(gameTime, spriteBatch, spriteSheet);
-            //spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
+            ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
