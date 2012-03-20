@@ -16,6 +16,7 @@ namespace CircleOfLife
     {
         //references
         Game game;
+        Map map;
 
         private List<Species> species = new List<Species>(50);
         private List<Species> speciesTemp = new List<Species>(50);
@@ -29,6 +30,8 @@ namespace CircleOfLife
             //assign references
             this.game = game;
             //this.COL = (CircleOfLifeGame)game;
+            map = new Map();
+            map.intialize();
 
         }
 
@@ -57,7 +60,7 @@ namespace CircleOfLife
         //incredibly sloppy
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
-        public void  Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             species = speciesTemp;
 
@@ -123,7 +126,7 @@ namespace CircleOfLife
                                 // its a prey
                                 prey = true;
                             }
-                            else if (species[i].name == species[k].name) 
+                            else if (species[i].name == species[k].name)
                             {
                                 same = true;
                             }
@@ -170,7 +173,7 @@ namespace CircleOfLife
                                             species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
                                             species[k].Creatures[l].state = 4; // dead
                                         }
-                                         // todo: feed
+                                        // todo: feed
                                         // doing the feeding in here for now
                                     }
                                     else if (prey)
@@ -319,7 +322,7 @@ namespace CircleOfLife
                             if (species[i].Creatures[j].food >= species[i].Creatures[j].foodCap)
                             {
                                 // reproduce
-                                species[i].reproduce( species[i].Creatures[j] );
+                                species[i].reproduce(species[i].Creatures[j]);
                                 species[i].Creatures[j].food = 0;
                             }
                         }
@@ -343,7 +346,10 @@ namespace CircleOfLife
                     i--;
                 }
             }
-}
+
+            // update map
+            map.update(gameTime);
+        }
 
         public void rescanSpecies()
         {
@@ -380,8 +386,8 @@ namespace CircleOfLife
             {
                 //flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
             }
-
-
+            // draw map
+            map.draw(gameTime, spriteBatch, spriteSheet);
         }
   
         public void clearEcosystem()
