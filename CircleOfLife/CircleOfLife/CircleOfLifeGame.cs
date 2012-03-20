@@ -160,7 +160,7 @@ namespace CircleOfLife
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
-            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
+            //spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

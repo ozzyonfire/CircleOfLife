@@ -29,6 +29,10 @@ namespace CircleOfLife
         Nuclex.Input.Devices.IKeyboard keyboard;
         Nuclex.Input.Devices.IMouse mouse;
 
+        //Game screens for different modes
+        Screen gameScreen;
+        Screen menuScreen;
+
         //temporary dialog
         SpeciesDialog speciesDialog;
 
@@ -63,14 +67,15 @@ namespace CircleOfLife
             //retrieve viewport
             viewport = game.GraphicsDevice.Viewport;
 
-            Screen mainScreen = new Screen(viewport.Width, viewport.Height);
+            gameScreen = new Screen(viewport.Width, viewport.Height);
 
+            menuScreen = new Screen(viewport.Width, viewport.Height);
 
             speciesDialog = new SpeciesDialog();
             //set clear button listener
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
-            mainScreen.Desktop.Children.Add(speciesDialog);
-            gui.Screen = mainScreen;
+            gameScreen.Desktop.Children.Add(speciesDialog);
+            gui.Screen = gameScreen;
 
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
@@ -112,9 +117,9 @@ namespace CircleOfLife
             }
 
             if (y < viewport.Height * 0.05)
-                baseGame.scrollDown = true;
-            else if (y > viewport.Height * 0.95)
                 baseGame.scrollUp = true;
+            else if (y > viewport.Height * 0.95)
+                baseGame.scrollDown = true;
             else if (baseGame.scrollUp || baseGame.scrollDown)
             {
                 if (!ks.IsKeyDown(Keys.Up))
@@ -210,6 +215,12 @@ namespace CircleOfLife
             if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
                 baseGame.scrollDown = false;
             
+            //
+            if (key.Equals(Keys.J))
+                gui.Screen = menuScreen;
+            if (key.Equals(Keys.K))
+                gui.Screen = gameScreen;
+
         }
 
 
