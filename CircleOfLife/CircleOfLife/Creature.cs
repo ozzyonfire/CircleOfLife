@@ -163,9 +163,11 @@ namespace CircleOfLife
 
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
         {
-            if (state == 1)
+            
+            //only one state for the time being
+            /*if (state == 1)
                 spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else if (state == 2)
                 spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
@@ -173,8 +175,8 @@ namespace CircleOfLife
                 spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
             else if (state == 4)
                 spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-            else
-                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
+            else */
+                spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X,position.Y + offset.Y), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
         }       
 
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)

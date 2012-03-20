@@ -30,9 +30,9 @@ namespace CircleOfLife
         Ecosystem ecosystem;
         User user;
 
-        KeyboardState oldKS;
-        MouseState oldMS;
 
+        //Map coordinates: these variables should be moved to a more appropriate class..eventually
+        Vector2 mapSize;    //not used currently
 
         public CircleOfLifeGame()
         {
@@ -65,6 +65,8 @@ namespace CircleOfLife
             ecosystem = new Ecosystem(this);
             //Initialize user interface system
             user = new User(this, ecosystem);
+
+
 
             base.Initialize();
         }
@@ -186,7 +188,7 @@ namespace CircleOfLife
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             ecosystem.draw(gameTime, spriteBatch, spriteSheet);
-
+            //spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -195,32 +197,6 @@ namespace CircleOfLife
     }
 
 
-    //nothing..game state template
-    public class TitleState : Nuclex.Game.States.DrawableGameState
-    {
-
-        GraphicsDevice graphicsDevice;
-
-        SpriteBatch spriteBatch;
-
-        public TitleState(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
-        {
-            this.graphicsDevice = graphicsDevice;
-            this.spriteBatch = spriteBatch;
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            graphicsDevice.Clear(Color.Brown);
-
-            //base.Draw(gameTime);
-        }
-    }
 
 }
 
