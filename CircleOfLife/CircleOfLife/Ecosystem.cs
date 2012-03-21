@@ -242,6 +242,7 @@ namespace CircleOfLife
                                         if (floraDistance < 15)
                                         {
                                             // start feeding
+                                            // start the feeding timer
                                             species[i].Creatures[j].state = 3;
                                         }
 
