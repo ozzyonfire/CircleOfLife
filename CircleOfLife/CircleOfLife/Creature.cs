@@ -53,6 +53,9 @@ namespace CircleOfLife
         // timer
         TimeSpan deathtimer;
 
+        //Animations
+        int frameOffset;
+
         //Random :}
         Random random = new Random();
 
@@ -70,13 +73,13 @@ namespace CircleOfLife
             switch (diet)
             {
                 case 0:
-                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    spriteRectangle = Sprites.herbivore;
                     break;
                 case 1:
-                    spriteRectangle = new Rectangle(100, 0, 100, 100);
+                    spriteRectangle = Sprites.carnivore;
                     break;
                 default:
-                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    spriteRectangle = Sprites.carnivore;
                     break;
             }
             size = stats.size;
@@ -100,6 +103,9 @@ namespace CircleOfLife
             energy = energyCap;
             currSpeed = 1f;
             deathtimer = new TimeSpan(0, 0, 0);
+
+            //animation offset
+            frameOffset = random.Next(4);
         }
 
         public void update(GameTime gameTime)
@@ -163,21 +169,7 @@ namespace CircleOfLife
 
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
-        {
-            
-            //only one state for the time being
-            /*if (state == 1)
-                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-            else if (state == 2)
-                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-            else if (state == 3)
-                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-            else if (state == 4)
-                spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-            else */
-                spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X,position.Y + offset.Y), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.0f);
-        }       
+  
 
         private void Evade(Vector2 position, ref Creature pred, ref float orientation, float turnSpeed)
         {
@@ -307,5 +299,15 @@ namespace CircleOfLife
         {
             this.food += value;
         }
+
+
+
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset, int frame)
+        {
+            spriteRectangle.X = 100 * ((frame + frameOffset)%4);
+            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size, SpriteEffects.None, 0.9f);
+        }     
+
+
     }
 }

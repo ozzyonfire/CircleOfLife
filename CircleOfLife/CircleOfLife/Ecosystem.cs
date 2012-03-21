@@ -373,11 +373,13 @@ namespace CircleOfLife
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
         {
+            //frame calculation is done here for the time being
+            int frame = ((int)Math.Round(gameTime.TotalGameTime.TotalMilliseconds / 150)) % 4;
 
             // draw the species then the plants
             for (int i = 0; i < species.Count; i++)
             {
-                species[i].draw(gameTime, spriteBatch, spriteSheet, offset);
+                species[i].draw(gameTime, spriteBatch, spriteSheet, offset, frame);
             }
             for (int i = 0; i < flora.Count; i++)
             {

@@ -36,7 +36,8 @@ namespace CircleOfLife
         //temporary dialog
         SpeciesDialog speciesDialog;
 
-
+        Rectangle hudBackground = Sprites.hudBackground;
+        Rectangle hudDestination = new Rectangle(0,430,720,50);
 
         public User(Game game, Ecosystem ecosystem)
         {
@@ -48,7 +49,7 @@ namespace CircleOfLife
             state = new Nuclex.Game.States.GameStateManager(game.Services);
             input = new InputManager(game.Services);
             gui = new GuiManager(game.Services);
-
+            
             //Add nuclex managers to game components
             game.Components.Add(state);
             game.Components.Add(input);
@@ -72,7 +73,7 @@ namespace CircleOfLife
             viewport = game.GraphicsDevice.Viewport;
 
             gameScreen = new Screen(viewport.Width, viewport.Height);
-
+            
             menuScreen = new Screen(viewport.Width, viewport.Height);
 
             speciesDialog = new SpeciesDialog();
@@ -80,6 +81,7 @@ namespace CircleOfLife
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
             gameScreen.Desktop.Children.Add(speciesDialog);
             gui.Screen = gameScreen;
+            
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
@@ -100,13 +102,23 @@ namespace CircleOfLife
 
         }
 
+        public void drawHUD(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        {
+            //only draws the background - nuclex handles the buttons
+            spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
+        }
 
+        public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        {
+
+        }
         //EVENT HANDLERS:
 
 
         void clearButton_Pressed(object sender, EventArgs e)
         {
             ecosystem.clearEcosystem();
+            this.speciesDialog.clearButton.sourceRect = new RectangleF(0, 0, 100, 100);
         }
 
         void mouse_MouseMoved(float x, float y)
@@ -294,8 +306,9 @@ namespace CircleOfLife
             public Nuclex.UserInterface.Controls.Desktop.InputControl agilityInput = new Nuclex.UserInterface.Controls.Desktop.InputControl();
             public Nuclex.UserInterface.Controls.Desktop.InputControl detectionInput = new Nuclex.UserInterface.Controls.Desktop.InputControl();
 
-            public Nuclex.UserInterface.Controls.Desktop.ButtonControl clearButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
-
+            //public Nuclex.UserInterface.Controls.Desktop.ButtonControl clearButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+            public GameButton clearButton = new GameButton();
+            
 
             public SpeciesDialog()
             {
@@ -306,8 +319,9 @@ namespace CircleOfLife
                 speedLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 150.0f), 80, 24);
                 agilityLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 175.0f), 80, 24);
                 detectionLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 200.0f), 80, 24);
-
-
+                
+                
+                
                 nameInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.0f, 50.0f), 120, 24);
                 colorInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.0f, 75.0f), 120, 24);
                 dietInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.0f, 100.0f), 120, 24);
@@ -345,7 +359,7 @@ namespace CircleOfLife
                 agilityInput.Text = "0.15";
                 detectionInput.Text = "150";
 
-                clearButton.Text = "Clear Species";
+                clearButton.Text = "";
 
                 this.Bounds = new UniRectangle(100.0f, 100.0f, 300.0f, 275.0f);
 
@@ -367,6 +381,44 @@ namespace CircleOfLife
 
                 Children.Add(clearButton);
             }
+
         }
+
+        //This is an extension of the button control with functionality necessary for this game
+        public class GameButton : Nuclex.UserInterface.Controls.Desktop.ButtonControl
+        {
+            public Texture2D spriteSheet;
+            public RectangleF baseSourceRect;
+            public RectangleF hoverSourceRect;
+            public RectangleF pressedSourceRect;
+
+            public GameButton()
+            {
+
+            }
+
+            protected override void OnMouseEntered()
+            {
+                base.OnMouseEntered();
+            }
+
+            protected override void OnMouseLeft()
+            {
+                base.OnMouseLeft();
+            }
+
+            /* protected override void OnMousePressed(MouseButtons button)
+             {
+                 base.OnMousePressed(button);
+             }
+                
+
+             protected override void OnMouseReleased(MouseButtons button)
+             {
+                    
+                 base.OnMousePressed(button);
+             }*/
+        }
+    
     }
 }

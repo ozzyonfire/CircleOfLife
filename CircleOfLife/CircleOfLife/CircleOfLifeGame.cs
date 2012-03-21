@@ -83,7 +83,7 @@ namespace CircleOfLife
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            spriteSheet = Content.Load<Texture2D>("test_sheet2");
+            spriteSheet = Content.Load<Texture2D>("spriteSheet");
             //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
 
@@ -133,7 +133,8 @@ namespace CircleOfLife
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
-            //spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, 640, 640), new Rectangle(0, 100, 1000, 1000), Color.White);
+            spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, 1440, 960), new Rectangle(0, 0, 1000, 1000), Color.White,0.0f,Vector2.Zero,SpriteEffects.None,0.1f);
+            user.drawHUD(gameTime, spriteBatch, spriteSheet);
             spriteBatch.End();
 
             base.Draw(gameTime);

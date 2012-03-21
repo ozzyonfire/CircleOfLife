@@ -58,11 +58,11 @@ namespace CircleOfLife
             }
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset, int frame)
         {
             for (int i = 0; i < creatures.Count; i++)
             {
-                creatures[i].draw(gameTime, spriteBatch, spriteSheet, offset);
+                creatures[i].draw(gameTime, spriteBatch, spriteSheet, offset, frame);
             }
         }
 

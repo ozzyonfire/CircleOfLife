@@ -20,22 +20,13 @@
       <Time>2012-03-14T02:03:37.125-07:00</Time>
     </Item>
     <Item>
-      <Source>test_sheet.png</Source>
-      <Name>test_sheet</Name>
+      <Source>spriteSheet.png</Source>
+      <Name>spriteSheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb</Output>
-      <Time>2012-03-14T07:09:59.34375-07:00</Time>
-    </Item>
-    <Item>
-      <Source>test_sheet2.png</Source>
-      <Name>test_sheet2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb</Output>
-      <Time>2012-03-16T18:03:39.984375-07:00</Time>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-03-21T12:08:31.78125-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

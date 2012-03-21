@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircleOfLifeGame.cs" />
+    <Compile Include="Sprites.cs" />
     <Compile Include="User.cs" />
     <Content Include="CircleOfLifeGame2.txt" />
     <Compile Include="Creature.cs" />
