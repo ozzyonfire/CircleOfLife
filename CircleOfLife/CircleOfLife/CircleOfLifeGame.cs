@@ -63,14 +63,10 @@ namespace CircleOfLife
         protected override void Initialize()
         {
 
-
             //Initialize ecosystem
             ecosystem = new Ecosystem(this);
             //Initialize user interface system
             user = new User(this, ecosystem);
-
-
-
             base.Initialize();
         }
 
@@ -88,9 +84,12 @@ namespace CircleOfLife
             //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
 
-            
+            user.initializeGameScreen();
         }
 
+        void initializeGameComponents()
+        {
+        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.

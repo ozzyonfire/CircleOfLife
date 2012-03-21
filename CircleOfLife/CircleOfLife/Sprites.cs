@@ -12,6 +12,6 @@ namespace CircleOfLife
         public static Rectangle herbivore = new Rectangle(0, 1200, 100, 100);
         public static Rectangle carnivore = new Rectangle(0, 1300, 100, 100);
         public static Rectangle hudBackground = new Rectangle(0, 1000, 50, 150);
-
+        public static Rectangle torchButton = new Rectangle(50, 1000, 150, 150);
     }
 }

@@ -80,6 +80,7 @@ namespace CircleOfLife
             //set clear button listener
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
             gameScreen.Desktop.Children.Add(speciesDialog);
+            //GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
             gui.Screen = gameScreen;
             
             //listeners
@@ -92,9 +93,9 @@ namespace CircleOfLife
             
         }
 
-        void initializeGameScreen()
+        public void initializeGameScreen()
         {
-
+            GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
         }
 
         void initializeMenuScreen()
@@ -274,14 +275,36 @@ namespace CircleOfLife
 
         //The following builds and initializes the games gui's seperated from the user class mainly for organizational purposes
 
-        public class menuUI
+        public class MenuUI
         {
-            
+            public MenuUI()
+            {
+
+            }
         }
 
-        public class gameUI
+        public class GameUI
         {
-
+            public GameButton quit;
+            public GameUI(Screen screen, Texture2D spriteSheet)
+            {
+                quit = new GameButton(new UniRectangle(
+                    new UniScalar(0.0f, 5.0f),
+                    new UniScalar(0.0f, 430.0f),
+                    new UniScalar(0.0f, 50.0f),
+                    new UniScalar(0.0f, 50.0f)),
+                    spriteSheet, new RectangleF(
+                        Sprites.torchButton.X,
+                        Sprites.torchButton.Y,
+                        Sprites.torchButton.Width,
+                        Sprites.torchButton.Height));
+                quit.hoverSourceRect = new RectangleF(
+                        Sprites.torchButton.X + 150,
+                        Sprites.torchButton.Y,
+                        Sprites.torchButton.Width,
+                        Sprites.torchButton.Height);
+                screen.Desktop.Children.Add(quit);
+            }
         }
         
         
@@ -397,13 +420,23 @@ namespace CircleOfLife
 
             }
 
+            public GameButton(UniRectangle bounds, Texture2D spriteSheet, RectangleF sourceRect)
+            {
+                this.Bounds = bounds;
+                this.imageTexture = spriteSheet;
+                this.baseSourceRect = sourceRect;
+                this.sourceRect = sourceRect;
+            }
+
             protected override void OnMouseEntered()
             {
+                sourceRect = hoverSourceRect;
                 base.OnMouseEntered();
             }
 
             protected override void OnMouseLeft()
             {
+                sourceRect = baseSourceRect;
                 base.OnMouseLeft();
             }
 
