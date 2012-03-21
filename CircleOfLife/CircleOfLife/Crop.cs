@@ -19,7 +19,7 @@ namespace CircleOfLife
         TimeSpan growTimer;
         int maxPlants;
 
-        List<Environment> plants = new List<Environment>(50);
+        public List<Environment> plants = new List<Environment>(50);
 
         public Crop(Environment plant, int growTime, int randSeed, int maxPlants)
         {
@@ -33,16 +33,27 @@ namespace CircleOfLife
         public void grow(GameTime gameTime)
         {
             // just grow one of the plants in the crop
-
+            removeDead();
             // don't add anymore if it has reached the max plants for the crop
             if (plants.Count >= maxPlants)
                 return;
 
             growTimer += gameTime.ElapsedGameTime;
-            if (growTimer > TimeSpan.FromSeconds(growTime))
+            if (growTimer > TimeSpan.FromSeconds(growTime) && plants.Count > 0)
             {
                 plants.Add(plants[random.Next(plants.Count)].grow());
                 growTimer = TimeSpan.Zero;
+            }
+        }
+
+        public void removeDead()
+        {
+            for (int i = 0; i < plants.Count; i++)
+            {
+                if (plants[i].state == 1)
+                {
+                    plants.RemoveAt(i);
+                }
             }
         }
 

@@ -20,7 +20,7 @@ namespace CircleOfLife
 
         private List<Species> species = new List<Species>(50);
         private List<Species> speciesTemp = new List<Species>(50);
-        private List<Environment> flora = new List<Environment>(50);
+        private List<Environment> flora = new List<Environment>(100);
 
         //Random :}
         Random random = new Random();
@@ -49,12 +49,6 @@ namespace CircleOfLife
         {
             species[n].addCreature(x, y);
         }
-
-        public void addFlora(String name, Texture2D sprite, floraStats stats, short x, short y)
-        {
-            //flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
-        }
-
 
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
         //incredibly sloppy
@@ -349,6 +343,16 @@ namespace CircleOfLife
 
             // update map
             map.update(gameTime);
+
+            // add flora
+            flora.Clear();
+            for (int i = 0; i < map.crops.Count; i++)
+            {
+                for (int j = 0; j < map.crops[i].plants.Count; j++)
+                {
+                    flora.Add(map.crops[i].plants[j]);
+                }
+            }
         }
 
         public void rescanSpecies()

@@ -14,14 +14,20 @@ namespace CircleOfLife
 {
     class Map
     {
-        private List<Crop> crops = new List<Crop>(100);
-        private List<Water> water = new List<Water>(50);
+        public List<Crop> crops = new List<Crop>(100);
+        public List<Water> water = new List<Water>(50);
         Random random = new Random();
-        
+        int cropNumber;
+        int width;
+        int height;
 
-        public void intialize()
+        public void intialize(int width, int height,int cropNumber)
         {
             // choose size to be 800 x 800
+            this.width = width;
+            this.height = height;
+            this.cropNumber = cropNumber;
+
 
             // choose 4 random points to be crops
             for (int i = 0; i < 4; i++)
@@ -51,11 +57,14 @@ namespace CircleOfLife
 
         public void update(GameTime gameTime)
         {
-                // grow the grass
-                for (int i = 0; i < crops.Count(); i++)
-                {
-                    crops[i].grow(gameTime);
-                }
+            // remove any plants that are dead
+
+            // grow the grass
+            for (int i = 0; i < crops.Count(); i++)
+            {
+                crops[i].grow(gameTime);
+            }
+            
         }
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)

@@ -39,8 +39,8 @@ namespace CircleOfLife
             graphics = new GraphicsDeviceManager(this);
           
             //set resolution
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1440;
+            graphics.PreferredBackBufferHeight = 900;
             graphics.IsFullScreen = false;
            
             KeyboardState oldKS = Keyboard.GetState();
