@@ -4,3 +4,4 @@ C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLifeContent\obj\x86\Deb
 G:\226\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
 Q:\226\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
 I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\Entropy\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache

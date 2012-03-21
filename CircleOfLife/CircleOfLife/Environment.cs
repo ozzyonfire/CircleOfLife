@@ -58,8 +58,8 @@ namespace CircleOfLife
 
         public Environment grow()
         {
-            float x = (float)random.Next(100);
-            float y = (float)random.Next(100);
+            float x = (float)random.Next(-100, 100);
+            float y = (float)random.Next(-100, 100);
 
             return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount);
         }
