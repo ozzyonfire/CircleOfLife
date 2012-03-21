@@ -77,6 +77,8 @@ namespace CircleOfLife
                             {
                                 // this is the creature
                                 // FIXME: this causes a minor bug: if there is only 1 creature they wont do anything
+                                // find food
+
                                 break;
                             }
 
@@ -357,23 +359,39 @@ namespace CircleOfLife
 
         public void rescanSpecies()
         {
+            
             // this method iterates through the species and sets what is prey and what is predator
             for (int i = 0; i < species.Count; i++)
             {
+                species[i].predators.Clear();
+                species[i].prey.Clear();
                 for (int j = 0; j < species.Count; j++)
                 {
-                    // check prey
-                    if (species[i].Stats.size > species[j].Stats.size)
+                    if (species[i] != species[j])
                     {
-                        // it can feed on the other species
-                        species[i].prey.Add(species[j]);
+                        // check prey
+                        if (species[i].Stats.size > species[j].Stats.size && species[i].Stats.diet == 1)
+                        {
+                            // it can feed on the other species
+                            species[i].prey.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size < species[j].Stats.size && species[j].Stats.diet == 1)
+                        {
+                            // it will be hunted by the other species
+                            species[i].predators.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size == species[j].Stats.size && species[i].Stats.diet == 1 && species[j].Stats.diet == 0)
+                        {
+                            // it can feed on the herbivore
+                            species[i].prey.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size == species[j].Stats.size && species[j].Stats.diet == 1 && species[i].Stats.diet == 0)
+                        {
+                            // it can be fed on by the carnivore
+                            species[i].predators.Add(species[j]);
+                        }
+                        // if its equal then they are not predator nor prey
                     }
-                    else if (species[i].Stats.size < species[j].Stats.size)
-                    {
-                        // it will be hunted by the other species
-                        species[i].predators.Add(species[j]);
-                    }
-                    // if its equal then they are not predator nor prey
                 }
             }
         }
