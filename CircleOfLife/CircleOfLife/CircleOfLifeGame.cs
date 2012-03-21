@@ -31,8 +31,9 @@ namespace CircleOfLife
         User user;
 
 
-        //Map coordinates: these variables should be moved to a more appropriate class..eventually
-        //Vector2 mapSize;    //not used currently
+        //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
+        int mapSizeX = 1440;    
+        int mapSizeY = 960;
 
         //temporary variable for implementing map scrolling
         public Vector2 userView;
@@ -51,7 +52,7 @@ namespace CircleOfLife
             graphics.IsFullScreen = true;
 
             //initialize
-            userView = new Vector2(0, 0);
+            userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -111,13 +112,13 @@ namespace CircleOfLife
 
             //Navigation scrolling section
             //the values need to be tuned to make scrolling smooth
-            if (scrollLeft)
+            if (scrollLeft && userView.X < 0)
                 userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollRight)
+            if (scrollRight && userView.X > -mapSizeX/2)
                 userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollUp)
+            if (scrollUp && userView.Y < 0)
                 userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollDown)
+            if (scrollDown && userView.Y > -mapSizeY/2)
                 userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
 
             base.Update(gameTime);
@@ -133,7 +134,7 @@ namespace CircleOfLife
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
-            spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, 1440, 960), new Rectangle(0, 0, 1000, 1000), Color.White,0.0f,Vector2.Zero,SpriteEffects.None,0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX, mapSizeY), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
             user.drawHUD(gameTime, spriteBatch, spriteSheet);
             spriteBatch.End();
 
