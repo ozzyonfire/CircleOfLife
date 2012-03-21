@@ -64,6 +64,10 @@ namespace CircleOfLife
 
         public void Initialize()
         {
+            //load in skin
+            //Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer.FromResource(
+
+
             //retrieve viewport
             viewport = game.GraphicsDevice.Viewport;
 
@@ -76,7 +80,6 @@ namespace CircleOfLife
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
             gameScreen.Desktop.Children.Add(speciesDialog);
             gui.Screen = gameScreen;
-
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
@@ -87,6 +90,15 @@ namespace CircleOfLife
             
         }
 
+        void initializeGameScreen()
+        {
+
+        }
+
+        void initializeMenuScreen()
+        {
+
+        }
 
 
         //EVENT HANDLERS:
@@ -217,9 +229,11 @@ namespace CircleOfLife
             
             //
             if (key.Equals(Keys.J))
-                gui.Screen = menuScreen;
-            if (key.Equals(Keys.K))
-                gui.Screen = gameScreen;
+            {
+                speciesDialog.clearButton.imageTexture = baseGame.spriteSheet;
+                speciesDialog.clearButton.sourceRect = new RectangleF(0, 100, 1000, 1000);
+                
+            }
 
         }
 
@@ -242,10 +256,27 @@ namespace CircleOfLife
             }
         }
 
+
+
+
+
+        //The following builds and initializes the games gui's seperated from the user class mainly for organizational purposes
+
+        public class menuUI
+        {
+            
+        }
+
+        public class gameUI
+        {
+
+        }
+        
+        
         public partial class SpeciesDialog : Nuclex.UserInterface.Controls.Desktop.WindowControl
         {
 
-
+            
             // Nuclex.UserInterface.Controls.LabelControl header = new Nuclex.UserInterface.Controls.LabelControl();
             public Nuclex.UserInterface.Controls.LabelControl nameLabel = new Nuclex.UserInterface.Controls.LabelControl();
             public Nuclex.UserInterface.Controls.LabelControl colorLabel = new Nuclex.UserInterface.Controls.LabelControl();
@@ -286,7 +317,7 @@ namespace CircleOfLife
                 detectionInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.0f, 200.0f), 120, 24);
 
                 clearButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.0f, 235.0f), 100, 24);
-
+                
                 nameLabel.Text = "Species Name:";
                 colorLabel.Text = "Color:";
                 dietLabel.Text = "Diet:";

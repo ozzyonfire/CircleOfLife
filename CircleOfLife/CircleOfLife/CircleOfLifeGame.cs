@@ -24,7 +24,7 @@ namespace CircleOfLife
         SpriteBatch spriteBatch;
         
         //graphics fields
-        Texture2D spriteSheet;
+        public Texture2D spriteSheet;
         Texture2D bushTexture;
 
         Ecosystem ecosystem;
@@ -58,10 +58,6 @@ namespace CircleOfLife
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
         {
@@ -91,30 +87,7 @@ namespace CircleOfLife
             //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
 
-            // set up species in here for now
-            Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
-            preyStats.diet = 0;
-            preyStats.size = 5;
-            preyStats.detection = 100;
-            preyStats.speed = 7;
-            preyStats.energyCap = 100;
-            preyStats.foodCap = 100;
-            preyStats.waterCap = 100;
-            preyStats.energyValue = 20;
-            preyStats.agility = 0.15f;
-           // ecosystem.addSpecies("mouse", preyStats, spriteSheet);
-
-            Ecosystem.speciesStats predStats = new Ecosystem.speciesStats();
-            predStats.diet = 1;
-            predStats.size = 10;
-            predStats.detection = 150;
-            predStats.speed = 5;
-            predStats.energyCap = 100;
-            predStats.foodCap = 100;
-            predStats.waterCap = 100;
-            predStats.energyValue = 50;
-            predStats.agility = 0.15f;
-           // ecosystem.addSpecies("cat", predStats, spriteSheet);
+            
         }
 
         /// <summary>
