@@ -21,16 +21,16 @@ namespace CircleOfLife
         int width;
         int height;
 
-        public void intialize(int width, int height,int cropNumber)
+        public void intialize(int width, int height)
         {
             // choose size to be 800 x 800
             this.width = width;
             this.height = height;
-            this.cropNumber = cropNumber;
+            this.cropNumber = width / 200;
 
 
             // choose 4 random points to be crops
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < cropNumber; i++)
             {
                 int x = random.Next(800);
                 int y = random.Next(800);
@@ -57,8 +57,10 @@ namespace CircleOfLife
 
         public void update(GameTime gameTime)
         {
-            // remove any plants that are dead
+            // if there are less than the required number of crops then add some new ones
 
+
+            // remove any plants that are dead
             // grow the grass
             for (int i = 0; i < crops.Count(); i++)
             {

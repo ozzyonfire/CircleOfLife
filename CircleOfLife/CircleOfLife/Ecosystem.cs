@@ -31,7 +31,7 @@ namespace CircleOfLife
             this.game = game;
             //this.COL = (CircleOfLifeGame)game;
             map = new Map();
-            map.intialize();
+            map.intialize(800, 800);
 
         }
 
