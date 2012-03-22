@@ -32,8 +32,8 @@ namespace CircleOfLife
 
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
-        int mapSizeX = 1440;    
-        int mapSizeY = 960;
+        int mapSizeX = 800;    
+        int mapSizeY = 800;
 
         //temporary variable for implementing map scrolling
         public Vector2 userView;
@@ -48,7 +48,7 @@ namespace CircleOfLife
           
             //set resolution
             graphics.PreferredBackBufferWidth = 1440;
-            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferHeight = 960;
             graphics.IsFullScreen = false;
             //initialize
             userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);

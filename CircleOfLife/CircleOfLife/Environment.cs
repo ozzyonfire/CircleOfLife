@@ -22,6 +22,8 @@ namespace CircleOfLife
         public short energyValue;
         public int type;
         Random random;
+
+        int frameOffset;
         //sprite location base
         Rectangle spriteRectangle;
         Color color;
@@ -40,10 +42,10 @@ namespace CircleOfLife
             switch (type)
             {
                 case 0:
-                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    spriteRectangle = Sprites.herbivore;
                     break;
                 default:
-                    spriteRectangle = new Rectangle(0, 0, 100, 100);
+                    spriteRectangle = Sprites.herbivore;
                     break;
             }
 
@@ -51,9 +53,10 @@ namespace CircleOfLife
 
         }
 
-        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
         {
-            spriteBatch.Draw(spriteSheet, position, spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.0f);
+            spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
         }
 
         public Environment grow()

@@ -57,11 +57,11 @@ namespace CircleOfLife
             }
         }
 
-        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
         {
             for (int i = 0; i < plants.Count; i ++)
             {
-                plants[i].draw(ref spriteBatch, ref spriteSheet);
+                plants[i].draw(ref spriteBatch, ref spriteSheet, offset, frame);
             }
         }
     }

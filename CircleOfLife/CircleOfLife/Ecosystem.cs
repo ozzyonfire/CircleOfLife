@@ -413,12 +413,8 @@ namespace CircleOfLife
             {
                 species[i].draw(gameTime, spriteBatch, spriteSheet, offset, frame);
             }
-            for (int i = 0; i < flora.Count; i++)
-            {
-                //flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
-            }
             // draw map
-            map.draw(gameTime, spriteBatch, spriteSheet);
+            map.draw(gameTime, spriteBatch, spriteSheet, offset, 0);
         }
   
         public void clearEcosystem()

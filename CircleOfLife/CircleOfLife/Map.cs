@@ -26,7 +26,7 @@ namespace CircleOfLife
             // choose size to be 800 x 800
             this.width = width;
             this.height = height;
-            this.cropNumber = width / 200;
+            this.cropNumber = width / 400;
 
 
             // choose 4 random points to be crops
@@ -84,14 +84,14 @@ namespace CircleOfLife
             
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset, int frame)
         {
             // draw the water
 
             // draw the crops
             for (int i = 0; i < crops.Count; i++)
             {
-                crops[i].draw(ref spriteBatch, ref spriteSheet);
+                crops[i].draw(ref spriteBatch, ref spriteSheet, offset, frame);
             }            
         }
 
