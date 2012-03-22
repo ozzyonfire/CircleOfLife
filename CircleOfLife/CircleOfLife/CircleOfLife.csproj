@@ -136,7 +136,10 @@
   <ItemGroup>
     <Compile Include="CircleOfLifeGame.cs" />
     <Compile Include="Sprites.cs" />
+    <Compile Include="Crop.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Water.cs" />
     <Content Include="CircleOfLifeGame2.txt" />
     <Compile Include="Creature.cs" />
     <Compile Include="Ecosystem.cs" />
