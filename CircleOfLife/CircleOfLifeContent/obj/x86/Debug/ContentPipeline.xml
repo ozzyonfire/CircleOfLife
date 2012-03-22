@@ -25,22 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-<<<<<<< HEAD
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-03-21T12:08:31.78125-07:00</Time>
-=======
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb</Output>
-      <Time>2012-03-15T18:37:21.5470378-04:00</Time>
-    </Item>
-    <Item>
-      <Source>test_sheet2.png</Source>
-      <Name>test_sheet2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb</Output>
-      <Time>2012-03-15T18:37:21.5520381-04:00</Time>
->>>>>>> master
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-03-21T20:52:29.4663802-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

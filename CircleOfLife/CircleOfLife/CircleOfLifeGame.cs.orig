@@ -47,11 +47,21 @@ namespace CircleOfLife
             graphics = new GraphicsDeviceManager(this);
           
             //set resolution
+<<<<<<< HEAD
+            //graphics.PreferredBackBufferWidth = 480;
+            //graphics.PreferredBackBufferHeight = 800;
+            graphics.IsFullScreen = true;
+
+            //initialize
+            userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
+=======
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 900;
             graphics.IsFullScreen = false;
-            //initialize
-            userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
+           
+            KeyboardState oldKS = Keyboard.GetState();
+            MouseState oldMS = Mouse.GetState();
+>>>>>>> master
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -61,6 +71,10 @@ namespace CircleOfLife
         /// </summary>
         protected override void Initialize()
         {
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
             //Initialize ecosystem
             ecosystem = new Ecosystem(this);
             //Initialize user interface system
@@ -78,10 +92,16 @@ namespace CircleOfLife
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+<<<<<<< HEAD
             spriteSheet = Content.Load<Texture2D>("spriteSheet");
+            //predatorTexture = Content.Load<Texture2D>("dragon");
             bushTexture = Content.Load<Texture2D>("bush");
 
             user.initializeGameScreen();
+=======
+            spriteSheet = Content.Load<Texture2D>("test_sheet2");
+            bushTexture = Content.Load<Texture2D>("bush");
+>>>>>>> master
         }
 
         void initializeGameComponents()
@@ -104,6 +124,7 @@ namespace CircleOfLife
         protected override void Update(GameTime gameTime)
         {
             ecosystem.Update(gameTime);
+<<<<<<< HEAD
 
 
             //Navigation scrolling section
@@ -117,6 +138,8 @@ namespace CircleOfLife
             if (scrollDown && userView.Y > -mapSizeY/2)
                 userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
 
+=======
+>>>>>>> master
             base.Update(gameTime);
         }
 
@@ -138,5 +161,8 @@ namespace CircleOfLife
         }
 
     }
+
+
+
 }
 

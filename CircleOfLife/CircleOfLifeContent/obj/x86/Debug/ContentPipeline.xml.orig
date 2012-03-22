@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb</Output>
-      <Time>2012-03-21T11:23:16.0860378-04:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb</Output>
+      <Time>2012-02-16T15:57:08-05:00</Time>
     </Item>
     <Item>
       <Source>panda.tga</Source>
@@ -16,17 +16,21 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb</Output>
-      <Time>2012-03-21T11:23:16.1016379-04:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb</Output>
+      <Time>2012-03-15T18:37:21.5450377-04:00</Time>
     </Item>
     <Item>
-      <Source>test_sheet.png</Source>
-      <Name>test_sheet</Name>
+      <Source>spriteSheet.png</Source>
+      <Name>spriteSheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb</Output>
-      <Time>2012-03-21T11:23:16.1016379-04:00</Time>
+<<<<<<< HEAD
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-03-21T12:08:31.78125-07:00</Time>
+=======
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb</Output>
+      <Time>2012-03-15T18:37:21.5470378-04:00</Time>
     </Item>
     <Item>
       <Source>test_sheet2.png</Source>
@@ -34,49 +38,49 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb</Output>
-      <Time>2012-03-21T11:23:16.1172379-04:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb</Output>
+      <Time>2012-03-15T18:37:21.5520381-04:00</Time>
+>>>>>>> master
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
-      <ContentProjectGUID>{ABF70EB5-E5D5-40BD-B4C6-63774D361B88}</ContentProjectGUID>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLifeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLife\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2011-09-01T16:22:30-04:00</Value>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-03-21T00:09:29.5684496-04:00</Value>
+        <Value>2011-10-25T22:16:14.2587838-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
