@@ -1,0 +1,191 @@
+[33mcommit 1c35a4a2615282a3a5344845775ee97c64d2777a[m
+Author: Peter <7ph2@queensu.ca>
+Date:   Wed Mar 21 13:00:00 2012 -0700
+
+    added map size and border. limits how far you can scroll.
+
+[33mcommit 57de898119ebe170462c8aef53e468d3c4d59828[m
+Author: Peter <7ph2@queensu.ca>
+Date:   Wed Mar 21 12:42:43 2012 -0700
+
+    Updated the sprite sheet. Did a whole lot of other tweeks. added in semin animations. added hud background kinda
+
+[33mcommit 88945f8cf4dc1f36048aa122de55cbc51e019e4a[m
+Author: Peter <7ph2@queensu.ca>
+Date:   Tue Mar 20 17:05:41 2012 -0700
+
+    Modified nuclex framework so that button control can have a image over it. Somewhat forced but should be functional
+
+[33mcommit 0982574f178c14be016f31f488d432dc600a784b[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Tue Mar 20 14:10:47 2012 -0700
+
+    flipped verttical mouse scrolling. Added a new game screen(menuScreen)
+
+[33mcommit a72f0489d4198d7b39d10b56aea105d4f4a7cad1[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Tue Mar 20 13:41:13 2012 -0700
+
+    Moved scrolling code from Ecosystem to CircleOfLifeGame class so that the offset property can be transfered to other draw calls
+
+[33mcommit 4c958c8f34cd580ad28f62c4a418fe045a3bcedd[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Tue Mar 20 00:21:03 2012 -0700
+
+    implemented map scrolling with keyboard and mouse. inversed scroll directions
+
+[33mcommit 38acc59701e1cb6e1810e85577e8712ff8f07042[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Tue Mar 20 00:12:06 2012 -0700
+
+    implemented map scrolling with keyboard and mouse
+
+[33mcommit 2417251507aa344f47119afe68bc235543ae03a0[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Thu Mar 15 05:41:34 2012 -0700
+
+    lot of changes to structure of project. Mostly interface stuff
+
+[33mcommit 6b65eefd18c95d90fb4fac84848818e47e761447[m
+Author: unknown <Peter@peterxp.(none)>
+Date:   Thu Mar 15 02:10:25 2012 -0700
+
+    Wide variety of changes to interface and other things
+
+[33mcommit b7f64f3ce34b4884908572beac92fe1022bfc315[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Thu Feb 16 17:15:38 2012 -0500
+
+    updates from todays meeting
+
+[33mcommit 79e1888c2059e2fb08fc1792e7d1fe62f6ae3353[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Wed Feb 15 21:58:20 2012 -0500
+
+    Redid the way creatures are added to the game. runs smoother now. tidied up some of the decision tree
+
+[33mcommit a5946bd6e117b0fcc2a0b0dd27bd6308d17a6640[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Wed Feb 15 21:23:53 2012 -0500
+
+    Prevented crowding, a little choppy but it works for now.
+
+[33mcommit af12074d6f456f13f850df2748d48a86167f0549[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Wed Feb 15 20:40:43 2012 -0500
+
+    Fixed some bugs
+
+[33mcommit 9fd8cd2626c74538cf35b970da79d0420efdab34[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Wed Feb 15 20:00:33 2012 -0500
+
+    Much more elegant dying method. A timer is linked with each creature.
+
+[33mcommit eeb6ba7e02fc49c6028213c7e4ae8956c8767091[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Wed Feb 15 01:11:40 2012 -0500
+
+    Added dying after a certain amount of time. Really basic and cruel. They die off in generations and it looks bad, but its a start. This also introduced several new bugs but its pretty stable.
+
+[33mcommit 50f201690602800381d8ff7702cbb5ea8d5b7501[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 23:28:20 2012 -0500
+
+    added plants. click with middle button to add a plant. quite buggy, been experiencing some latency issues.
+
+[33mcommit 246477c80cf0b35de1741228e7232619ca5222db[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 21:19:00 2012 -0500
+
+    smoothed acceleration and evading
+
+[33mcommit 16f195aeb549d47e6075d636e0ea292c5463778e[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 20:58:10 2012 -0500
+
+    Added acceleration, not sure if we want to make this another stat of the species or just have a constant one.
+
+[33mcommit 17388bfc9790ae0ad70a321a6b5464315adcc880[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 20:40:23 2012 -0500
+
+    now each creature is spawned with a random goal position which they move to
+
+[33mcommit a905b3110b292eb7360ded14c06c694a07a1e798[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 19:44:05 2012 -0500
+
+    improved evading, now based on priority
+
+[33mcommit 60c3e09b40a2cd4c02d37df9065a26ff5825b2f0[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 18:43:45 2012 -0500
+
+    This is a new method for evading, its not optimal so the predators kill a little bit easier, but it makes for more exciting chases
+
+[33mcommit 1dff7dfff3177721b7faf7852deadeec96cf55e2[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 16:50:05 2012 -0500
+
+    This version has intellegent evasion, although I'm not sure if I like it as much.
+
+[33mcommit 8b4a514544e5106ef2c002df022f0f90f7b57f7a[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 15:30:27 2012 -0500
+
+    Temp Fixed a bug which made predators get stuck in chase mode after a while
+
+[33mcommit 624d8232c0e7ddf228c130a58c5ae5184d0fd93c[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 14:41:45 2012 -0500
+
+    Fixed a couple bugs, now predators and prey are based on size alone. Chasing and evading works. Killing works with no crashes. Also added reproduction
+
+[33mcommit e8e90c7955b0af27f78d08b4429ad823fa4dc9c1[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 01:09:40 2012 -0500
+
+    A bug which occurs after a while crashes the program. Has to do with removing the creatures and then later checking them.
+
+[33mcommit 24c353f833c66f19cbf78c5a9b05475c10b9bee4[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Tue Feb 14 00:41:25 2012 -0500
+
+    Added chasing and evading. Every man for himself right now. Have to check if the creature is friend or foe.
+
+[33mcommit 49c140a5f54ce9402998c60c840b85724af29077[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Mon Feb 13 22:22:47 2012 -0500
+
+    Update the changes we made today during the meeting.
+
+[33mcommit b10c38c452ad3414f63e67618dd84eaf93be90ef[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Mon Feb 13 12:55:14 2012 -0500
+
+    Started adding implementation for feeding
+
+[33mcommit b655401b2ed71d9710373855ba749d3f2e29415d[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Mon Feb 13 12:12:38 2012 -0500
+
+    Updating my version to rokes's version
+
+[33mcommit 100a0c41171645b1218cd4facf1bc5c3507bdd05[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Thu Feb 9 17:15:59 2012 -0500
+
+    Added the Species.cs class
+
+[33mcommit 68924a1a06019c8b19399136f6aa071a3d18d543[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Thu Feb 9 16:43:43 2012 -0500
+
+    Created visual studio solution and updated the readme file
+
+[33mcommit f57240336b15406ed1cd525fd982de4074cfa462[m
+Author: Matt Oskamp <7mao@queensu.ca>
+Date:   Thu Feb 9 16:25:26 2012 -0500
+
+    first commit
