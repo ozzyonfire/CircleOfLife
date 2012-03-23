@@ -30,6 +30,7 @@ namespace CircleOfLife
 
         //sprite location base
         Rectangle spriteRectangle;
+        Rectangle body;
 
         //creature state
         public byte state;
@@ -96,6 +97,8 @@ namespace CircleOfLife
             position = new Vector2(xPos, yPos);
             goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
             orientation = new float();
+
+            Rectangle body = new Rectangle(xPos, yPos, size, size);
 
             state = 0; //wander
             food = 0;

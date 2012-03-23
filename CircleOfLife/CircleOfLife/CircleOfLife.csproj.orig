@@ -135,9 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircleOfLifeGame.cs" />
+<<<<<<< HEAD
     <Compile Include="Sprites.cs" />
+=======
     <Compile Include="Crop.cs" />
     <Compile Include="Map.cs" />
+>>>>>>> master
     <Compile Include="User.cs" />
     <Compile Include="Water.cs" />
     <Content Include="CircleOfLifeGame2.txt" />

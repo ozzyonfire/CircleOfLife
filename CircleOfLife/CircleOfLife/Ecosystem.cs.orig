@@ -31,10 +31,13 @@ namespace CircleOfLife
         {
             //assign references
             this.game = game;
+<<<<<<< HEAD
+=======
             //this.COL = (CircleOfLifeGame)game;
             map = new Map();
             map.intialize(800, 800);
 
+>>>>>>> master
         }
 
         public Species addSpecies(String name, speciesStats stats)
@@ -56,15 +59,19 @@ namespace CircleOfLife
         //incredibly sloppy
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
+<<<<<<< HEAD
+        public void  Update(GameTime gameTime)
+{
+
+
+
+=======
         public void Update(GameTime gameTime)
         {
+>>>>>>> master
             species = speciesTemp;
 
-
-
-            species = speciesTemp;
-
-             // detection is based on the hysteresis methods to make transitions smoother
+            // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
             bool prey = false;
@@ -413,8 +420,12 @@ namespace CircleOfLife
             {
                 species[i].draw(gameTime, spriteBatch, spriteSheet, offset, frame);
             }
+            for (int i = 0; i < flora.Count; i++)
+            {
+                //flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
+            }
             // draw map
-            map.draw(gameTime, spriteBatch, spriteSheet, offset, 0);
+            map.draw(gameTime, spriteBatch, spriteSheet);
         }
   
         public void clearEcosystem()
