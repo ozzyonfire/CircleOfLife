@@ -20,8 +20,8 @@ namespace CircleOfLife
     /// </summary>
     public class CircleOfLifeGame : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;
         
         //graphics fields
         public Texture2D spriteSheet;
@@ -32,8 +32,8 @@ namespace CircleOfLife
 
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
-        int mapSizeX = 800;    
-        int mapSizeY = 800;
+        public int mapSizeX;    
+        public int mapSizeY;
 
         //temporary variable for implementing map scrolling
         public Vector2 userView;
@@ -49,6 +49,9 @@ namespace CircleOfLife
             //set resolution
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 960;
+            //map size is initially twice screen size
+            mapSizeX = 2880;
+            mapSizeY = 1920;
             graphics.IsFullScreen = false;
             //initialize
             userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
