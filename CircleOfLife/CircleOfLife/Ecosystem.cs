@@ -59,12 +59,7 @@ namespace CircleOfLife
         public void Update(GameTime gameTime)
         {
             species = speciesTemp;
-
-
-
-            species = speciesTemp;
-
-             // detection is based on the hysteresis methods to make transitions smoother
+            // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
             bool prey = false;
@@ -249,6 +244,7 @@ namespace CircleOfLife
                                         {
                                             // start feeding
                                             // start the feeding timer
+                                            species[i].Creatures[j].feedTimer += gameTime.ElapsedGameTime;
                                             species[i].Creatures[j].state = 3;
                                         }
 
@@ -297,25 +293,31 @@ namespace CircleOfLife
                                 }
                                 else if (species[i].Creatures[j].state == 3) // feeding
                                 {
+                                    // if the feed timer allows it, eat
+                                    species[i].Creatures[j].feedTimer += gameTime.ElapsedGameTime;
                                     // add energyValue to food
                                     // keep eating!
-                                    if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state != 1)
+                                    if (species[i].Creatures[j].feedTimer > TimeSpan.FromSeconds(2))
                                     {
-                                        // its eating a plant
-                                        species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
-                                        species[i].Creatures[j].flora.size--;
-                                        species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
-                                        if (species[i].Creatures[j].flora.size <= 0)
+                                        species[i].Creatures[j].feedTimer = TimeSpan.Zero;
+                                        if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state != 1)
                                         {
-                                            // kill the plant
-                                            species[i].Creatures[j].flora.state = 1;
+                                            // its eating a plant
+                                            species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
+                                            species[i].Creatures[j].flora.size--;
+                                            species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
+                                            if (species[i].Creatures[j].flora.size <= 0)
+                                            {
+                                                // kill the plant
+                                                species[i].Creatures[j].flora.state = 1;
+                                            }
                                         }
-                                    }
-                                    else if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state == 1)
-                                    {
-                                        // stop feeding look for more food
-                                        species[i].Creatures[j].state = 0;
-                                        species[i].Creatures[j].flora = null;
+                                        else if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state == 1)
+                                        {
+                                            // stop feeding look for more food
+                                            species[i].Creatures[j].state = 0;
+                                            species[i].Creatures[j].flora = null;
+                                        }
                                     }
                                 }
                             }
@@ -332,6 +334,9 @@ namespace CircleOfLife
                     }
                 }
             }
+
+            // avoid the boundary
+            
 
             // update species and creatures
             for (int i = 0; i < species.Count; i++)

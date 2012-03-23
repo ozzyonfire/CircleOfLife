@@ -53,6 +53,7 @@ namespace CircleOfLife
 
         // timer
         TimeSpan deathtimer;
+        public TimeSpan feedTimer;
 
         //Animations
         int frameOffset;
@@ -106,6 +107,7 @@ namespace CircleOfLife
             energy = energyCap;
             currSpeed = 1f;
             deathtimer = new TimeSpan(0, 0, 0);
+            feedTimer = new TimeSpan(0, 0, 0);
 
             //animation offset
             frameOffset = random.Next(4);
