@@ -37,7 +37,7 @@ namespace CircleOfLife
         SpeciesDialog speciesDialog;
 
         Rectangle hudBackground = Sprites.hudBackground;
-        Rectangle hudDestination = new Rectangle(0,430,720,50);
+        Rectangle hudDestination;
 
         public User(Game game, Ecosystem ecosystem)
         {
@@ -59,6 +59,7 @@ namespace CircleOfLife
             keyboard = input.GetKeyboard();
             mouse = input.GetMouse();
 
+            hudDestination = new Rectangle(0, (int)(baseGame.graphics.PreferredBackBufferHeight * 0.9f), baseGame.graphics.PreferredBackBufferWidth, (int)(baseGame.graphics.PreferredBackBufferHeight * 0.1f));
             //meh
             Initialize();
         }
@@ -288,11 +289,12 @@ namespace CircleOfLife
             public GameButton quit;
             public GameUI(Screen screen, Texture2D spriteSheet)
             {
+                
                 quit = new GameButton(new UniRectangle(
-                    new UniScalar(0.0f, 5.0f),
-                    new UniScalar(0.0f, 430.0f),
-                    new UniScalar(0.0f, 50.0f),
-                    new UniScalar(0.0f, 50.0f)),
+                    new UniScalar(0.0f, 0.0f),
+                    new UniScalar(0.91f, 0.0f),
+                    new UniScalar(0.09f, 0.0f),
+                    new UniScalar(0.09f, 0.0f)),
                     spriteSheet, new RectangleF(
                         Sprites.torchButton.X,
                         Sprites.torchButton.Y,
