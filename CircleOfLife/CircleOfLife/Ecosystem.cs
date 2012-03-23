@@ -16,19 +16,24 @@ namespace CircleOfLife
     {
         //references
         Game game;
+        Map map;
 
         private List<Species> species = new List<Species>(50);
         private List<Species> speciesTemp = new List<Species>(50);
-        private List<Environment> flora = new List<Environment>(50);
+        private List<Environment> flora = new List<Environment>(100);
 
         //Random :}
         Random random = new Random();
 
+
+        
         public Ecosystem(Game game)
         {
             //assign references
             this.game = game;
             //this.COL = (CircleOfLifeGame)game;
+            map = new Map();
+            map.intialize(800, 800);
 
         }
 
@@ -47,20 +52,17 @@ namespace CircleOfLife
             species[n].addCreature(x, y);
         }
 
-        public void addFlora(String name, Texture2D sprite, floraStats stats, short x, short y)
-        {
-            flora.Add(new Environment(name, sprite, stats.foodValue, stats.energyValue, stats.size, x, y));
-        }
-
-
         //This is an ultra simplification of what the real system will be..kinda considering each species to be a unit
         //incredibly sloppy
         // we should iterate through all the creatures and perform the necessary tasks
         // so feed, check to reproduce, etc.
-        public void  Update(GameTime gameTime)
-{
+        public void Update(GameTime gameTime)
+        {
+            species = speciesTemp;
 
-    species = speciesTemp;
+
+
+            species = speciesTemp;
 
              // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
@@ -81,6 +83,8 @@ namespace CircleOfLife
                             {
                                 // this is the creature
                                 // FIXME: this causes a minor bug: if there is only 1 creature they wont do anything
+                                // find food
+
                                 break;
                             }
 
@@ -124,7 +128,7 @@ namespace CircleOfLife
                                 // its a prey
                                 prey = true;
                             }
-                            else if (species[i].name == species[k].name) 
+                            else if (species[i].name == species[k].name)
                             {
                                 same = true;
                             }
@@ -171,7 +175,7 @@ namespace CircleOfLife
                                             species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
                                             species[k].Creatures[l].state = 4; // dead
                                         }
-                                         // todo: feed
+                                        // todo: feed
                                         // doing the feeding in here for now
                                     }
                                     else if (prey)
@@ -244,6 +248,7 @@ namespace CircleOfLife
                                         if (floraDistance < 15)
                                         {
                                             // start feeding
+                                            // start the feeding timer
                                             species[i].Creatures[j].state = 3;
                                         }
 
@@ -320,7 +325,7 @@ namespace CircleOfLife
                             if (species[i].Creatures[j].food >= species[i].Creatures[j].foodCap)
                             {
                                 // reproduce
-                                species[i].reproduce( species[i].Creatures[j] );
+                                species[i].reproduce(species[i].Creatures[j]);
                                 species[i].Creatures[j].food = 0;
                             }
                         }
@@ -344,45 +349,72 @@ namespace CircleOfLife
                     i--;
                 }
             }
-}
 
-        public void rescanSpecies()
-        {
-            // this method iterates through the species and sets what is prey and what is predator
-            for (int i = 0; i < species.Count; i++)
+            // update map
+            map.update(gameTime);
+
+            // add flora
+            flora.Clear();
+            for (int i = 0; i < map.crops.Count; i++)
             {
-                for (int j = 0; j < species.Count; j++)
+                for (int j = 0; j < map.crops[i].plants.Count; j++)
                 {
-                    // check prey
-                    if (species[i].Stats.size > species[j].Stats.size)
-                    {
-                        // it can feed on the other species
-                        species[i].prey.Add(species[j]);
-                    }
-                    else if (species[i].Stats.size < species[j].Stats.size)
-                    {
-                        // it will be hunted by the other species
-                        species[i].predators.Add(species[j]);
-                    }
-                    // if its equal then they are not predator nor prey
+                    flora.Add(map.crops[i].plants[j]);
                 }
             }
         }
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void rescanSpecies()
         {
+            
+            // this method iterates through the species and sets what is prey and what is predator
+            for (int i = 0; i < species.Count; i++)
+            {
+                species[i].predators.Clear();
+                species[i].prey.Clear();
+                for (int j = 0; j < species.Count; j++)
+                {
+                    if (species[i] != species[j])
+                    {
+                        // check prey
+                        if (species[i].Stats.size > species[j].Stats.size && species[i].Stats.diet == 1)
+                        {
+                            // it can feed on the other species
+                            species[i].prey.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size < species[j].Stats.size && species[j].Stats.diet == 1)
+                        {
+                            // it will be hunted by the other species
+                            species[i].predators.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size == species[j].Stats.size && species[i].Stats.diet == 1 && species[j].Stats.diet == 0)
+                        {
+                            // it can feed on the herbivore
+                            species[i].prey.Add(species[j]);
+                        }
+                        else if (species[i].Stats.size == species[j].Stats.size && species[j].Stats.diet == 1 && species[i].Stats.diet == 0)
+                        {
+                            // it can be fed on by the carnivore
+                            species[i].predators.Add(species[j]);
+                        }
+                        // if its equal then they are not predator nor prey
+                    }
+                }
+            }
+        }
+
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset)
+        {
+            //frame calculation is done here for the time being
+            int frame = ((int)Math.Round(gameTime.TotalGameTime.TotalMilliseconds / 150)) % 4;
 
             // draw the species then the plants
             for (int i = 0; i < species.Count; i++)
             {
-                species[i].draw(gameTime, spriteBatch, spriteSheet);
+                species[i].draw(gameTime, spriteBatch, spriteSheet, offset, frame);
             }
-            for (int i = 0; i < flora.Count; i++)
-            {
-                //flora[i].draw(ref graphics, ref spriteBatch, ref flora[i].sprite);
-            }
-
-
+            // draw map
+            map.draw(gameTime, spriteBatch, spriteSheet, offset, 0);
         }
   
         public void clearEcosystem()

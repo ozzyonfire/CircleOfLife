@@ -20,21 +20,51 @@ namespace CircleOfLife
         public Vector2 position;
         public short state;
         public short energyValue;
-        public Texture2D sprite;
+        public int type;
+        Random random;
 
-        public Environment(String name, Texture2D sprite, short foodValue, short energyValue, short size, short xPos, short yPos)
+        int frameOffset;
+        //sprite location base
+        Rectangle spriteRectangle;
+        Color color;
+
+        public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos, int type, int randSeed)
         {
             this.name = name;
             this.foodValue = foodValue;
             this.size = size;
             this.energyValue = energyValue;
             this.position = new Vector2((float)xPos, (float)yPos);
-            this.sprite = sprite;
+            this.type = type;
+
+            random = new Random(randSeed);
+
+            switch (type)
+            {
+                case 0:
+                    spriteRectangle = Sprites.herbivore;
+                    break;
+                default:
+                    spriteRectangle = Sprites.herbivore;
+                    break;
+            }
+
+            color = Color.Green;
+
         }
 
-        public void draw(ref GraphicsDeviceManager graphics, ref SpriteBatch spriteBatch, ref Texture2D spriteSheet)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
         {
-            spriteBatch.Draw(spriteSheet, position, null, Color.White, 0, new Vector2(0), 0.3f, SpriteEffects.None, 0.0f);
+            spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
+        }
+
+        public Environment grow()
+        {
+            float x = (float)random.Next(-100, 100);
+            float y = (float)random.Next(-100, 100);
+
+            return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount);
         }
     }
 }

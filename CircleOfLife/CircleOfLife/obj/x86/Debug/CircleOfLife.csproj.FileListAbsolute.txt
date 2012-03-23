@@ -1,78 +1,8 @@
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-C:\Devel\rokes-CircleOfLife-fa72a85\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.pdb
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
-Q:\226\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
-G:\226\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.UserInterface.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.UserInterface.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Input.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\NMock.StrongNamed.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\SlimDX.DirectInput.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\nunit.framework.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Input.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\NMock.StrongNamed.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\SlimDX.DirectInput.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\nunit.framework.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Support.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Support.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Audio.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Fonts.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Graphics.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Windows.Forms.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Networking.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Testing.Xna.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.ContentCompressor.exe
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\LzmaSharp.dll
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Audio.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Fonts.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Graphics.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Windows.Forms.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Networking.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Testing.Xna.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.ContentCompressor.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\LzmaSharp.xml
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb
-I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb
-C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Audio.dll
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Fonts.dll
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.dll
@@ -92,8 +22,10 @@ C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Audio.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Fonts.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Graphics.xml
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Input.pdb
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Input.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Support.xml
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.UserInterface.pdb
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.UserInterface.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Windows.Forms.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Networking.xml
@@ -103,3 +35,7 @@ C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\NMock.StrongNamed.
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Nuclex.Game.ContentCompressor.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\LzmaSharp.xml
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\SlimDX.DirectInput.xml
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
+C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb

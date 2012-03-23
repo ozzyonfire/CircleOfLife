@@ -24,48 +24,47 @@ namespace CircleOfLife
         SpriteBatch spriteBatch;
         
         //graphics fields
-        Texture2D spriteSheet;
+        public Texture2D spriteSheet;
         Texture2D bushTexture;
 
         Ecosystem ecosystem;
         User user;
 
-        KeyboardState oldKS;
-        MouseState oldMS;
 
+        //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
+        int mapSizeX = 800;    
+        int mapSizeY = 800;
+
+        //temporary variable for implementing map scrolling
+        public Vector2 userView;
+        public bool scrollLeft = false;
+        public bool scrollRight = false;
+        public bool scrollDown = false;
+        public bool scrollUp = false;
 
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);
           
             //set resolution
-            //graphics.PreferredBackBufferWidth = 480;
-            //graphics.PreferredBackBufferHeight = 800;
-            graphics.IsFullScreen = true;
-
-           
-            KeyboardState oldKS = Keyboard.GetState();
-            MouseState oldMS = Mouse.GetState();
+            graphics.PreferredBackBufferWidth = 1440;
+            graphics.PreferredBackBufferHeight = 960;
+            graphics.IsFullScreen = false;
+            //initialize
+            userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
         {
-
-
             //Initialize ecosystem
             ecosystem = new Ecosystem(this);
             //Initialize user interface system
             user = new User(this, ecosystem);
-
             base.Initialize();
         }
 
@@ -79,11 +78,15 @@ namespace CircleOfLife
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            spriteSheet = Content.Load<Texture2D>("test_sheet2");
-            //predatorTexture = Content.Load<Texture2D>("dragon");
+            spriteSheet = Content.Load<Texture2D>("spriteSheet");
             bushTexture = Content.Load<Texture2D>("bush");
+
+            user.initializeGameScreen();
         }
 
+        void initializeGameComponents()
+        {
+        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -100,8 +103,20 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             ecosystem.Update(gameTime);
+
+
+            //Navigation scrolling section
+            //the values need to be tuned to make scrolling smooth
+            if (scrollLeft && userView.X < 0)
+                userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollRight && userView.X > -mapSizeX/2)
+                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollUp && userView.Y < 0)
+                userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            if (scrollDown && userView.Y > -mapSizeY/2)
+                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+
             base.Update(gameTime);
         }
 
@@ -114,42 +129,14 @@ namespace CircleOfLife
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            ecosystem.draw(gameTime, spriteBatch, spriteSheet);
-
+            ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
+            spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX, mapSizeY), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            user.drawHUD(gameTime, spriteBatch, spriteSheet);
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
     }
-
-
-    //nothing..game state template
-    public class TitleState : Nuclex.Game.States.DrawableGameState
-    {
-
-        GraphicsDevice graphicsDevice;
-
-        SpriteBatch spriteBatch;
-
-        public TitleState(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
-        {
-            this.graphicsDevice = graphicsDevice;
-            this.spriteBatch = spriteBatch;
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            graphicsDevice.Clear(Color.Brown);
-
-            //base.Draw(gameTime);
-        }
-    }
-
 }
 
