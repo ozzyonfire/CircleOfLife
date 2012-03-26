@@ -39,6 +39,10 @@ namespace CircleOfLife
         Rectangle hudBackground = Sprites.hudBackground;
         Rectangle hudDestination;
 
+        PerkTree perkTree;
+        Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
+        Nuclex.UserInterface.Controls.Desktop.ListControl speciesList;
+
         public User(Game game, Ecosystem ecosystem)
         {
             this.ecosystem = ecosystem;
@@ -68,6 +72,7 @@ namespace CircleOfLife
         {
             //load in skin
             //Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer.FromResource(
+            
 
 
             //retrieve viewport
@@ -87,6 +92,7 @@ namespace CircleOfLife
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
+            mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
 
             keyboard.KeyReleased += new Nuclex.Input.Devices.KeyDelegate(keyboard_KeyReleased);
 
@@ -94,25 +100,33 @@ namespace CircleOfLife
             
         }
 
-        public void initializeGameScreen()
+        public void enterMenu()
         {
-            GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
+            speciesList.Items.Clear();
+            for (int i = 0; i < ecosystem.species.Count; i++)
+                speciesList.Items.Add(ecosystem.species[i].name);
         }
 
-        void initializeMenuScreen()
-        {
 
+        void perkSliderMoved(object sender, EventArgs e)
+        {
+            Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl slider = (Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl)sender;
+            perkTree.offset = (int)(slider.ThumbPosition*100);
         }
 
-        public void drawHUD(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void drawHUD(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
         {
             //only draws the background - nuclex handles the buttons
             spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
         }
 
-        public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
+        public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
         {
-
+            //Draw menu background
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            //Draw menu Title
+            spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), Color.Black);
+            perkTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
         }
         //EVENT HANDLERS:
 
@@ -155,74 +169,106 @@ namespace CircleOfLife
             }
 
 
+            //if in menu mode
+            perkTree.mouseOver((int)x, (int)y);
         }
 
         void mouse_MouseButtonReleased(MouseButtons buttons)
         {
             MouseState ms = mouse.GetState();
-            //check not in dialog
-            if (ms.X > speciesDialog.Bounds.Left.Fraction * viewport.Width + speciesDialog.Bounds.Left.Offset &&
-                ms.X < speciesDialog.Bounds.Right.Fraction * viewport.Width + speciesDialog.Bounds.Right.Offset &&
-                ms.Y < speciesDialog.Bounds.Bottom.Fraction * viewport.Width + speciesDialog.Bounds.Bottom.Offset &&
-                ms.Y > speciesDialog.Bounds.Top.Fraction * viewport.Width + speciesDialog.Bounds.Top.Offset)
-                return;
 
-            // set up species in here for now
-            Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
 
-            preyStats.size = Convert.ToInt16(speciesDialog.sizeInput.Text);
-            preyStats.detection = Convert.ToInt16(speciesDialog.detectionInput.Text);
-            preyStats.speed = Convert.ToInt16(speciesDialog.speedInput.Text);
-            preyStats.energyCap = 100;
-            preyStats.foodCap = 100;
-            preyStats.waterCap = 100;
-            preyStats.energyValue = 20;
-            preyStats.agility = Convert.ToSingle(speciesDialog.agilityInput.Text);
-            if (speciesDialog.colorInput.SelectedItems.Count == 1)
-                switch (speciesDialog.colorInput.Items[speciesDialog.colorInput.SelectedItems[0]])
-                {
-                    case "Red":
-                        preyStats.color = Color.Red;
-                        break;
-                    case "Green":
-                        preyStats.color = Color.Green;
-                        break;
-                    case "Blue":
-                        preyStats.color = Color.Blue;
-                        break;
-                    case "Brown":
-                        preyStats.color = Color.Brown;
-                        break;
-                    case "Orange":
-                        preyStats.color = Color.Orange;
-                        break;
-                    default:
-                        preyStats.color = Color.White;
-                        break;
-                }
+            //return if in menu state
+            if (baseGame.menuOpen)
+            {
+                perkTree.mouseClick(ms.X, ms.Y);
+            }
             else
-                preyStats.color = Color.White;
+            {
+                //Temporary debug stuff
+                //check not in dialog
+                if (ms.X > speciesDialog.Bounds.Left.Fraction * viewport.Width + speciesDialog.Bounds.Left.Offset &&
+                    ms.X < speciesDialog.Bounds.Right.Fraction * viewport.Width + speciesDialog.Bounds.Right.Offset &&
+                    ms.Y < speciesDialog.Bounds.Bottom.Fraction * viewport.Width + speciesDialog.Bounds.Bottom.Offset &&
+                    ms.Y > speciesDialog.Bounds.Top.Fraction * viewport.Width + speciesDialog.Bounds.Top.Offset)
+                    return;
 
-            if (speciesDialog.dietInput.SelectedItems.Count == 1)
-                switch (speciesDialog.dietInput.SelectedItems[0])
-                {
-                    case 0:
-                        preyStats.diet = 0;
-                        break;
-                    case 1:
-                        preyStats.diet = 1;
-                        break;
-                    case 2:
-                        preyStats.diet = 2;
-                        break;
-                }
-            else
-                preyStats.diet = 0;
+                // set up species in here for now
+                Ecosystem.speciesStats preyStats = new Ecosystem.speciesStats();
 
-            Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
-            newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y);
+                preyStats.size = Convert.ToInt16(speciesDialog.sizeInput.Text);
+                preyStats.detection = Convert.ToInt16(speciesDialog.detectionInput.Text);
+                preyStats.speed = Convert.ToInt16(speciesDialog.speedInput.Text);
+                preyStats.energyCap = 100;
+                preyStats.foodCap = 100;
+                preyStats.waterCap = 100;
+                preyStats.energyValue = 20;
+                preyStats.agility = Convert.ToSingle(speciesDialog.agilityInput.Text);
+                if (speciesDialog.colorInput.SelectedItems.Count == 1)
+                    switch (speciesDialog.colorInput.Items[speciesDialog.colorInput.SelectedItems[0]])
+                    {
+                        case "Red":
+                            preyStats.color = Color.Red;
+                            break;
+                        case "Green":
+                            preyStats.color = Color.Green;
+                            break;
+                        case "Blue":
+                            preyStats.color = Color.Blue;
+                            break;
+                        case "Brown":
+                            preyStats.color = Color.Brown;
+                            break;
+                        case "Orange":
+                            preyStats.color = Color.Orange;
+                            break;
+                        default:
+                            preyStats.color = Color.White;
+                            break;
+                    }
+                else
+                    preyStats.color = Color.White;
+
+                if (speciesDialog.dietInput.SelectedItems.Count == 1)
+                    switch (speciesDialog.dietInput.SelectedItems[0])
+                    {
+                        case 0:
+                            preyStats.diet = 0;
+                            break;
+                        case 1:
+                            preyStats.diet = 1;
+                            break;
+                        case 2:
+                            preyStats.diet = 2;
+                            break;
+                    }
+                else
+                    preyStats.diet = 0;
+
+                Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
+                newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y);
+            }
         }
 
+        void mouse_MouseWheelRotated(float ticks)
+        {
+            if (baseGame.menuOpen)
+            {
+                //scroll perk tree if mouse is in that area
+                //TODO check mouse location
+                //TODO adjust scroll bar
+                int newOffset = perkTree.offset - (int)ticks*9;
+                if (newOffset < 0)
+                    perkTree.offset = 0;
+                else
+                    perkTree.offset = newOffset;
+
+            }
+            else
+            {
+
+            }
+        }
 
         void keyboard_KeyReleased(Keys key)
         {
@@ -242,11 +288,19 @@ namespace CircleOfLife
                 baseGame.scrollDown = false;
             
             //
-            if (key.Equals(Keys.J))
+            if (key.Equals(Keys.M))
             {
-                speciesDialog.clearButton.imageTexture = baseGame.spriteSheet;
-                speciesDialog.clearButton.sourceRect = new RectangleF(0, 100, 1000, 1000);
-                
+                if (baseGame.menuOpen)
+                {
+                    baseGame.menuOpen = false;
+                    gui.Screen = gameScreen;
+                }
+                else
+                {
+                    baseGame.menuOpen = true;
+                    enterMenu();
+                    gui.Screen = menuScreen;
+                }
             }
 
         }
@@ -275,39 +329,56 @@ namespace CircleOfLife
 
 
         //The following builds and initializes the games gui's seperated from the user class mainly for organizational purposes
-
-        public class MenuUI
+        public void initializeGameScreen()
         {
-            public MenuUI()
-            {
-
-            }
-        }
-
-        public class GameUI
-        {
-            public GameButton quit;
-            public GameUI(Screen screen, Texture2D spriteSheet)
-            {
-                
-                quit = new GameButton(new UniRectangle(
+            GameButton torchButton = new GameButton(new UniRectangle(
                     new UniScalar(0.0f, 0.0f),
                     new UniScalar(0.91f, 0.0f),
                     new UniScalar(0.09f, 0.0f),
                     new UniScalar(0.09f, 0.0f)),
-                    spriteSheet, new RectangleF(
+                    baseGame.spriteSheet, new RectangleF(
                         Sprites.torchButton.X,
                         Sprites.torchButton.Y,
                         Sprites.torchButton.Width,
                         Sprites.torchButton.Height));
-                quit.hoverSourceRect = new RectangleF(
+                torchButton.hoverSourceRect = new RectangleF(
                         Sprites.torchButton.X + 150,
                         Sprites.torchButton.Y,
                         Sprites.torchButton.Width,
                         Sprites.torchButton.Height);
-                screen.Desktop.Children.Add(quit);
-            }
+
+                torchButton.Text = "Help";
+                gameScreen.Desktop.Children.Add(torchButton);
         }
+
+
+        public void initializeMenuScreen()
+        {
+            perkTree = new PerkTree();
+
+            //initialize elements
+            speciesList = new Nuclex.UserInterface.Controls.Desktop.ListControl();
+            Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+            menuSlider = new Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl();
+
+            speciesList.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 200.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 300.0f));
+            speciesList.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
+
+            createButton.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 505.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 50.0f));
+            createButton.Text = "New Species";
+
+            menuSlider.Bounds = new UniRectangle(new UniScalar(0.0f, 1000), new UniScalar(0.0f, 100),new UniScalar(0.0f, 300), new UniScalar(0.0f, 20));
+            menuSlider.ThumbSize = 0.1f;
+            menuSlider.Moved += new EventHandler(perkSliderMoved);
+
+
+
+            menuScreen.Desktop.Children.Add(menuSlider);
+            menuScreen.Desktop.Children.Add(speciesList);
+            menuScreen.Desktop.Children.Add(createButton);
+        }
+
+
         
         
         public partial class SpeciesDialog : Nuclex.UserInterface.Controls.Desktop.WindowControl
@@ -455,5 +526,8 @@ namespace CircleOfLife
              }*/
         }
     
+
+     
+
     }
 }

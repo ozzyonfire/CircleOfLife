@@ -25,7 +25,10 @@ namespace CircleOfLife
         
         //graphics fields
         public Texture2D spriteSheet;
-        Texture2D bushTexture;
+
+        public Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer UIVisualizer;
+
+        public GameFonts gameFonts;
 
         Ecosystem ecosystem;
         User user;
@@ -41,6 +44,10 @@ namespace CircleOfLife
         public bool scrollRight = false;
         public bool scrollDown = false;
         public bool scrollUp = false;
+
+        public bool menuOpen = false;
+
+
 
         public CircleOfLifeGame()
         {
@@ -82,9 +89,16 @@ namespace CircleOfLife
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             spriteSheet = Content.Load<Texture2D>("spriteSheet");
-            bushTexture = Content.Load<Texture2D>("bush");
 
+            gameFonts.Default = Content.Load<SpriteFont>("BaseFont");
+            gameFonts.Header = Content.Load<SpriteFont>("HeaderFont");
+            gameFonts.Title = Content.Load<SpriteFont>("TitleFont");
+
+           // UIVisualizer = Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer.FromFile(Services, "..\\..\\..\\..\\CircleOfLifeContent\\Skin\\EntropyUISheet.xml");
+            //these intialization functions must occur after sprite sheet has been loaded
             user.initializeGameScreen();
+            user.initializeMenuScreen();
+
         }
 
         void initializeGameComponents()
@@ -106,19 +120,25 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            ecosystem.Update(gameTime);
+            if (menuOpen)
+            {
 
+            }
+            else
+            {
+                ecosystem.Update(gameTime);
 
-            //Navigation scrolling section
-            //the values need to be tuned to make scrolling smooth
-            if (scrollLeft && userView.X < 0)
-                userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollRight && userView.X > -mapSizeX/2)
-                userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollUp && userView.Y < 0)
-                userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-            if (scrollDown && userView.Y > -mapSizeY/2)
-                userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                //Navigation scrolling section
+                //the values need to be tuned to make scrolling smooth
+                if (scrollLeft && userView.X < 0)
+                    userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                if (scrollRight && userView.X > -mapSizeX / 2)
+                    userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                if (scrollUp && userView.Y < 0)
+                    userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                if (scrollDown && userView.Y > -mapSizeY / 2)
+                    userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+            }
 
             base.Update(gameTime);
         }
@@ -132,14 +152,32 @@ namespace CircleOfLife
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            ecosystem.draw(gameTime, spriteBatch, spriteSheet,userView);
-            spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX, mapSizeY), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
-            user.drawHUD(gameTime, spriteBatch, spriteSheet);
+
+            if (menuOpen)
+            {
+                //draw menu background
+                user.drawMenu(gameTime, spriteBatch, spriteSheet, gameFonts);
+            }
+            else
+            {
+                ecosystem.draw(gameTime, spriteBatch, spriteSheet, userView);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX, mapSizeY), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+                user.drawHUD(gameTime, spriteBatch, spriteSheet, gameFonts);
+            }
+
+
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
+
+        public struct GameFonts
+        {
+            public SpriteFont Default;
+            public SpriteFont Header;
+            public SpriteFont Title;
+        }
     }
 }
 

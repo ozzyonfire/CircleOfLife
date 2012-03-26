@@ -1,3 +1,6 @@
 Content\bush.xnb
-Content\panda.xnb
+Content\titleFont.xnb
+Content\baseFont.xnb
 Content\spriteSheet.xnb
+Content\XMLFile1.xnb
+Content\HeaderFont.xnb

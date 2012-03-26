@@ -11,13 +11,22 @@
       <Time>2012-03-23T13:32:29.734375-07:00</Time>
     </Item>
     <Item>
-      <Source>panda.tga</Source>
-      <Name>panda</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+      <Source>titleFont.spritefont</Source>
+      <Name>titleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb</Output>
-      <Time>2012-03-23T13:32:29.734375-07:00</Time>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\titleFont.xnb</Output>
+      <Time>2012-03-26T02:26:07.875-07:00</Time>
+    </Item>
+    <Item>
+      <Source>baseFont.spritefont</Source>
+      <Name>baseFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\baseFont.xnb</Output>
+      <Time>2012-03-25T18:26:49.859375-07:00</Time>
     </Item>
     <Item>
       <Source>spriteSheet.png</Source>
@@ -26,7 +35,25 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-03-23T13:32:29.75-07:00</Time>
+      <Time>2012-03-25T13:03:34.296875-07:00</Time>
+    </Item>
+    <Item>
+      <Source>XMLFile1.xml</Source>
+      <Name>XMLFile1</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\XMLFile1.xnb</Output>
+      <Time>2012-03-25T00:21:15.84375-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HeaderFont.spritefont</Source>
+      <Name>HeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\HeaderFont.xnb</Output>
+      <Time>2012-03-25T18:26:58.546875-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

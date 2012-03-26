@@ -18,8 +18,8 @@ namespace CircleOfLife
         Game game;
         Map map;
 
-        private List<Species> species = new List<Species>(50);
-        private List<Species> speciesTemp = new List<Species>(50);
+        public List<Species> species = new List<Species>(50);
+        public List<Species> speciesTemp = new List<Species>(50);
         private List<Environment> flora = new List<Environment>(100);
 
         //Random :}
