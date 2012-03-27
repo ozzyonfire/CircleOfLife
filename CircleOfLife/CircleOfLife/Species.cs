@@ -26,8 +26,8 @@ namespace CircleOfLife
         public List<Creature> Creatures { get { return creatures; } }
 
 
-        //perks?
-        
+        //perks? only 10 for now
+        public bool[] perks = new bool[10];
         
         //Extras???
         private short generations;

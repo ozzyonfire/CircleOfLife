@@ -42,6 +42,7 @@ namespace CircleOfLife
         PerkTree perkTree;
         Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
         Nuclex.UserInterface.Controls.Desktop.ListControl speciesList;
+        Nuclex.UserInterface.Controls.LabelControl description;
 
         public User(Game game, Ecosystem ecosystem)
         {
@@ -102,9 +103,11 @@ namespace CircleOfLife
 
         public void enterMenu()
         {
+            baseGame.menuOpen = true;
             speciesList.Items.Clear();
             for (int i = 0; i < ecosystem.species.Count; i++)
                 speciesList.Items.Add(ecosystem.species[i].name);
+            gui.Screen = menuScreen;
         }
 
 
@@ -247,6 +250,11 @@ namespace CircleOfLife
 
                 Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
                 newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y);
+               // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y);
+               // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y + 10);
+              //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
+
+                speciesDialog.nameInput.Text = "Kleemo" + ecosystem.species.Count.ToString();
             }
         }
 
@@ -297,9 +305,7 @@ namespace CircleOfLife
                 }
                 else
                 {
-                    baseGame.menuOpen = true;
                     enterMenu();
-                    gui.Screen = menuScreen;
                 }
             }
 
@@ -324,7 +330,11 @@ namespace CircleOfLife
             }
         }
 
+        void drawPerview()
+        {
+            //the art for this class not yet available
 
+        }
 
 
 
@@ -347,8 +357,14 @@ namespace CircleOfLife
                         Sprites.torchButton.Width,
                         Sprites.torchButton.Height);
 
-                torchButton.Text = "Help";
+                torchButton.Text = "Menu";
+                torchButton.Pressed += new EventHandler(torchButton_Pressed);
                 gameScreen.Desktop.Children.Add(torchButton);
+        }
+
+        void torchButton_Pressed(object sender, EventArgs e)
+        {
+            enterMenu();
         }
 
 
@@ -360,6 +376,7 @@ namespace CircleOfLife
             speciesList = new Nuclex.UserInterface.Controls.Desktop.ListControl();
             Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
             menuSlider = new Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl();
+            description = new Nuclex.UserInterface.Controls.LabelControl();
 
             speciesList.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 200.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 300.0f));
             speciesList.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
@@ -367,15 +384,17 @@ namespace CircleOfLife
             createButton.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 505.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 50.0f));
             createButton.Text = "New Species";
 
-            menuSlider.Bounds = new UniRectangle(new UniScalar(0.0f, 1000), new UniScalar(0.0f, 100),new UniScalar(0.0f, 300), new UniScalar(0.0f, 20));
+            menuSlider.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.75f, 0),new UniScalar(0.5f,0), new UniScalar(0.0f, 30));
             menuSlider.ThumbSize = 0.1f;
             menuSlider.Moved += new EventHandler(perkSliderMoved);
 
-
+            description.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.8f, 0), new UniScalar(0.5f, 0), new UniScalar(0.2f, 0));
+            description.Text = Sprites.description;
 
             menuScreen.Desktop.Children.Add(menuSlider);
             menuScreen.Desktop.Children.Add(speciesList);
             menuScreen.Desktop.Children.Add(createButton);
+            menuScreen.Desktop.Children.Add(description);
         }
 
 
@@ -450,7 +469,8 @@ namespace CircleOfLife
                 dietInput.Items.Add("Omnivore");
                 dietInput.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
 
-                sizeInput.Text = "20";
+                nameInput.Text = "Kleemo";
+                sizeInput.Text = "40";
                 speedInput.Text = "5";
                 agilityInput.Text = "0.15";
                 detectionInput.Text = "150";

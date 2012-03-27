@@ -18,7 +18,7 @@ namespace CircleOfLife
 {
     class PerkTree
     {
-        public List<Perk> perks = new List<Perk>(50);
+        public List<Perk> perks = new List<Perk>(15);
         public int offset;
         //coordinates of full tree
         public int x;
@@ -31,16 +31,42 @@ namespace CircleOfLife
 
         public PerkTree()
         {
-            Perk newPerk = new Perk("Perky Tits",new Vector2(700,200));
-            perks.Add(newPerk);
-            newPerk = new Perk("Tight Ass", new Vector2(450, 200));
-            perks.Add(newPerk);
+            add("Carnivore",new Vector2(700,150));
+            add("Herbivore", new Vector2(450, 150));
+            add("Eyes", new Vector2(700, 300));
+            add("Tail", new Vector2(450, 300));
         }
 
         public void add(String name, Vector2 position)
         {
             Perk newPerk = new Perk(name, position);
-            
+            //checks to see if the new perk expands the bounds of the entire perk tree and adjusts
+            if (x == 0) //assume this means unitialized
+            {
+                x = (int)position.X;
+                y = (int)position.Y;
+                width = newPerk.width;
+                height = newPerk.height;
+            }
+            else
+            {
+                if (position.X < x)
+                {
+                    width = x - (int)position.X + width;
+                    x = (int)position.X;
+                }
+                if (position.Y < y)
+                {
+                    height = y - (int)position.Y + height;
+                    y = (int)position.Y;
+                }
+                
+                if (position.X + newPerk.width - x > width)
+                    width = (int)position.X + newPerk.width - x;
+                if (position.Y + newPerk.height - y > height)
+                    height = (int)position.Y + newPerk.height - y;
+            }
+            perks.Add(newPerk);
         }
         public void mouseOver(int x, int y)
         {

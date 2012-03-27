@@ -78,7 +78,7 @@ namespace CircleOfLife
                     spriteRectangle = Sprites.herbivore;
                     break;
                 case 1:
-                    spriteRectangle = Sprites.carnivore;
+                    spriteRectangle = Sprites.mormo;
                     break;
                 default:
                     spriteRectangle = Sprites.carnivore;
