@@ -27,13 +27,13 @@ namespace CircleOfLife
 
 
         
-        public Ecosystem(Game game)
+        public Ecosystem(Game game, int width, int height)
         {
             //assign references
             this.game = game;
             //this.COL = (CircleOfLifeGame)game;
             map = new Map();
-            map.intialize(800, 800);
+            map.intialize(width, height);
 
         }
 
@@ -82,6 +82,8 @@ namespace CircleOfLife
 
                                 break;
                             }
+
+                            species[i].Creatures[j].color = Color.Black;
 
                             // check surroundings
                             float distanceAway = Vector2.Distance(species[i].Creatures[j].Position, species[k].Creatures[l].Position);
@@ -244,7 +246,7 @@ namespace CircleOfLife
                                         {
                                             // start feeding
                                             // start the feeding timer
-                                            species[i].Creatures[j].feedTimer += gameTime.ElapsedGameTime;
+                                            species[i].Creatures[j].feedTimer = TimeSpan.Zero;
                                             species[i].Creatures[j].state = 3;
                                         }
 
@@ -297,7 +299,7 @@ namespace CircleOfLife
                                     species[i].Creatures[j].feedTimer += gameTime.ElapsedGameTime;
                                     // add energyValue to food
                                     // keep eating!
-                                    if (species[i].Creatures[j].feedTimer > TimeSpan.FromSeconds(2))
+                                    if (species[i].Creatures[j].feedTimer > TimeSpan.FromSeconds(1)) // feeding timer
                                     {
                                         species[i].Creatures[j].feedTimer = TimeSpan.Zero;
                                         if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state != 1)
@@ -310,6 +312,8 @@ namespace CircleOfLife
                                             {
                                                 // kill the plant
                                                 species[i].Creatures[j].flora.state = 1;
+                                                species[i].Creatures[j].state = 0;
+                                                species[i].Creatures[j].flora = null;
                                             }
                                         }
                                         else if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].flora.state == 1)
@@ -318,9 +322,13 @@ namespace CircleOfLife
                                             species[i].Creatures[j].state = 0;
                                             species[i].Creatures[j].flora = null;
                                         }
+
+                                        
                                     }
                                 }
                             }
+                            // debugging
+                            species[i].Creatures[j].color = Color.White;
 
                             // reproduction
                             // check food vs foodCap

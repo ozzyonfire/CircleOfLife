@@ -72,7 +72,7 @@ namespace CircleOfLife
         protected override void Initialize()
         {
             //Initialize ecosystem
-            ecosystem = new Ecosystem(this);
+            ecosystem = new Ecosystem(this, mapSizeX, mapSizeY);
             //Initialize user interface system
             user = new User(this, ecosystem);
             base.Initialize();

@@ -7,26 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb</Output>
-      <Time>2012-03-23T13:32:29.734375-07:00</Time>
-    </Item>
-    <Item>
-      <Source>titleFont.spritefont</Source>
-      <Name>titleFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\titleFont.xnb</Output>
-      <Time>2012-03-26T02:26:07.875-07:00</Time>
-    </Item>
-    <Item>
-      <Source>baseFont.spritefont</Source>
-      <Name>baseFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\baseFont.xnb</Output>
-      <Time>2012-03-25T18:26:49.859375-07:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb</Output>
+      <Time>2012-03-26T23:32:09.8613192-04:00</Time>
     </Item>
     <Item>
       <Source>spriteSheet.png</Source>
@@ -34,17 +16,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-03-26T16:14:50.921875-07:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-03-26T23:32:09.8843206-04:00</Time>
     </Item>
     <Item>
-      <Source>XMLFile1.xml</Source>
-      <Name>XMLFile1</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
+      <Source>BaseFont.spritefont</Source>
+      <Name>BaseFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\XMLFile1.xnb</Output>
-      <Time>2012-03-25T00:21:15.84375-07:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\BaseFont.xnb</Output>
+      <Time>2012-03-26T23:32:09.8473184-04:00</Time>
     </Item>
     <Item>
       <Source>HeaderFont.spritefont</Source>
@@ -52,8 +34,26 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\HeaderFont.xnb</Output>
-      <Time>2012-03-25T18:26:58.546875-07:00</Time>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\HeaderFont.xnb</Output>
+      <Time>2012-03-26T23:32:09.8523187-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TitleFont.spritefont</Source>
+      <Name>TitleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\TitleFont.xnb</Output>
+      <Time>2012-03-26T23:32:09.8593191-04:00</Time>
+    </Item>
+    <Item>
+      <Source>XMLFile1.xml</Source>
+      <Name>XMLFile1</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\XMLFile1.xnb</Output>
+      <Time>2012-03-26T23:32:09.8603192-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -61,39 +61,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
-      <LoggerRootDirectory>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
-      <IntermediateDirectory>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-07:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>I:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-02-08T14:52:32.163058-08:00</Value>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-10-25T22:16:14.2587838-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

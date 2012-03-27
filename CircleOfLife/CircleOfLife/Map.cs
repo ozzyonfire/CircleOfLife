@@ -17,42 +17,39 @@ namespace CircleOfLife
         public List<Crop> crops = new List<Crop>(100);
         public List<Water> water = new List<Water>(50);
         Random random = new Random();
+        Vector2 center;
         int cropNumber;
         int width;
         int height;
 
         public void intialize(int width, int height)
         {
-            // choose size to be 800 x 800
             this.width = width;
             this.height = height;
             this.cropNumber = width / 400;
 
+            center = new Vector2(width / 2, height / 2);
 
-            // choose 4 random points to be crops
+            // choose random points to be crops within the map
             for (int i = 0; i < cropNumber; i++)
             {
                 int x = random.Next(width);
                 int y = random.Next(height);
 
-                Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + i + 1);
-                Crop field = new Crop(grass, random.Next(3,8), System.Environment.TickCount + i, 4);
-                crops.Add(field);
-            }
+                Vector2 point = new Vector2(x, y);
 
-            // choose 3 random points for water
-            for (int i = 0; i < 3; i++)
-            {
-                int x = random.Next(800);
-                int y = random.Next(800);
-
-                short radius = (short)random.Next(100);
-
-                Water pond = new Water((short)x, (short)y, radius);
-                water.Add(pond);
-            }
-
-            
+                if (Vector2.Distance(center, point) >= height / 2)
+                {
+                    // not within the circle so generate new points
+                    i--;
+                }
+                else
+                {
+                    Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + i + 1);
+                    Crop field = new Crop(grass, random.Next(3, 8), System.Environment.TickCount + i, 4);
+                    crops.Add(field);
+                }
+            }            
         }
 
         public void update(GameTime gameTime)
@@ -60,11 +57,24 @@ namespace CircleOfLife
             // if there are less than the required number of crops then add some new ones
             if (crops.Count < cropNumber)
             {
-                int x = random.Next(width);
-                int y = random.Next(height);
-                Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1);
-                Crop field = new Crop(grass, random.Next(3, 8), System.Environment.TickCount, 4);
-                crops.Add(field);
+                int i = 0;
+
+                while (i == 0)
+                {
+                    int x = random.Next(width);
+                    int y = random.Next(height);
+
+                    Vector2 point = new Vector2(x, y);
+                    if (Vector2.Distance(center, point) < height / 2)
+                    {
+                        // within the circle so generate new points
+                        i++;
+                        Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1);
+                        Crop field = new Crop(grass, random.Next(3, 8), System.Environment.TickCount, 4);
+                        crops.Add(field);
+                    }
+
+                }
             }
 
             // remove any plants that are dead
