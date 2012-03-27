@@ -83,8 +83,6 @@ namespace CircleOfLife
                                 break;
                             }
 
-                            species[i].Creatures[j].color = Color.Black;
-
                             // check surroundings
                             float distanceAway = Vector2.Distance(species[i].Creatures[j].Position, species[k].Creatures[l].Position);
 
@@ -327,8 +325,14 @@ namespace CircleOfLife
                                     }
                                 }
                             }
-                            // debugging
-                            species[i].Creatures[j].color = Color.White;
+
+                            float distanceToCenter = Vector2.Distance(species[i].Creatures[j].Position, map.center);
+                            // avoid the boundary
+                            if (distanceToCenter > (map.height / 2 - 100))
+                            {
+                                // the max distance will be the height of the map
+                                species[i].Creatures[j].turnToCenter(distanceToCenter, map.center, Math.Min(map.height, map.width));
+                            }
 
                             // reproduction
                             // check food vs foodCap
@@ -343,7 +347,6 @@ namespace CircleOfLife
                 }
             }
 
-            // avoid the boundary
             
 
             // update species and creatures

@@ -260,6 +260,20 @@ namespace CircleOfLife
             position += seekPosition * currSpeed;
         }
 
+        public void turnToCenter(float distanceFromScreenCenter, Vector2 center, float maxDistance)
+        {
+            float normalizedDistance =
+                distanceFromScreenCenter / maxDistance;
+
+            float turnToCenterSpeed = .3f * normalizedDistance * normalizedDistance *
+                this.agility;
+
+            // once we've calculated how much we want to turn towards the center, we can
+            // use the TurnToFace function to actually do the work.
+            orientation = TurnToFace(position, center, orientation,
+                turnToCenterSpeed);
+        }
+
         /// <summary>
         /// Calculates the angle that an object should face, given its position, its
         /// target's position, its current angle, and its maximum turning speed.

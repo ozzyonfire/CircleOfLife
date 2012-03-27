@@ -17,10 +17,10 @@ namespace CircleOfLife
         public List<Crop> crops = new List<Crop>(100);
         public List<Water> water = new List<Water>(50);
         Random random = new Random();
-        Vector2 center;
+        public Vector2 center;
         int cropNumber;
-        int width;
-        int height;
+        public int width;
+        public int height;
 
         public void intialize(int width, int height)
         {
@@ -37,8 +37,8 @@ namespace CircleOfLife
                 int y = random.Next(height);
 
                 Vector2 point = new Vector2(x, y);
-
-                if (Vector2.Distance(center, point) >= height / 2)
+                float minD = Math.Min(height / 2, width / 2);
+                if (Vector2.Distance(center, point) >= minD)
                 {
                     // not within the circle so generate new points
                     i--;
@@ -65,7 +65,8 @@ namespace CircleOfLife
                     int y = random.Next(height);
 
                     Vector2 point = new Vector2(x, y);
-                    if (Vector2.Distance(center, point) < height / 2)
+                    float minD = Math.Min(height / 2, width / 2);
+                    if (Vector2.Distance(center, point) < minD)
                     {
                         // within the circle so generate new points
                         i++;

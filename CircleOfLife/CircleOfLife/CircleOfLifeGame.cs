@@ -57,7 +57,7 @@ namespace CircleOfLife
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 960;
             //map size is initially twice screen size
-            mapSizeX = 2880;
+            mapSizeX = 1920;
             mapSizeY = 1920;
             graphics.IsFullScreen = false;
             //initialize
