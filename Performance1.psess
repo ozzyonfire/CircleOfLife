@@ -1,25 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <VSPerformanceSession Version="1.00">
   <Options>
+    <Solution>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife.sln</Solution>
     <CollectionMethod>Sampling</CollectionMethod>
     <AllocationMethod>None</AllocationMethod>
+    <LaunchRuntimeControl>true</LaunchRuntimeControl>
     <AddReport>true</AddReport>
+    <ResourceBasedAnalysisSelected>true</ResourceBasedAnalysisSelected>
+    <ThreadBasedAnalysisSelected>false</ThreadBasedAnalysisSelected>
     <UniqueReport>Timestamp</UniqueReport>
     <SamplingMethod>Cycles</SamplingMethod>
     <CycleCount>10000000</CycleCount>
     <PageFaultCount>10</PageFaultCount>
     <SysCallCount>10</SysCallCount>
-    <SamplingCounter PlatformID="00000000" CounterID="0000000000000000" ReloadValue="000000000000000a" />
+    <SamplingCounter Name="" ReloadValue="00000000000f4240" DisplayName="" />
     <RelocateBinaries>false</RelocateBinaries>
     <CollectOnHpcCluster>false</CollectOnHpcCluster>
     <HPCSettings>
+      <NumberOfProcesses>0</NumberOfProcesses>
       <TargetSelection>UnknownDisabled</TargetSelection>
+      <ProfileOnRank>0</ProfileOnRank>
+      <AdvancedProperties>
+        <Project>CircleOfLife</Project>
+        <CleanUp>true</CleanUp>
+        <MpiexecCommand>mpiexec.exe</MpiexecCommand>
+        <DeployCRT>true</DeployCRT>
+      </AdvancedProperties>
     </HPCSettings>
     <HardwareCounters EnableHWCounters="false" />
+    <EtwSettings />
+    <PdhSettings>
+      <PdhCountersEnabled>false</PdhCountersEnabled>
+      <PdhCountersRate>500</PdhCountersRate>
+      <PdhCounters>
+        <PdhCounter>\Memory\Pages/sec</PdhCounter>
+        <PdhCounter>\PhysicalDisk(_Total)\Avg. Disk Queue Length</PdhCounter>
+        <PdhCounter>\Processor(_Total)\% Processor Time</PdhCounter>
+      </PdhCounters>
+    </PdhSettings>
   </Options>
+  <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
+  <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
   <PreinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PreinstrumentEvent>
   <PostinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PostinstrumentEvent>
+  <Binaries>
+    <ProjBinary>
+      <Path>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe</Path>
+      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
+      <Instrument>true</Instrument>
+      <Sample>true</Sample>
+      <ExternalWebsite>false</ExternalWebsite>
+      <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
+      <IsLocalJavascript>false</IsLocalJavascript>
+      <LaunchProject>true</LaunchProject>
+      <OverrideProjectSettings>false</OverrideProjectSettings>
+      <LaunchMethod>Executable</LaunchMethod>
+      <ExecutablePath>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\CircleOfLife.exe</ExecutablePath>
+      <StartupDirectory>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\</StartupDirectory>
+      <Arguments />
+      <NetAppHost>IIS</NetAppHost>
+      <NetBrowser>InternetExplorer</NetBrowser>
+      <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
+      <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
+      <PreinstrumentEvent>
+        <InstrEventExclude>false</InstrEventExclude>
+      </PreinstrumentEvent>
+      <PostinstrumentEvent>
+        <InstrEventExclude>false</InstrEventExclude>
+      </PostinstrumentEvent>
+      <ProjRef>{17E888A4-1BEB-4C06-A762-217CFBCC77BB}|CircleOfLife\CircleOfLife\CircleOfLife.csproj</ProjRef>
+      <ProjPath>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\CircleOfLife.csproj</ProjPath>
+      <ProjName>CircleOfLife</ProjName>
+    </ProjBinary>
+  </Binaries>
+  <Reports>
+    <Report>
+      <Path>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife120326.vsp</Path>
+    </Report>
+  </Reports>
+  <Launches>
+    <ProjBinary>
+      <Path>:PB:{17E888A4-1BEB-4C06-A762-217CFBCC77BB}|CircleOfLife\CircleOfLife\CircleOfLife.csproj</Path>
+    </ProjBinary>
+  </Launches>
+  <RuntimeMarks>
+    <MarkName>Mark One</MarkName>
+    <MarkName>Mark Two</MarkName>
+    <MarkName>Mark Three</MarkName>
+    <MarkName>Mark Four</MarkName>
+    <MarkName>Mark Five</MarkName>
+    <MarkName>Mark Six</MarkName>
+    <MarkName>Mark Seven</MarkName>
+    <MarkName>Mark Eight</MarkName>
+    <MarkName>Mark Nine</MarkName>
+    <MarkName>Mark Ten</MarkName>
+  </RuntimeMarks>
 </VSPerformanceSession>
