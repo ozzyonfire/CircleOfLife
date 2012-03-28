@@ -47,8 +47,6 @@ namespace CircleOfLife
 
         public bool menuOpen = false;
 
-
-
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);

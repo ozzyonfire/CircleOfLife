@@ -30,7 +30,7 @@ namespace CircleOfLife
             growTimer = new TimeSpan(0, 0, 0);
         }
 
-        public void grow(GameTime gameTime)
+        public void grow(GameTime gameTime, int width, int height)
         {
             // just grow one of the plants in the crop
             removeDead();
@@ -41,7 +41,7 @@ namespace CircleOfLife
             growTimer += gameTime.ElapsedGameTime;
             if (growTimer > TimeSpan.FromSeconds(growTime) && plants.Count > 0)
             {
-                plants.Add(plants[random.Next(plants.Count)].grow());
+                plants.Add(plants[random.Next(plants.Count)].grow(width, height));
                 growTimer = TimeSpan.Zero;
             }
         }

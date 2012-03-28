@@ -59,12 +59,31 @@ namespace CircleOfLife
             spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
         }
 
-        public Environment grow()
+        public Environment grow(int width, int height)
         {
+            int i = 0;
             float x = (float)random.Next(-100, 100);
             float y = (float)random.Next(-100, 100);
 
+            while (i == 0)
+            {
+                x = (float)random.Next(-100, 100);
+                y = (float)random.Next(-100, 100);
+
+                Vector2 point = new Vector2(this.position.X + x, this.position.Y + y);
+                Vector2 center = new Vector2(width / 2, height / 2);
+
+                float minD = Math.Min(height / 2, width / 2);
+                if (Vector2.Distance(center, point) < minD - 100)
+                {
+                    // within the circle so break out and draw crops
+                    i++;
+                }
+            }
+
             return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount);
+
+            
         }
     }
 }
