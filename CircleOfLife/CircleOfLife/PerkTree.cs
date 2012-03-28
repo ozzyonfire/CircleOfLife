@@ -31,10 +31,16 @@ namespace CircleOfLife
 
         public PerkTree()
         {
-            add("Carnivore",new Vector2(700,150));
             add("Herbivore", new Vector2(450, 150));
-            add("Eyes", new Vector2(700, 300));
+            add("Carnivore", new Vector2(700, 150));
+            add("Claws", new Vector2(200, 300));
             add("Tail", new Vector2(450, 300));
+            add("Eyes", new Vector2(700, 300));
+            add("Humps", new Vector2(950, 300));
+            add("Claws", new Vector2(200, 450));
+            add("Tail", new Vector2(450, 450));
+            add("Eyes", new Vector2(700, 450));
+            add("Humps", new Vector2(950, 450));
         }
 
         public void add(String name, Vector2 position)

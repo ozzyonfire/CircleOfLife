@@ -46,6 +46,7 @@ namespace CircleOfLife
         public bool scrollUp = false;
 
         public bool menuOpen = false;
+        public bool dialogOpen = false;
 
         public CircleOfLifeGame()
         {
@@ -129,13 +130,13 @@ namespace CircleOfLife
                 //Navigation scrolling section
                 //the values need to be tuned to make scrolling smooth
                 if (scrollLeft && userView.X < 0)
-                    userView.X += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-                if (scrollRight && userView.X > -mapSizeX / 2)
-                    userView.X -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                    userView.X += 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                if (scrollRight && userView.X > -mapSizeX + graphics.PreferredBackBufferWidth)
+                    userView.X -= 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
                 if (scrollUp && userView.Y < 0)
-                    userView.Y += 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-                if (scrollDown && userView.Y > -mapSizeY / 2)
-                    userView.Y -= 3.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                    userView.Y += 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
+                if (scrollDown && userView.Y > -mapSizeY + graphics.PreferredBackBufferHeight)
+                    userView.Y -= 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
             }
 
             base.Update(gameTime);

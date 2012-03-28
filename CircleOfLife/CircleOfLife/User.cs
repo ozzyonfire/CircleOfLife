@@ -87,13 +87,18 @@ namespace CircleOfLife
             //set clear button listener
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
             gameScreen.Desktop.Children.Add(speciesDialog);
+
+            //Dialog test
+            GameDialog gameDialog = new GameDialog();
+            gameScreen.Desktop.Children.Add(gameDialog);
+
             //GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
             gui.Screen = gameScreen;
             
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
-            mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
+            //mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
 
             keyboard.KeyReleased += new Nuclex.Input.Devices.KeyDelegate(keyboard_KeyReleased);
 
@@ -260,7 +265,7 @@ namespace CircleOfLife
 
         void mouse_MouseWheelRotated(float ticks)
         {
-            if (baseGame.menuOpen)
+           /* if (baseGame.menuOpen)
             {
                 //scroll perk tree if mouse is in that area
                 //TODO check mouse location
@@ -275,7 +280,7 @@ namespace CircleOfLife
             else
             {
 
-            }
+            }*/
         }
 
         void keyboard_KeyReleased(Keys key)
@@ -330,10 +335,10 @@ namespace CircleOfLife
             }
         }
 
-        void drawPerview()
+        void drawPerview(Rectangle destination)
         {
             //the art for this class not yet available
-
+            
         }
 
 
@@ -375,7 +380,7 @@ namespace CircleOfLife
             //initialize elements
             speciesList = new Nuclex.UserInterface.Controls.Desktop.ListControl();
             Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
-            menuSlider = new Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl();
+            //menuSlider = new Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl();
             description = new Nuclex.UserInterface.Controls.LabelControl();
 
             speciesList.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 200.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 300.0f));
@@ -384,20 +389,52 @@ namespace CircleOfLife
             createButton.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 505.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 50.0f));
             createButton.Text = "New Species";
 
-            menuSlider.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.75f, 0),new UniScalar(0.5f,0), new UniScalar(0.0f, 30));
-            menuSlider.ThumbSize = 0.1f;
-            menuSlider.Moved += new EventHandler(perkSliderMoved);
+            //menuSlider.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.75f, 0),new UniScalar(0.5f,0), new UniScalar(0.0f, 30));
+            //menuSlider.ThumbSize = 0.1f;
+            //menuSlider.Moved += new EventHandler(perkSliderMoved);
 
             description.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.8f, 0), new UniScalar(0.5f, 0), new UniScalar(0.2f, 0));
             description.Text = Sprites.description;
 
-            menuScreen.Desktop.Children.Add(menuSlider);
-            menuScreen.Desktop.Children.Add(speciesList);
-            menuScreen.Desktop.Children.Add(createButton);
+            //menuScreen.Desktop.Children.Add(menuSlider);
+            //menuScreen.Desktop.Children.Add(speciesList);
+            //menuScreen.Desktop.Children.Add(createButton);
             menuScreen.Desktop.Children.Add(description);
         }
+         public partial class GameDialog : Nuclex.UserInterface.Controls.Desktop.WindowControl
+        {
+
+            
+            // Nuclex.UserInterface.Controls.LabelControl header = new Nuclex.UserInterface.Controls.LabelControl();
+            public Nuclex.UserInterface.Controls.LabelControl nameLabel = new Nuclex.UserInterface.Controls.LabelControl();
+
+            public Nuclex.UserInterface.Controls.Desktop.ButtonControl doneButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+            //public GameButton clearButton = new GameButton();
+            
+
+            public GameDialog()
+            {
+                nameLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 50.0f), 80, 24);
+                nameLabel.Text = "Incredibly useful information\n remove this by commenting out:\n \"gameScreen.Desktop.Children.Add(gameDialog);\" in the user class";
+
+                doneButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.0f, 235.0f), 100, 24);
+                doneButton.Pressed += new EventHandler(doneButton_Pressed);
+                doneButton.Text = "Done";
 
 
+                this.Title = "DIALOG!!";
+                this.Bounds = new UniRectangle(new UniScalar(0.4f, 0), 100.0f, 500.0f, 275.0f);
+
+                Children.Add(nameLabel);
+                Children.Add(doneButton);
+            }
+
+            void doneButton_Pressed(object sender, EventArgs e)
+            {
+                this.Close();
+            }
+
+        }
         
         
         public partial class SpeciesDialog : Nuclex.UserInterface.Controls.Desktop.WindowControl

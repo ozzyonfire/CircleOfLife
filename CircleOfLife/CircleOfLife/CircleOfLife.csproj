@@ -90,17 +90,21 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Nuclex.Audio">
-      <HintPath>Nuclex\Nuclex.Audio.dll</HintPath>
+    <Reference Include="Nuclex.Audio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\Nuclex.Audio.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Fonts">
-      <HintPath>Nuclex\Nuclex.Fonts.dll</HintPath>
+    <Reference Include="Nuclex.Fonts, Version=4.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\Nuclex.Fonts.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Game">
-      <HintPath>Nuclex\Nuclex.Game.dll</HintPath>
+    <Reference Include="Nuclex.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\Nuclex.Game.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Graphics">
-      <HintPath>Nuclex\Nuclex.Graphics.dll</HintPath>
+    <Reference Include="Nuclex.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\Nuclex.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Input, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0f01c2d3090063de, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -114,8 +118,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Nuclex_modified\Nuclex.UserInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Windows.Forms">
-      <HintPath>Nuclex\Nuclex.Windows.Forms.dll</HintPath>
+    <Reference Include="Nuclex.Windows.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\Nuclex.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SlimDX.DirectInput, Version=4.0.10.43, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nuclex_modified\SlimDX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
