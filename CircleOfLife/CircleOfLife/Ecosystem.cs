@@ -155,7 +155,7 @@ namespace CircleOfLife
                                     {
                                         // new random goal
                                         species[i].Creatures[j].flora = null;
-                                        species[i].Creatures[j].randomGoal();
+                                        species[i].Creatures[j].randomGoal(map.width, map.height);
                                     }
                                 }
                                 else if (species[i].Creatures[j].state == 1) // chasing
@@ -230,7 +230,7 @@ namespace CircleOfLife
                                     {
                                         // new random goal
                                         species[i].Creatures[j].flora = null;
-                                        species[i].Creatures[j].randomGoal();
+                                        species[i].Creatures[j].randomGoal(map.width, map.height);
                                     }
                                     if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
                                     {
@@ -320,8 +320,6 @@ namespace CircleOfLife
                                             species[i].Creatures[j].state = 0;
                                             species[i].Creatures[j].flora = null;
                                         }
-
-                                        
                                     }
                                 }
                             }
@@ -333,6 +331,32 @@ namespace CircleOfLife
                                 // the max distance will be the height of the map
                                 species[i].Creatures[j].turnToCenter(distanceToCenter, map.center, Math.Min(map.height, map.width));
                             }
+
+                            
+                            // reduce energy if chasing or evading
+                            if (species[i].Creatures[j].state == 1 || species[i].Creatures[j].state == 2)
+                            {
+                                species[i].Creatures[j].sprintTime += gameTime.ElapsedGameTime;
+                                if (species[i].Creatures[j].sprintTime > TimeSpan.FromSeconds(species[i].Creatures[j].stamina))
+                                {
+                                    // stop sprinting
+                                    species[i].Creatures[j].state = 0;
+                                    species[i].Creatures[j].restTime = TimeSpan.Zero;
+                                }
+                            }
+                            else if (species[i].Creatures[j].state == 0)
+                            {
+                                if (species[i].Creatures[j].restTime < TimeSpan.FromSeconds(species[i].Creatures[j].stamina / 2))
+                                {
+                                    species[i].Creatures[j].restTime += gameTime.ElapsedGameTime;
+                                }
+                                else
+                                {
+                                    // allowed to sprint again
+                                    species[i].Creatures[j].sprintTime = TimeSpan.Zero;
+                                }
+                            }
+                            
 
                             // reproduction
                             // check food vs foodCap

@@ -38,7 +38,7 @@ namespace CircleOfLife
 
                 Vector2 point = new Vector2(x, y);
                 float minD = Math.Min(height / 2, width / 2);
-                if (Vector2.Distance(center, point) >= minD)
+                if (Vector2.Distance(center, point) >= minD - 100)
                 {
                     // not within the circle so generate new points
                     i--;
@@ -66,7 +66,7 @@ namespace CircleOfLife
 
                     Vector2 point = new Vector2(x, y);
                     float minD = Math.Min(height / 2, width / 2);
-                    if (Vector2.Distance(center, point) < minD)
+                    if (Vector2.Distance(center, point) < minD - 100)
                     {
                         // within the circle so generate new points
                         i++;
@@ -89,7 +89,7 @@ namespace CircleOfLife
                 }
                 else
                 {
-                    crops[i].grow(gameTime);
+                    crops[i].grow(gameTime, this.width, this.height);
                 }
             }
             

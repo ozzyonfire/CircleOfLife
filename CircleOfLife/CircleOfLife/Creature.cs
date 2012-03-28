@@ -27,10 +27,14 @@ namespace CircleOfLife
         private int energyValue;
         public float agility;
         public Color color;
+        public int stamina;
 
         //sprite location base
         Rectangle spriteRectangle;
         Rectangle body;
+
+        int mapHeight;
+        int mapWidth;
 
         //creature state
         public byte state;
@@ -54,6 +58,8 @@ namespace CircleOfLife
         // timer
         TimeSpan deathtimer;
         public TimeSpan feedTimer;
+        public TimeSpan sprintTime;
+        public TimeSpan restTime;
 
         //Animations
         int frameOffset;
@@ -108,6 +114,12 @@ namespace CircleOfLife
             currSpeed = 1f;
             deathtimer = new TimeSpan(0, 0, 0);
             feedTimer = new TimeSpan(0, 0, 0);
+            sprintTime = new TimeSpan(0, 0, 0);
+            restTime = new TimeSpan(0, 0, 0);
+            this.stamina = 8;
+
+            this.mapWidth = 1920;
+            this.mapHeight = 1920;
 
             //animation offset
             frameOffset = random.Next(4);
@@ -192,7 +204,7 @@ namespace CircleOfLife
             if (distanceToGoal < 300)
             {
                 // assign a new random goal position
-                randomGoal();
+                randomGoal(mapWidth, mapHeight);
             }
 
             if (distanceToPred < 50)
@@ -235,18 +247,34 @@ namespace CircleOfLife
             if (distanceFromGoal < 200 && this.flora == null)
             {
                 // new random goal position
-                randomGoal();
+                randomGoal(mapWidth, mapHeight);
             }
 
             orientation = TurnToFace(position, wanderDirection, orientation,
                 .25f * turnSpeed);
         }
 
-        public void randomGoal()
+        public void randomGoal(int width, int height)
         {
-            // new random goal position
-            goalPosition.X = (float)random.NextDouble() * 1024;
-            goalPosition.Y = (float)random.NextDouble() * 768;
+            this.mapWidth = width;
+            this.mapHeight = height;
+            int i = 0;
+            while (i == 0)
+            {
+
+                // new random goal position
+                goalPosition.X = (float)random.Next(width);
+                goalPosition.Y = (float)random.Next(height);
+
+                Vector2 center = new Vector2(width / 2, height / 2);
+
+                float minD = Math.Min(height / 2, width / 2);
+                if (Vector2.Distance(goalPosition, center) < minD)
+                {
+                    i++;
+                }
+            }
+            
         }
 
         public void avoid(Vector2 otherPosition)

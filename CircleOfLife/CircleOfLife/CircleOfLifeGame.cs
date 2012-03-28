@@ -48,8 +48,6 @@ namespace CircleOfLife
         public bool menuOpen = false;
         public bool dialogOpen = false;
 
-
-
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);
