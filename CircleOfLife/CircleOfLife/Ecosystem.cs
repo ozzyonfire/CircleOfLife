@@ -162,7 +162,7 @@ namespace CircleOfLife
                                 {
                                     if (species[i].Creatures[j].Prey == species[k].Creatures[l]) // this is the target
                                     {
-                                        if (distanceAway < 10) // change this to an intersection
+                                        if (species[i].Creatures[j].body.Intersects(species[k].Creatures[l].body))
                                         {
                                             // killed it
                                             species[i].Creatures[j].state = 0;
@@ -240,7 +240,7 @@ namespace CircleOfLife
                                         }
                                         float floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
 
-                                        if (floraDistance < 15)
+                                        if (species[i].Creatures[j].body.Intersects(species[i].Creatures[j].flora.body))
                                         {
                                             // start feeding
                                             // start the feeding timer

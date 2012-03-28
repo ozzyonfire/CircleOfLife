@@ -26,6 +26,7 @@ namespace CircleOfLife
         int frameOffset;
         //sprite location base
         Rectangle spriteRectangle;
+        public Rectangle body;
         Color color;
 
         public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos, int type, int randSeed)
@@ -49,14 +50,29 @@ namespace CircleOfLife
                     break;
             }
 
+            float w = size * 0.1f * spriteRectangle.Width;
+            float h = size * 0.1f * spriteRectangle.Height;
+
+            body = new Rectangle(xPos, yPos, (int)w, (int)h);
+
             color = Color.Green;
 
+        }
+
+        public void update()
+        {
+            float w = size * 0.1f * spriteRectangle.Width;
+            float h = size * 0.1f * spriteRectangle.Height;
+
+            body.Width = (int)w;
+            body.Height = (int)h;
         }
 
         public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
         {
             spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
             spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
+            //spriteBatch.Draw(spriteSheet, new Rectangle(body.X + (int)offset.X, body.Y + (int)offset.Y, body.Width, body.Height), Color.Blue);
         }
 
         public Environment grow(int width, int height)

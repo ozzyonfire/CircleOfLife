@@ -26,7 +26,7 @@ namespace CircleOfLife
         {
             this.width = width;
             this.height = height;
-            this.cropNumber = width / 400;
+            this.cropNumber = width / 200;
 
             center = new Vector2(width / 2, height / 2);
 
