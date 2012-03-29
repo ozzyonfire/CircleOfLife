@@ -75,7 +75,7 @@ namespace CircleOfLife
 
             pos.Y = pos.Y -1; //guessed effect
             color.A = (byte)(255 - 8 *frame );
-            spriteBatch.DrawString(gameFonts.Header, text, pos, color);
+            spriteBatch.DrawString(gameFonts.Header, text, pos, color,0.0f,Vector2.Zero,1.0f,SpriteEffects.None,0.1f);
 
             frame++;
             if (frame == frames)

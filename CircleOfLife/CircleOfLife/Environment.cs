@@ -53,10 +53,12 @@ namespace CircleOfLife
 
         }
 
-        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector3 offset, int frame)
         {
+            //float x = offset.Z * offset.Z / 2 * tx * (tx / 2 - position.X + offset.X);
+            //float y = offset.Z * offset.Z / 2 * ty * (ty / 2 - position.Y + offset.Y);
             spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
-            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
+            spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, 0, new Vector2(0), 0.1f * size * offset.Z, SpriteEffects.None, 0.9f);
         }
 
         public Environment grow(int width, int height)

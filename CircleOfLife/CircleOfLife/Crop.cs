@@ -57,7 +57,7 @@ namespace CircleOfLife
             }
         }
 
-        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector3 offset, int frame)
         {
             for (int i = 0; i < plants.Count; i ++)
             {

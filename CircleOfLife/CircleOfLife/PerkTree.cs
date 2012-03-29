@@ -182,15 +182,15 @@ namespace CircleOfLife
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts,int offset)
         {
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y, 5, 27), topLeft, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + 5 + offset, Y, width - 10, 27), top, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y, 5, 27), topRight, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + 27, 5, height - 27), left, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y + 27, 5, height - 27), right, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + height, 5, 4), bottomLeft, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + 5 + offset, Y + height, width - 10, 4), bottom, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y + height, 5, 4), bottomRight, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + 50, width, 4), bottom, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y, 5, 27), topLeft, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + 5 + offset, Y, width - 10, 27), top, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y, 5, 27), topRight, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + 27, 5, height - 27), left, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y + 27, 5, height - 27), right, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + height, 5, 4), bottomLeft, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + 5 + offset, Y + height, width - 10, 4), bottom, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y + height, 5, 4), bottomRight, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y + 50, width, 4), bottom, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
 
 
             spriteBatch.DrawString(gameFonts.Header, name, new Vector2(X + 15 + offset, Y), Color.White, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
