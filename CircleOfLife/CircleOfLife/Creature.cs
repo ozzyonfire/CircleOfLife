@@ -116,7 +116,7 @@ namespace CircleOfLife
             feedTimer = new TimeSpan(0, 0, 0);
             sprintTime = new TimeSpan(0, 0, 0);
             restTime = new TimeSpan(0, 0, 0);
-            this.stamina = 8;
+            this.stamina = 6;
 
             this.mapWidth = 1920;
             this.mapHeight = 1920;
@@ -129,6 +129,7 @@ namespace CircleOfLife
         {
             if (state == 1) // chase
             {
+                this.sprintTime += gameTime.ElapsedGameTime;
                 Chase(position, ref prey, ref orientation, agility);
                 Vector2 heading = new Vector2((float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
@@ -141,6 +142,7 @@ namespace CircleOfLife
             }
             else if (state == 0) // wander
             {
+                this.restTime += gameTime.ElapsedGameTime;
                 if (flora != null && this.diet == 0)
                 {
                     goalPosition = flora.position;
@@ -159,6 +161,7 @@ namespace CircleOfLife
             }
             else if (state == 2) // evade
             {
+                this.sprintTime += gameTime.ElapsedGameTime;
                 Evade(position, ref predator, ref orientation, agility);                
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));

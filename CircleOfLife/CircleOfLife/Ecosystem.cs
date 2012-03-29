@@ -336,24 +336,19 @@ namespace CircleOfLife
                             // reduce energy if chasing or evading
                             if (species[i].Creatures[j].state == 1 || species[i].Creatures[j].state == 2)
                             {
-                                species[i].Creatures[j].sprintTime += gameTime.ElapsedGameTime;
                                 if (species[i].Creatures[j].sprintTime > TimeSpan.FromSeconds(species[i].Creatures[j].stamina))
                                 {
                                     // stop sprinting
                                     species[i].Creatures[j].state = 0;
-                                    species[i].Creatures[j].restTime = TimeSpan.Zero;
                                 }
                             }
                             else if (species[i].Creatures[j].state == 0)
                             {
-                                if (species[i].Creatures[j].restTime < TimeSpan.FromSeconds(species[i].Creatures[j].stamina / 2))
-                                {
-                                    species[i].Creatures[j].restTime += gameTime.ElapsedGameTime;
-                                }
-                                else
+                                if (species[i].Creatures[j].restTime > TimeSpan.FromSeconds(species[i].Creatures[j].stamina / 2))
                                 {
                                     // allowed to sprint again
                                     species[i].Creatures[j].sprintTime = TimeSpan.Zero;
+                                    species[i].Creatures[j].restTime = TimeSpan.Zero;
                                 }
                             }
                             
