@@ -26,6 +26,7 @@ namespace CircleOfLife
         int frameOffset;
         //sprite location base
         Rectangle spriteRectangle;
+        public Rectangle body;
         Color color;
 
         public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos, int type, int randSeed)
@@ -49,16 +50,39 @@ namespace CircleOfLife
                     break;
             }
 
+            float w = size * 0.1f * spriteRectangle.Width;
+            float h = size * 0.1f * spriteRectangle.Height;
+
+            body = new Rectangle(xPos, yPos, (int)w, (int)h);
+
             color = Color.Green;
 
         }
 
+<<<<<<< HEAD
         public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector3 offset, int frame)
+=======
+        public void update()
+        {
+            float w = size * 0.1f * spriteRectangle.Width;
+            float h = size * 0.1f * spriteRectangle.Height;
+
+            body.Width = (int)w;
+            body.Height = (int)h;
+        }
+
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector2 offset, int frame)
+>>>>>>> e6554d83874323f39ae08c157baa9cdb7aaf323e
         {
             //float x = offset.Z * offset.Z / 2 * tx * (tx / 2 - position.X + offset.X);
             //float y = offset.Z * offset.Z / 2 * ty * (ty / 2 - position.Y + offset.Y);
             spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+<<<<<<< HEAD
             spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, 0, new Vector2(0), 0.1f * size * offset.Z, SpriteEffects.None, 0.9f);
+=======
+            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, 0, new Vector2(0), 0.1f * size, SpriteEffects.None, 0.9f);
+            //spriteBatch.Draw(spriteSheet, new Rectangle(body.X + (int)offset.X, body.Y + (int)offset.Y, body.Width, body.Height), Color.Blue);
+>>>>>>> e6554d83874323f39ae08c157baa9cdb7aaf323e
         }
 
         public Environment grow(int width, int height)

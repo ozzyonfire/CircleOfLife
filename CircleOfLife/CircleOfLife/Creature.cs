@@ -31,7 +31,7 @@ namespace CircleOfLife
 
         //sprite location base
         Rectangle spriteRectangle;
-        Rectangle body;
+        public Rectangle body;
 
         int mapHeight;
         int mapWidth;
@@ -187,6 +187,12 @@ namespace CircleOfLife
                 deathtimer = TimeSpan.Zero;
             }
 
+            body.X = (int)position.X;
+            body.Y = (int)position.Y;
+            float w = this.size * 0.01f * spriteRectangle.Width;
+            float h = this.size * 0.01f * spriteRectangle.Height;
+            body.Width = (int)w;
+            body.Height = (int)h;
         }
 
   
@@ -355,7 +361,9 @@ namespace CircleOfLife
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
             spriteRectangle.X = 100 * ((frame + frameOffset)%4);
+
             spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+
         }     
 
 

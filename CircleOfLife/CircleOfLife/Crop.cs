@@ -50,6 +50,7 @@ namespace CircleOfLife
         {
             for (int i = 0; i < plants.Count; i++)
             {
+                plants[i].update();
                 if (plants[i].state == 1)
                 {
                     plants.RemoveAt(i);
