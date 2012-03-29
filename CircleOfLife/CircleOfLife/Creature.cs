@@ -84,10 +84,10 @@ namespace CircleOfLife
                     spriteRectangle = Sprites.herbivore;
                     break;
                 case 1:
-                    spriteRectangle = Sprites.mormo;
+                    spriteRectangle = Sprites.carnivore;
                     break;
                 default:
-                    spriteRectangle = Sprites.carnivore;
+                    spriteRectangle = Sprites.mormo;
                     break;
             }
             size = stats.size;
@@ -358,10 +358,12 @@ namespace CircleOfLife
 
 
 
-        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector2 offset, int frame)
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
             spriteRectangle.X = 100 * ((frame + frameOffset)%4);
-            spriteBatch.Draw(spriteSheet, new Vector2(position.X + offset.X, position.Y + offset.Y), spriteRectangle, color, orientation, new Vector2(0), .01f * size, SpriteEffects.None, 0.9f);
+
+            spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+
         }     
 
 

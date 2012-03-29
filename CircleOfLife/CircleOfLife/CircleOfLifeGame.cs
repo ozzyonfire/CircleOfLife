@@ -35,11 +35,13 @@ namespace CircleOfLife
 
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
-        public int mapSizeX;    
+        public int mapSizeX;
         public int mapSizeY;
+        public int screenSizeX;
+        public int screenSizeY;
 
         //temporary variable for implementing map scrolling
-        public Vector2 userView;
+        public Vector3 userView;
         public bool scrollLeft = false;
         public bool scrollRight = false;
         public bool scrollDown = false;
@@ -55,12 +57,14 @@ namespace CircleOfLife
             //set resolution
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 960;
+            screenSizeX = 1440;
+            screenSizeY = 960;
             //map size is initially twice screen size
             mapSizeX = 1920;
             mapSizeY = 1920;
             graphics.IsFullScreen = false;
             //initialize
-            userView = new Vector2(-mapSizeX / 4, -mapSizeY /4);
+            userView = new Vector3(-mapSizeX / 4, -mapSizeY /4,1.0f);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -148,7 +152,7 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
 
@@ -160,7 +164,10 @@ namespace CircleOfLife
             else
             {
                 ecosystem.draw(gameTime, spriteBatch, spriteSheet, userView);
-                spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX, mapSizeY), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z ), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
+                //spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX , mapSizeY ), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+                
                 user.drawHUD(gameTime, spriteBatch, spriteSheet, gameFonts);
             }
 

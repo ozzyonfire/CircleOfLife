@@ -40,6 +40,8 @@ namespace CircleOfLife
         Rectangle hudDestination;
 
         PerkTree perkTree;
+        Effects effects;
+
         Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
         Nuclex.UserInterface.Controls.Desktop.ListControl speciesList;
         Nuclex.UserInterface.Controls.LabelControl description;
@@ -98,7 +100,7 @@ namespace CircleOfLife
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
-            //mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
+            mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
 
             keyboard.KeyReleased += new Nuclex.Input.Devices.KeyDelegate(keyboard_KeyReleased);
 
@@ -126,14 +128,17 @@ namespace CircleOfLife
         {
             //only draws the background - nuclex handles the buttons
             spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
+            effects.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
+            spriteBatch.DrawString(gameFonts.Header, "Score: 1337", new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
         }
 
         public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
         {
             //Draw menu background
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
             spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
             //Draw menu Title
-            spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), Color.Black);
+            spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), new Color(255,0,0,128));
             perkTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
         }
         //EVENT HANDLERS:
@@ -254,7 +259,7 @@ namespace CircleOfLife
                     preyStats.diet = 0;
 
                 Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
-                newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y);
+                newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
                // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y);
                // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y + 10);
               //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
@@ -281,6 +286,10 @@ namespace CircleOfLife
             {
 
             }*/
+
+                baseGame.userView = new Vector3(baseGame.userView.X, baseGame.userView.Y, baseGame.userView.Z + 0.1f*ticks);
+
+
         }
 
         void keyboard_KeyReleased(Keys key)
@@ -313,7 +322,10 @@ namespace CircleOfLife
                     enterMenu();
                 }
             }
-
+            if (key.Equals(Keys.Space))
+            {
+                effects.addFloatingString("CAT!!",new Vector2(ms.X,ms.Y),Color.Red);
+            }
         }
 
 
@@ -376,6 +388,7 @@ namespace CircleOfLife
         public void initializeMenuScreen()
         {
             perkTree = new PerkTree();
+            effects = new Effects();
 
             //initialize elements
             speciesList = new Nuclex.UserInterface.Controls.Desktop.ListControl();
@@ -408,7 +421,7 @@ namespace CircleOfLife
             // Nuclex.UserInterface.Controls.LabelControl header = new Nuclex.UserInterface.Controls.LabelControl();
             public Nuclex.UserInterface.Controls.LabelControl nameLabel = new Nuclex.UserInterface.Controls.LabelControl();
 
-            public Nuclex.UserInterface.Controls.Desktop.ButtonControl doneButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+            public Nuclex.UserInterface.Controls.Desktop.ButtonControl proceedButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
             //public GameButton clearButton = new GameButton();
             
 
@@ -416,20 +429,20 @@ namespace CircleOfLife
             {
                 nameLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 50.0f), 80, 24);
                 nameLabel.Text = "Incredibly useful information\n remove this by commenting out:\n \"gameScreen.Desktop.Children.Add(gameDialog);\" in the user class";
+                
+                proceedButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.0f, 235.0f), 100, 24);
+                proceedButton.Pressed += new EventHandler(proceedButton_Pressed);
+                proceedButton.Text = "Proceed";
 
-                doneButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.0f, 235.0f), 100, 24);
-                doneButton.Pressed += new EventHandler(doneButton_Pressed);
-                doneButton.Text = "Done";
-
-
+                this.EnableDragging = false;
                 this.Title = "DIALOG!!";
                 this.Bounds = new UniRectangle(new UniScalar(0.4f, 0), 100.0f, 500.0f, 275.0f);
 
                 Children.Add(nameLabel);
-                Children.Add(doneButton);
+                Children.Add(proceedButton);
             }
 
-            void doneButton_Pressed(object sender, EventArgs e)
+            void proceedButton_Pressed(object sender, EventArgs e)
             {
                 this.Close();
             }
