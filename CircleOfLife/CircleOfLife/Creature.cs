@@ -356,8 +356,6 @@ namespace CircleOfLife
             this.food += value;
         }
 
-
-
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
             spriteRectangle.X = 100 * ((frame + frameOffset)%4);

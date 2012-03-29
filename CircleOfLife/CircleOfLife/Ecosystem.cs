@@ -401,7 +401,6 @@ namespace CircleOfLife
 
         public void rescanSpecies()
         {
-            
             // this method iterates through the species and sets what is prey and what is predator
             for (int i = 0; i < species.Count; i++)
             {

@@ -21,8 +21,10 @@ namespace CircleOfLife
         public short state;
         public short energyValue;
         public int type;
+        TimeSpan growTime;
         Random random;
 
+        int frame;
         int frameOffset;
         //sprite location base
         Rectangle spriteRectangle;
@@ -37,16 +39,16 @@ namespace CircleOfLife
             this.energyValue = energyValue;
             this.position = new Vector2((float)xPos, (float)yPos);
             this.type = type;
-
+            this.frame = 0;
             random = new Random(randSeed);
 
             switch (type)
             {
                 case 0:
-                    spriteRectangle = Sprites.herbivore;
+                    spriteRectangle = Sprites.flower;
                     break;
                 default:
-                    spriteRectangle = Sprites.herbivore;
+                    spriteRectangle = Sprites.flower;
                     break;
             }
 
@@ -60,16 +62,23 @@ namespace CircleOfLife
         }
 
 
-        public void update()
+        public void update(GameTime gameTime)
         {
             float w = size * 0.1f * spriteRectangle.Width;
             float h = size * 0.1f * spriteRectangle.Height;
 
             body.Width = (int)w;
             body.Height = (int)h;
+
+            growTime += gameTime.ElapsedGameTime;
+
+            if (growTime >= TimeSpan.FromMilliseconds(100) && frame < 2)
+            {
+                frame++;
+            }
         }
 
-        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector3 offset, int frame)
+        public void draw(ref SpriteBatch spriteBatch, ref Texture2D spriteSheet, Vector3 offset)
 
         {
             //float x = offset.Z * offset.Z / 2 * tx * (tx / 2 - position.X + offset.X);

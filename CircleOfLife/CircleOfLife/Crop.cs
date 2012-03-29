@@ -33,7 +33,7 @@ namespace CircleOfLife
         public void grow(GameTime gameTime, int width, int height)
         {
             // just grow one of the plants in the crop
-            removeDead();
+            removeDead(gameTime);
             // don't add anymore if it has reached the max plants for the crop
             if (plants.Count >= maxPlants)
                 return;
@@ -46,11 +46,11 @@ namespace CircleOfLife
             }
         }
 
-        public void removeDead()
+        public void removeDead(GameTime gameTime)
         {
             for (int i = 0; i < plants.Count; i++)
             {
-                plants[i].update();
+                plants[i].update(gameTime);
                 if (plants[i].state == 1)
                 {
                     plants.RemoveAt(i);
@@ -62,7 +62,7 @@ namespace CircleOfLife
         {
             for (int i = 0; i < plants.Count; i ++)
             {
-                plants[i].draw(ref spriteBatch, ref spriteSheet, offset, frame);
+                plants[i].draw(ref spriteBatch, ref spriteSheet, offset);
             }
         }
     }
