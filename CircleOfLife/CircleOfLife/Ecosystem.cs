@@ -198,9 +198,9 @@ namespace CircleOfLife
                                     {
                                         // keep evading
                                     }
-                                    else if (pred)
+                                    else if (pred && species[i].Creatures[j].Predator != null) // hopefully this will fix the crash
                                     {
-                                        float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position);
+                                        float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position); // still crashing here
                                         if (distanceAway < predDistance)
                                         {
                                             // new predator

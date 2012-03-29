@@ -102,7 +102,7 @@ namespace CircleOfLife
             color = stats.color;
 
             position = new Vector2(xPos, yPos);
-            goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
+            
             orientation = new float();
 
             Rectangle body = new Rectangle(xPos, yPos, size, size);
@@ -120,7 +120,7 @@ namespace CircleOfLife
 
             this.mapWidth = 1920;
             this.mapHeight = 1920;
-
+            randomGoal(mapWidth, mapHeight);
             //animation offset
             frameOffset = random.Next(4);
         }
