@@ -13,7 +13,7 @@ using Nuclex.Game;
 
 namespace CircleOfLife
 {
-    class User
+    public class User
     {
         Ecosystem ecosystem;    //reference to ecosystem class
         Game game;
@@ -40,7 +40,7 @@ namespace CircleOfLife
         Rectangle hudDestination;
 
         PerkTree perkTree;
-        Effects effects;
+        public Effects effects;
 
         Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
         Nuclex.UserInterface.Controls.Desktop.ListControl speciesList;
@@ -92,13 +92,14 @@ namespace CircleOfLife
 
             //Dialog test
             GameDialog gameDialog = new GameDialog();
-            gameScreen.Desktop.Children.Add(gameDialog);
+            //gameScreen.Desktop.Children.Add(gameDialog);
 
             //GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
             gui.Screen = gameScreen;
             
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
+            //mouse.MouseButtonPressed += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
             mouse.MouseButtonReleased += new Nuclex.Input.Devices.MouseButtonDelegate(mouse_MouseButtonReleased);
             mouse.MouseWheelRotated += new Nuclex.Input.Devices.MouseWheelDelegate(mouse_MouseWheelRotated);
 
@@ -127,7 +128,7 @@ namespace CircleOfLife
         public void drawHUD(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
         {
             //only draws the background - nuclex handles the buttons
-            spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
+            //spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
             effects.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
             spriteBatch.DrawString(gameFonts.Header, "Score: 1337", new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
         }
@@ -236,11 +237,11 @@ namespace CircleOfLife
                             preyStats.color = Color.Orange;
                             break;
                         default:
-                            preyStats.color = Color.White;
+                            preyStats.color = Color.Brown;
                             break;
                     }
                 else
-                    preyStats.color = Color.White;
+                    preyStats.color = Color.Brown;
 
                 if (speciesDialog.dietInput.SelectedItems.Count == 1)
                     switch (speciesDialog.dietInput.SelectedItems[0])
@@ -286,9 +287,11 @@ namespace CircleOfLife
             {
 
             }*/
-
-                baseGame.userView = new Vector3(baseGame.userView.X, baseGame.userView.Y, baseGame.userView.Z + 0.1f*ticks);
-
+            MouseState ms = mouse.GetState();
+                
+            //mouse centered zoom!
+            baseGame.userView = new Vector3((baseGame.userView.X - ms.X + viewport.Width / 2) * (baseGame.userView.Z + 0.1f * ticks), (baseGame.userView.Y + ms.Y - viewport.Height / 2) * (baseGame.userView.Z + 0.1f * ticks), baseGame.userView.Z + 0.1f * ticks);
+            //baseGame.userView = new Vector3(baseGame.userView.X, baseGame.userView.Y, baseGame.userView.Z + 0.1f * ticks);
 
         }
 
@@ -325,6 +328,21 @@ namespace CircleOfLife
             if (key.Equals(Keys.Space))
             {
                 effects.addFloatingString("CAT!!",new Vector2(ms.X,ms.Y),Color.Red);
+            }
+
+
+
+            //debug map expansion
+            if (key.Equals(Keys.E))
+            {
+                baseGame.mapSizeX = baseGame.mapSizeX + 50;
+                baseGame.mapSizeY = baseGame.mapSizeY + 50;
+            }
+            //debug map contraction
+            if (key.Equals(Keys.Q))
+            {
+                baseGame.mapSizeX = baseGame.mapSizeX - 50;
+                baseGame.mapSizeY = baseGame.mapSizeY - 50;
             }
         }
 

@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Creature
+    public class Creature
     {
         //species characteristics
         public byte diet;
@@ -66,6 +66,10 @@ namespace CircleOfLife
         public TimeSpan feedTimer;
         public TimeSpan sprintTime;
         public TimeSpan restTime;
+
+        public TimeSpan corpseTimer;
+        public int rotTime;    //temporary?
+        public int rotStage;        //three frames/stages to death
 
         //Animations
         int frameOffset;
@@ -122,6 +126,11 @@ namespace CircleOfLife
             feedTimer = new TimeSpan(0, 0, 0);
             sprintTime = new TimeSpan(0, 0, 0);
             restTime = new TimeSpan(0, 0, 0);
+            //Death
+            corpseTimer = new TimeSpan(0, 0, 0);
+            rotTime = 30;
+            rotStage = 0;
+
             this.stamina = 6;
 
             this.mapWidth = 1920;   //hmm
@@ -137,7 +146,16 @@ namespace CircleOfLife
         public void update(GameTime gameTime)
         {
             if (state == 4)
-                return;
+            {
+                corpseTimer += gameTime.ElapsedGameTime;
+                if (corpseTimer > TimeSpan.FromSeconds(rotTime))
+                    state = 6;
+                else if (corpseTimer > TimeSpan.FromSeconds(rotTime*2/3))
+                    rotStage = 2;
+                else if (corpseTimer > TimeSpan.FromSeconds(rotTime * 1 / 3))
+                    rotStage = 1;
+
+            }
             else if (state == 1) // chase
             {
                 this.sprintTime += gameTime.ElapsedGameTime;
@@ -371,7 +389,7 @@ namespace CircleOfLife
         {
             if (state == 4)
             {
-                spriteRectangle.X = 400;
+                spriteRectangle.X = 400 + 100 * rotStage;
                 spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }
             else

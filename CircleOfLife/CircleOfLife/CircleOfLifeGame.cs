@@ -30,8 +30,8 @@ namespace CircleOfLife
 
         public GameFonts gameFonts;
 
-        Ecosystem ecosystem;
-        User user;
+        public Ecosystem ecosystem;
+        public User user;
 
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
@@ -133,11 +133,11 @@ namespace CircleOfLife
 
                 //Navigation scrolling section
                 //the values need to be tuned to make scrolling smooth
-                if (scrollLeft && userView.X < 0)
+                if (scrollLeft && userView.X < 100)
                     userView.X += 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
                 if (scrollRight && userView.X > -mapSizeX + graphics.PreferredBackBufferWidth)
                     userView.X -= 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
-                if (scrollUp && userView.Y < 0)
+                if (scrollUp && userView.Y < 100)
                     userView.Y += 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
                 if (scrollDown && userView.Y > -mapSizeY + graphics.PreferredBackBufferHeight)
                     userView.Y -= 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
@@ -183,6 +183,12 @@ namespace CircleOfLife
             public SpriteFont Default;
             public SpriteFont Header;
             public SpriteFont Title;
+        }
+
+        public Vector2 realToRelative(Vector2 realPosition)
+        {
+            Vector2 result = new Vector2((realPosition.X + userView.X) * userView.Z, (realPosition.Y + userView.Y) * userView.Z);
+            return result;
         }
     }
 }

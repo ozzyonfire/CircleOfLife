@@ -12,11 +12,12 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Species
+    public class Species
     {
         public string name;
         private short population;
         private Ecosystem.speciesStats stats;
+        private List<Creature> tempCreatures = new List<Creature>(100);
         private List<Creature> creatures = new List<Creature>(100);
         public List<Species> predators = new List<Species>(10);
         public List<Species> prey = new List<Species>(10);
@@ -41,11 +42,12 @@ namespace CircleOfLife
 
         public void addCreature(int xPos, int yPos)
         {
-            creatures.Add(new Creature(xPos, yPos, stats));
+            tempCreatures.Add(new Creature(xPos, yPos, stats));
         }
 
         public void update(GameTime gameTime)
         {
+            creatures = tempCreatures;
             for (int i = 0; i < creatures.Count; i++)
             {
                 creatures[i].update(gameTime);

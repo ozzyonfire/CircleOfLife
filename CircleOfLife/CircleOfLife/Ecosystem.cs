@@ -12,10 +12,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Ecosystem
+    public class Ecosystem
     {
         //references
         Game game;
+        CircleOfLifeGame baseGame;
         Map map;
 
         public List<Species> species = new List<Species>(50);
@@ -31,7 +32,7 @@ namespace CircleOfLife
         {
             //assign references
             this.game = game;
-            //this.COL = (CircleOfLifeGame)game;
+            this.baseGame = (CircleOfLifeGame)game;
             map = new Map();
             map.intialize(width, height);
 
@@ -215,7 +216,7 @@ namespace CircleOfLife
                                         if (species[i].Creatures[j].Prey.state == 4)
                                         {
                                             //TODO: switch to feed state instead of wanderking off
-                                            species[i].Creatures[j].state = 0;
+                                            species[i].Creatures[j].state = 3;
                                         }
                                     }
 
@@ -300,6 +301,7 @@ namespace CircleOfLife
                                 species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
                                 species[i].Creatures[j].flora.size--;
                                 species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
+                                baseGame.user.effects.addFloatingString("+1", baseGame.realToRelative(species[i].Creatures[j].Position), Color.Green);
                                 if (species[i].Creatures[j].flora.size <= 0)
                                 {
                                     // kill the plant
@@ -313,6 +315,11 @@ namespace CircleOfLife
                                 // stop feeding look for more food
                                 species[i].Creatures[j].state = 0;
                                 species[i].Creatures[j].flora = null;
+                            }
+                            //carnivore feeding
+                            else if (species[i].Creatures[j].diet == 1 && species[i].Creatures[j].Prey.state == 4)
+                            {
+
                             }
                         }
                     }

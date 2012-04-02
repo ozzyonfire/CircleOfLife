@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Media;
 namespace CircleOfLife
 {
     //Class used for animation of random sprite effects in game. such as floating numbers
-    class Effects
+    public class Effects
     {
         public List<Effect> effects = new List<Effect>(50); //unsure of size
         public Effects()
@@ -44,7 +44,7 @@ namespace CircleOfLife
         }
     }
 
-    interface Effect
+    public interface Effect
     {
         bool Finished { get; }
         void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts);

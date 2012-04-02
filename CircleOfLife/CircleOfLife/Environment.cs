@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Environment
+    public class Environment
     {
         public String name;
         public short foodValue;
