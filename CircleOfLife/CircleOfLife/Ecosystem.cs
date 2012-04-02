@@ -301,7 +301,8 @@ namespace CircleOfLife
                                 species[i].Creatures[j].Feed(species[i].Creatures[j].flora.foodValue);
                                 species[i].Creatures[j].flora.size--;
                                 species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
-                                baseGame.user.effects.addFloatingString("+1", baseGame.realToRelative(species[i].Creatures[j].Position), Color.Green);
+                                //TODO: better position calculations
+                                baseGame.user.effects.addFloatingString("+1", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Green);
                                 if (species[i].Creatures[j].flora.size <= 0)
                                 {
                                     // kill the plant
@@ -319,8 +320,13 @@ namespace CircleOfLife
                             //carnivore feeding
                             else if (species[i].Creatures[j].diet == 1 && species[i].Creatures[j].Prey.state == 4)
                             {
-
+                                species[i].Creatures[j].Feed(5);
+                                species[i].Creatures[j].energy += 5;
+                                species[i].Creatures[j].Prey.foodValue -= 5;
+                                baseGame.user.effects.addFloatingString("+5", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
                             }
+                            else //wander away
+                                species[i].Creatures[j].state = 0;
                         }
                     }
 

@@ -48,6 +48,7 @@ namespace CircleOfLife
        // public bool erased;    //when killed by a mormo or power and disappear nearly instantly
         public int foodValue;
 
+        public int feedSpeed;   //amount fed per second
 
         //creatures
         private Creature predator;
@@ -128,7 +129,7 @@ namespace CircleOfLife
             restTime = new TimeSpan(0, 0, 0);
             //Death
             corpseTimer = new TimeSpan(0, 0, 0);
-            rotTime = 30;
+            rotTime = 15;
             rotStage = 0;
 
             this.stamina = 6;
@@ -136,7 +137,7 @@ namespace CircleOfLife
             this.mapWidth = 1920;   //hmm
             this.mapHeight = 1920;
 
-            foodValue = size * 2;//Should be tweeked
+            foodValue = 30;//Should be tweeked(size)
 
             randomGoal(mapWidth, mapHeight);
             //animation offset
@@ -148,11 +149,11 @@ namespace CircleOfLife
             if (state == 4)
             {
                 corpseTimer += gameTime.ElapsedGameTime;
-                if (corpseTimer > TimeSpan.FromSeconds(rotTime))
+                if (corpseTimer > TimeSpan.FromSeconds(rotTime) || foodValue < 1)
                     state = 6;
-                else if (corpseTimer > TimeSpan.FromSeconds(rotTime*2/3))
+                else if (corpseTimer > TimeSpan.FromSeconds(rotTime*2/3) || foodValue < 10)
                     rotStage = 2;
-                else if (corpseTimer > TimeSpan.FromSeconds(rotTime * 1 / 3))
+                else if (corpseTimer > TimeSpan.FromSeconds(rotTime * 1 / 3) || foodValue < 20)
                     rotStage = 1;
 
             }
