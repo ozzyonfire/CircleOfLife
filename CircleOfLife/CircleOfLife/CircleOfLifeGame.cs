@@ -60,8 +60,8 @@ namespace CircleOfLife
             screenSizeX = 1440;
             screenSizeY = 960;
             //map size is initially twice screen size
-            mapSizeX = 3000;
-            mapSizeY = 3000;
+            mapSizeX = 2000;
+            mapSizeY = 2000;
             graphics.IsFullScreen = false;
             //initialize
             userView = new Vector3(-mapSizeX / 4, -mapSizeY /4,1.0f);

@@ -177,6 +177,10 @@ namespace CircleOfLife
                 {
                     goalPosition = flora.position;
                 }
+                else if (prey != null && this.diet == 1)
+                {
+                    goalPosition = prey.position;
+                }
 
                 Wander(position, ref goalPosition, ref orientation, agility);
                 Vector2 heading = new Vector2(

@@ -224,8 +224,14 @@ namespace CircleOfLife
                                     else if (species[i].Creatures[j].state == 0) //wandering
                                     {
                                         // start chasing
-                                        species[i].Creatures[j].state = 1;
                                         species[i].Creatures[j].Prey = species[i].prey[k].Creatures[l];
+                                        if(species[i].prey[k].Creatures[l].state != 4)
+                                            species[i].Creatures[j].state = 1;
+                                        else if (species[i].Creatures[j].body.Intersects(species[i].prey[k].Creatures[l].body))
+                                        {
+                                            species[i].Creatures[j].state = 3;
+                                            species[i].prey[k].Creatures[l].state = 4; // redundent probably
+                                        }
                                     }
                                 }
 
@@ -251,26 +257,29 @@ namespace CircleOfLife
 
                         float newDistance;
                         float floraDistance;
-                        int k;
-                        for (k = 0; k < flora.Count; k++)
+                        int goal = 0;
+                        if (species[i].Creatures[j].flora == null)
                         {
-                            if (species[i].Creatures[j].flora == null)
-                            {
-                                species[i].Creatures[j].flora = flora[k];
-                            }
-                            else
-                            {
-                                //new distance has a 30% variance so that different creatures behave differently
-                                newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[k].position) + random.Next(-150,150); 
-                                floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
-
-                                //new target if closer
-                                if (newDistance < floraDistance)
-                                    species[i].Creatures[j].flora = flora[k];
-                                //Console.WriteLine(newDistance.ToString());
-                            }
+                            species[i].Creatures[j].flora = flora[0];
                         }
-                      // Console.WriteLine(i.ToString() + ", " + j.ToString() + ": " + k.ToString());
+                        floraDistance = Vector2.Distance(species[i].Creatures[j].Position,species[i].Creatures[j].flora.position);
+                        for (int k = 0; k < flora.Count; k++)
+                        {
+                                //new distance has a 400px variance so that different creatures behave differently
+                                newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[k].position);
+                                //Console.WriteLine(newDistance.ToString());
+                                //newDistance += random.Next(-400, 400); 
+                                
+                                //new target if closer, RANDOM offset added to create some variety and stop creatures travelling in a horde
+                                if (newDistance + random.Next(0,10000) < floraDistance)
+                                {
+                                    species[i].Creatures[j].flora = flora[k];
+                                    floraDistance = newDistance;
+                                    //Console.WriteLine(k.ToString());
+                                }
+                            
+                        }
+                       // Console.WriteLine(i.ToString() + ", " + j.ToString() + ": " + Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position).ToString());
                     }
 
                     
@@ -344,8 +353,8 @@ namespace CircleOfLife
                             //carnivore feeding
                             else if (species[i].Creatures[j].diet == 1 && species[i].Creatures[j].Prey.state == 4)
                             {
-                                species[i].Creatures[j].Feed(5);
-                                species[i].Creatures[j].energy += 5;
+                                species[i].Creatures[j].Feed(15);
+                                species[i].Creatures[j].energy += 15;
                                 species[i].Creatures[j].Prey.foodValue -= 5;
                                 baseGame.user.effects.addFloatingString("+5", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
                             }
