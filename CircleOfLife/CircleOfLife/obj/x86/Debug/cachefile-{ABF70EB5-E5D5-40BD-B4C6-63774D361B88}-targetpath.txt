@@ -1,4 +1,3 @@
-Content\bush.xnb
 Content\spriteSheet.xnb
 Content\BaseFont.xnb
 Content\HeaderFont.xnb

@@ -159,7 +159,7 @@ namespace CircleOfLife
                     {
                         for (int k = 0; k < species[i].prey.Count; k++)
                         {
-                            for (int l = 0; l < species[i].prey[k].Creatures.Count; l++)
+                            for (int l = 0; l < species[i].prey[k].Creatures.Count; l++)    //Cycle through prey
                             {
                                 detected = false;
                                 // check surroundings
@@ -192,9 +192,9 @@ namespace CircleOfLife
                                             if (species[i].Creatures[j].body.Intersects(species[i].prey[k].Creatures[l].body))
                                             {
                                                 // killed it
-                                                species[i].Creatures[j].state = 0;
-                                                species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
-                                                species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
+                                                species[i].Creatures[j].state = 3;
+                                                //species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
+                                                //species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
                                                 species[i].prey[k].Creatures[l].state = 4; // dead
                                             }
                                             // todo: switch to feed state
@@ -216,7 +216,8 @@ namespace CircleOfLife
                                         if (species[i].Creatures[j].Prey.state == 4)
                                         {
                                             //TODO: switch to feed state instead of wanderking off
-                                            species[i].Creatures[j].state = 3;
+                                            //Allow creature to finish chasing so its close to corpse before feeding
+                                            //species[i].Creatures[j].state = 3;
                                         }
                                     }
 
@@ -233,23 +234,46 @@ namespace CircleOfLife
                         }
                     }
 
-                    if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].state == 0) //if wandering herbivore, look for plants
+                    // if wandering loop through members of same species so they don't overlap
+                    //TODO: too much computation? further avoidance necessary?
+                    if (species[i].Creatures[j].state == 0 || species[i].Creatures[j].state == 3)   //feeding?
                     {
-                        for (int k = 0; k < flora.Count; k++)
+                        for (int k = 0; k < species[i].Creatures.Count; k++)
                         {
-                            if (species[i].Creatures[j].flora == null)
-                                species[i].Creatures[j].flora = flora[k];
-                            else
-                            {
-                                float newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[k].position);
-                                float floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
-                                //new target if closer
-                                if (newDistance < floraDistance)
-                                    species[i].Creatures[j].flora = flora[k];
-                            }
+                            if (k != j)
+                                if (Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[k].Position) < 10)
+                                    species[i].Creatures[j].avoid(species[i].Creatures[k].Position);
                         }
                     }
 
+                    if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].state == 0) //if wandering herbivore, look for plants
+                    {
+
+                        float newDistance;
+                        float floraDistance;
+                        int k;
+                        for (k = 0; k < flora.Count; k++)
+                        {
+                            if (species[i].Creatures[j].flora == null)
+                            {
+                                species[i].Creatures[j].flora = flora[k];
+                            }
+                            else
+                            {
+                                //new distance has a 30% variance so that different creatures behave differently
+                                newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[k].position) + random.Next(-150,150); 
+                                floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
+
+                                //new target if closer
+                                if (newDistance < floraDistance)
+                                    species[i].Creatures[j].flora = flora[k];
+                                //Console.WriteLine(newDistance.ToString());
+                            }
+                        }
+                      // Console.WriteLine(i.ToString() + ", " + j.ToString() + ": " + k.ToString());
+                    }
+
+                    
 
                     //Not detected
 

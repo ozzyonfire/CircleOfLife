@@ -167,7 +167,7 @@ namespace CircleOfLife
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z ), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.9f);
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
                 //spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX , mapSizeY ), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
-                
+                //spriteBatch.Draw(spriteSheet, new Rectangle(400, 400, 200, 200), new Rectangle(1000, 0, 300, 300),Color.White);
                 user.drawHUD(gameTime, spriteBatch, spriteSheet, gameFonts);
             }
 
