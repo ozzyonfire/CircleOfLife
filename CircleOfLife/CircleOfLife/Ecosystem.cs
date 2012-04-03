@@ -127,31 +127,21 @@ namespace CircleOfLife
 
 
                                 }
-                                else if (species[i].Creatures[j].state == 2) // evading
-                                {
-                                    // check what it is evading
-                                    // compare it to target predator
-                                    //if new predator is closer evade it, otherwise continue evading original predator
-                                    if (species[i].Creatures[j].Predator != species[i].predators[k].Creatures[l])
-                                    {
-                                        float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position);
-                                        if (distanceAway < predDistance)
-                                        {
-                                            // new predator
-                                            species[i].Creatures[j].Predator = species[i].predators[k].Creatures[l];
-                                        }
-                                    }
-                                }
                             }
-                        }
+                            else if (species[i].Creatures[j].state == 2 && species[i].predators[k].Creatures[l].state != 1) // evading and not detected
+                            {
+                                species[i].Creatures[j].state = 0;
+                            }
+                            }
+                        
                     }
 
 
 
 
                     //TODO: break if being chased (or thirsty?)
-                    if (species[i].Creatures[j].state == 2)
-                        break;
+                   // if (species[i].Creatures[j].state == 2)
+                   //    break;
 
 
 

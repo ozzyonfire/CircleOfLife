@@ -35,6 +35,8 @@ namespace CircleOfLife
 
         //temporary dialog
         SpeciesDialog speciesDialog;
+        GameDialog gameDialog;
+
 
         Rectangle hudBackground = Sprites.hudBackground;
         Rectangle hudDestination;
@@ -90,9 +92,6 @@ namespace CircleOfLife
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
             gameScreen.Desktop.Children.Add(speciesDialog);
 
-            //Dialog test
-            GameDialog gameDialog = new GameDialog();
-            //gameScreen.Desktop.Children.Add(gameDialog);
 
             //GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
             gui.Screen = gameScreen;
@@ -432,6 +431,32 @@ namespace CircleOfLife
             //menuScreen.Desktop.Children.Add(createButton);
             menuScreen.Desktop.Children.Add(description);
         }
+
+        public void dialog(string text, string title)
+        {
+            float w = menuScreen.Width;
+            float h = menuScreen.Height;
+            UniRectangle bounds = new UniRectangle(w * 0.35f, h * 0.4f, w * 0.3f, h * 0.2f);
+            gameDialog = new GameDialog(text, title, bounds);
+            baseGame.dialogOpen = true;
+            gameDialog.proceedButton.Pressed += new EventHandler(proceedButton_Pressed);
+            if (baseGame.menuOpen)
+            {
+                menuScreen.Desktop.Children.Add(gameDialog);
+            }
+            else
+            {
+                gameScreen.Desktop.Children.Add(gameDialog);
+            }
+        }
+
+        void proceedButton_Pressed(object sender, EventArgs e)
+        {
+            gameDialog.Close();
+            baseGame.dialogOpen = false;
+        }
+
+
          public partial class GameDialog : Nuclex.UserInterface.Controls.Desktop.WindowControl
         {
 
@@ -443,26 +468,23 @@ namespace CircleOfLife
             //public GameButton clearButton = new GameButton();
             
 
-            public GameDialog()
+            public GameDialog(string text, string title, UniRectangle bounds)
             {
+
+                nameLabel.Text = text;
+                this.EnableDragging = false;
+                this.Title = title;
+                this.Bounds = bounds;
+
                 nameLabel.Bounds = new UniRectangle(new UniScalar(0.0f, 10f), new UniScalar(0.0f, 50.0f), 80, 24);
-                nameLabel.Text = "Incredibly useful information\n remove this by commenting out:\n \"gameScreen.Desktop.Children.Add(gameDialog);\" in the user class";
+                //nameLabel.Text = "Incredibly useful information\n remove this by commenting out:\n \"gameScreen.Desktop.Children.Add(gameDialog);\" in the user class";
                 
-                proceedButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.0f, 235.0f), 100, 24);
-                proceedButton.Pressed += new EventHandler(proceedButton_Pressed);
+                proceedButton.Bounds = new UniRectangle(new UniScalar(0.75f,0), new UniScalar(0.85f,0), 100, 24);
                 proceedButton.Text = "Proceed";
 
-                this.EnableDragging = false;
-                this.Title = "DIALOG!!";
-                this.Bounds = new UniRectangle(new UniScalar(0.4f, 0), 100.0f, 500.0f, 275.0f);
 
                 Children.Add(nameLabel);
                 Children.Add(proceedButton);
-            }
-
-            void proceedButton_Pressed(object sender, EventArgs e)
-            {
-                this.Close();
             }
 
         }
