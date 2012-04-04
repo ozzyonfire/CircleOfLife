@@ -390,6 +390,8 @@ namespace CircleOfLife
                         // reproduce
                         species[i].reproduce(species[i].Creatures[j]);
                         species[i].Creatures[j].food = 0;
+                        //up points
+                        baseGame.oPoints += 10;
                     }
                 }
             }

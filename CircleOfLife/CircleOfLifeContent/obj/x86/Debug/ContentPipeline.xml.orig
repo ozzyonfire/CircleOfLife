@@ -2,22 +2,52 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>bush.png</Source>
-      <Name>bush</Name>
+<<<<<<< HEAD
+=======
+      <Source>spriteSheet.png</Source>
+      <Name>spriteSheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bush.xnb</Output>
-      <Time>2012-02-16T15:57:08-05:00</Time>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-04-04T17:59:57.171875-07:00</Time>
     </Item>
     <Item>
-      <Source>panda.tga</Source>
-      <Name>panda</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+>>>>>>> 113c9930cda8ebefa807a52f6949fa11d50606b6
+      <Source>BaseFont.spritefont</Source>
+      <Name>BaseFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\panda.xnb</Output>
-      <Time>2012-03-15T18:37:21.5450377-04:00</Time>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\BaseFont.xnb</Output>
+      <Time>2012-04-04T14:17:37.5066181-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HeaderFont.spritefont</Source>
+      <Name>HeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\HeaderFont.xnb</Output>
+      <Time>2012-04-04T14:17:37.5246192-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TitleFont.spritefont</Source>
+      <Name>TitleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\TitleFont.xnb</Output>
+      <Time>2012-04-04T14:17:37.5406201-04:00</Time>
+    </Item>
+    <Item>
+      <Source>XMLFile1.xml</Source>
+      <Name>XMLFile1</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\XMLFile1.xnb</Output>
+      <Time>2012-04-04T14:17:37.5416201-04:00</Time>
     </Item>
     <Item>
       <Source>spriteSheet.png</Source>
@@ -25,22 +55,18 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-<<<<<<< HEAD
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-03-21T12:08:31.78125-07:00</Time>
-=======
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet.xnb</Output>
-      <Time>2012-03-15T18:37:21.5470378-04:00</Time>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-04-04T14:17:37.5876228-04:00</Time>
     </Item>
     <Item>
-      <Source>test_sheet2.png</Source>
-      <Name>test_sheet2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+      <Source>bgmusic.wma</Source>
+      <Name>bgmusic</Name>
+      <Importer>WmaImporter</Importer>
+      <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\test_sheet2.xnb</Output>
-      <Time>2012-03-15T18:37:21.5520381-04:00</Time>
->>>>>>> master
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.xnb</Output>
+      <Extra>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.wma</Extra>
+      <Time>2012-04-04T14:17:37.5556209-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -48,10 +74,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Devel\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLifeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLife\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

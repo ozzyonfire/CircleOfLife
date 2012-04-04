@@ -31,19 +31,48 @@ namespace CircleOfLife
 
         public PerkTree()
         {
-            add("Herbivore", new Vector2(450, 150));
-            add("Carnivore", new Vector2(700, 150));
-            add("Claws", new Vector2(200, 300));
-            add("Tail", new Vector2(450, 300));
-            add("Eyes", new Vector2(700, 300));
-            add("Humps", new Vector2(950, 300));
-            add("Claws", new Vector2(200, 450));
-            add("Tail", new Vector2(450, 450));
-            add("Eyes", new Vector2(700, 450));
-            add("Humps", new Vector2(950, 450));
+            Perk newPerk;
+            newPerk = add("Herbivore", new Vector2(450, 150));
+            newPerk.effects = "Allows creature to\n consume plants";
+            newPerk.cost = "O: 100     E: 0";
+            newPerk = add("Carnivore", new Vector2(700, 150));
+            newPerk.effects = "Allows creature to\nconsume creatures";
+            newPerk.cost = "O: 500     E: 1";
+            newPerk = add("Pincer", new Vector2(200, 300));
+            newPerk.effects = "Increased attack\nFaster consumption";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = add("Tail", new Vector2(450, 300));
+            newPerk.effects = "Increased speed";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = add("Eyes", new Vector2(700, 300));
+            newPerk.effects = "Increased detection";
+            newPerk.cost = "O: 200    E: 5";
+            newPerk = add("Swarm", new Vector2(950, 300));
+            newPerk.effects = "Increased birth rate";
+            newPerk.cost = "O: 1000     E: 10";
+            newPerk = add("Hibernate", new Vector2(200, 450));
+            newPerk.effects = "Conserve energy by\nremaining still";
+            newPerk.cost = "O: 1000     E: 10";
+            newPerk = add("Canibal", new Vector2(450, 450));
+            newPerk.effects = "Consume corpses of\nsame species";
+            newPerk.cost = "O: 200     E: 5";
+            newPerk = add("Scent", new Vector2(700, 450));
+            newPerk.effects = "Detection of corpses";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = add("Bulk", new Vector2(950, 450));
+            newPerk.effects = "Increased defence\nSlower speed";
+            newPerk.cost = "O: 1500     E: 5"; 
         }
 
-        public void add(String name, Vector2 position)
+        public void showSpecies(Species target)
+        {
+            for (int i = 0; i < target.perks.Length; i++)
+            {
+                perks[i].Selected = target.perks[i];
+            }
+        }
+
+        public Perk add(String name, Vector2 position)
         {
             Perk newPerk = new Perk(name, position);
             //checks to see if the new perk expands the bounds of the entire perk tree and adjusts
@@ -73,6 +102,7 @@ namespace CircleOfLife
                     height = (int)position.Y + newPerk.height - y;
             }
             perks.Add(newPerk);
+            return newPerk;
         }
         public void mouseOver(int x, int y)
         {
@@ -108,9 +138,11 @@ namespace CircleOfLife
     class Perk
     {
         public String name;
+        public String effects = "Effects\nMore Effects";
+        public String cost = "Cost";
         public int ID;
         public String info;
-        public int cost;
+        //public int cost;
         public int X;
         public int Y;
 
@@ -194,8 +226,8 @@ namespace CircleOfLife
 
 
             spriteBatch.DrawString(gameFonts.Header, name, new Vector2(X + 15 + offset, Y), Color.White, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
-            spriteBatch.DrawString(gameFonts.Header, "Cost", new Vector2(X + 15 + offset, Y + 27), Color.Red, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
-            spriteBatch.DrawString(gameFonts.Header, "Effects\nMore Effects:)", new Vector2(X + 15 + offset, Y + 50), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
+            spriteBatch.DrawString(gameFonts.Header, cost, new Vector2(X + 15 + offset, Y + 27), Color.Red, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
+            spriteBatch.DrawString(gameFonts.Header, effects, new Vector2(X + 15 + offset, Y + 50), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 1.0f, SpriteEffects.None, 0.0f);
             //spriteBatch.Draw(spriteSheet, new Rectangle(X, Y + 25, width, 50), bodyRectangle, Color.White);
             //spriteBatch.Draw(spriteSheet, new Rectangle(X, Y + 74, width, 50), bodyRectangle, Color.White);
         }
