@@ -71,6 +71,8 @@ namespace CircleOfLife
             //initialize
             userView = new Vector3(-mapSizeX / 4, -mapSizeY /4,1.0f);
 
+            
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -84,6 +86,7 @@ namespace CircleOfLife
             //Initialize user interface system
             user = new User(this, ecosystem);
             base.Initialize();
+            this.IsMouseVisible = true; // set this to false for nice cursor
         }
 
 

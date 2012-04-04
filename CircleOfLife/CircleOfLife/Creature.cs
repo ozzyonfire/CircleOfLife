@@ -31,7 +31,7 @@ namespace CircleOfLife
 
         //sprite location base
         Rectangle spriteRectangle;
-        public Rectangle body;
+        public RotatedRectangle body;
 
         int mapHeight;
         int mapWidth;
@@ -61,6 +61,9 @@ namespace CircleOfLife
         private Vector2 position;
         private float orientation;
         public Vector2 goalPosition;
+        public Vector2 origin;
+        public float width;
+        public float height;
 
         // timer
         TimeSpan deathtimer;
@@ -115,8 +118,9 @@ namespace CircleOfLife
             position = new Vector2(xPos, yPos);
             
             orientation = new float();
+            origin = new Vector2(spriteRectangle.Width / 2, spriteRectangle.Height / 2);
 
-            Rectangle body = new Rectangle(xPos, yPos, size, size);
+            body = new RotatedRectangle(new Rectangle(xPos - size / 2, yPos - size / 2, size, size), orientation);
 
             state = 0; //wander
             food = 0;
@@ -170,7 +174,7 @@ namespace CircleOfLife
 
                 if (currSpeed < speed)
                 {
-                    currSpeed += 0.05f * currSpeed;
+                    currSpeed += 0.03f * currSpeed;
                 }
 
                 position += heading * currSpeed;
@@ -207,9 +211,13 @@ namespace CircleOfLife
 
                 if (currSpeed < speed)
                 {
-                    currSpeed += 0.05f * currSpeed;
+                    currSpeed += 0.07f * currSpeed;
                 }
                 position += heading * currSpeed;
+            }
+            else if (state == 3) // feed
+            {
+                this.currSpeed = 0.25f * speed;
             }
 
             deathtimer += gameTime.ElapsedGameTime;
@@ -226,12 +234,13 @@ namespace CircleOfLife
                 deathtimer = TimeSpan.Zero;
             }
 
-            body.X = (int)position.X;
-            body.Y = (int)position.Y;
             float w = this.size * 0.01f * spriteRectangle.Width;
             float h = this.size * 0.01f * spriteRectangle.Height;
-            body.Width = (int)w;
-            body.Height = (int)h;
+            
+            body = new RotatedRectangle(new Rectangle((int)position.X, (int)position.Y, (int)w, (int)h), orientation);
+
+            this.width = w;
+            this.height = h;
         }
 
   
@@ -249,21 +258,21 @@ namespace CircleOfLife
             float distanceToGoal = Vector2.Distance(position, goalPosition);
             float distanceToPred = Vector2.Distance(position, pred.position);
             
-            if (distanceToGoal < 300)
+            if (distanceToGoal < 100)
             {
                 // assign a new random goal position
                 randomGoal(mapWidth, mapHeight);
             }
 
-            if (distanceToPred < 50)
+            if (distanceToPred < 100)
             {
                 // high priority choose optimal, can't have full turn speed
-                orientation = TurnToFace(position, seekPosition, orientation, 0.20f * turnSpeed);
+                orientation = TurnToFace(position, seekPosition, orientation, 3f * turnSpeed);
             }
             else
             {
                 // choose random point to run to
-                orientation = TurnToFace(position, goalPosition, orientation, 0.9f * turnSpeed);
+                orientation = TurnToFace(position, goalPosition, orientation, 1.2f * turnSpeed);
             }
         }
 
@@ -341,7 +350,7 @@ namespace CircleOfLife
             float normalizedDistance =
                 distanceFromScreenCenter / maxDistance;
 
-            float turnToCenterSpeed = .3f * normalizedDistance * normalizedDistance *
+            float turnToCenterSpeed = 5f * normalizedDistance * normalizedDistance *
                 this.agility;
 
             // once we've calculated how much we want to turn towards the center, we can
@@ -400,12 +409,12 @@ namespace CircleOfLife
             if (state == 4)
             {
                 spriteRectangle.X = 1600 + 150 * rotStage;
-                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }
             else
             {
                 spriteRectangle.X = 1001 + 150 * ((frame + frameOffset) % 4);
-                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }
         }     
 

@@ -18,17 +18,20 @@ namespace CircleOfLife
         public short foodValue;
         public short size;
         public Vector2 position;
+        public Vector2 origin;
         public short state;
         public short energyValue;
         public int type;
         TimeSpan growTime;
         Random random;
 
+        public float width;
+        public float height;
+
         int frame;
-        int frameOffset;
         //sprite location base
         Rectangle spriteRectangle;
-        public Rectangle body;
+        public RotatedRectangle body;
         Color color;
         float orientation;  //keep things random
 
@@ -56,11 +59,13 @@ namespace CircleOfLife
             float w = size * 0.1f * spriteRectangle.Width;
             float h = size * 0.1f * spriteRectangle.Height;
 
-            body = new Rectangle(xPos, yPos, (int)w, (int)h);
+            orientation = random.Next(62) * 0.1f;
+
+            origin = new Vector2(spriteRectangle.Width / 2, spriteRectangle.Height / 2);
+
+            body = new CircleOfLife.RotatedRectangle(new Rectangle(xPos, yPos, (int)w, (int)h), orientation);
 
             color = Color.Green;
-
-            orientation = random.Next(62) * 0.1f;
         }
 
 
@@ -69,8 +74,8 @@ namespace CircleOfLife
             float w = size * 0.1f * spriteRectangle.Width;
             float h = size * 0.1f * spriteRectangle.Height;
 
-            body.Width = (int)w;
-            body.Height = (int)h;
+            this.width = w;
+            this.height = h;
 
             growTime += gameTime.ElapsedGameTime;
 
@@ -87,12 +92,12 @@ namespace CircleOfLife
             //float y = offset.Z * offset.Z / 2 * ty * (ty / 2 - position.Y + offset.Y);
             //switch between different flower types based on orientation for example purposes
             if(orientation < 4.5f)
-                spriteRectangle.X = 300 + 100 * ((frame + frameOffset) % 4);
+                spriteRectangle.X = 300 + 100 * ((frame) % 4);
             else
-                spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+                spriteRectangle.X = 100 * ((frame) % 4);
 
-            spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.1f * size * offset.Z, SpriteEffects.None, 0.9f);
-          //spriteBatch.Draw(spriteSheet, new Rectangle(body.X + (int)offset.X, body.Y + (int)offset.Y, body.Width, body.Height), Color.Blue);
+            spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.1f * size * offset.Z, SpriteEffects.None, 0.9f);
+            //spriteBatch.Draw(spriteSheet, new Rectangle(body.X + (int)offset.X, body.Y + (int)offset.Y, body.Width, body.Height), Color.Blue);
 
         }
 
