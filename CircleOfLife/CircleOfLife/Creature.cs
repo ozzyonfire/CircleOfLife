@@ -142,6 +142,11 @@ namespace CircleOfLife
             randomGoal(mapWidth, mapHeight);
             //animation offset
             frameOffset = random.Next(4);
+
+
+            //REMOVE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if(diet == 1)
+                this.energyCap *= 5;
         }
 
         public void update(GameTime gameTime)
@@ -394,12 +399,12 @@ namespace CircleOfLife
         {
             if (state == 4)
             {
-                spriteRectangle.X = 400 + 100 * rotStage;
+                spriteRectangle.X = 1600 + 150 * rotStage;
                 spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }
             else
             {
-                spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+                spriteRectangle.X = 1001 + 150 * ((frame + frameOffset) % 4);
                 spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }
         }     

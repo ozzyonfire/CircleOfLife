@@ -130,6 +130,8 @@ namespace CircleOfLife
             //spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
             effects.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
             spriteBatch.DrawString(gameFonts.Header, "Score: 1337", new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
+
+            drawMouse(spriteBatch, spriteSheet);
         }
 
         public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
@@ -140,10 +142,34 @@ namespace CircleOfLife
             //Draw menu Title
             spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), new Color(255,0,0,128));
             perkTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
+
+            drawMouse(spriteBatch, spriteSheet);
         }
+        
+
+        public void drawMouse(SpriteBatch spriteBatch, Texture2D spriteSheet)
+        {
+            MouseState ms = mouse.GetState();
+            Rectangle mouseRect;
+            if(baseGame.scrollRight)
+                mouseRect = new Rectangle(1100,300,100,100);
+            else if (baseGame.scrollLeft)
+                mouseRect = new Rectangle(1200,300,100,100);
+            else if (baseGame.scrollUp)
+                mouseRect = new Rectangle(1300,300,100,100);
+            else if (baseGame.scrollDown)
+                mouseRect = new Rectangle(1400, 300, 100, 100);
+            else if (baseGame.menuOpen)
+                mouseRect = new Rectangle(1500, 300, 100, 100);
+            else
+                mouseRect = new Rectangle(1000,300,100,100);
+
+            spriteBatch.Draw(spriteSheet, new Rectangle(ms.X - 25, ms.Y - 25, 50, 50), mouseRect, Color.Green, 0.0f, Vector2.Zero, SpriteEffects.None, 0.0f);
+        }
+
+
+        //-------------------------
         //EVENT HANDLERS:
-
-
         void clearButton_Pressed(object sender, EventArgs e)
         {
             ecosystem.clearEcosystem();

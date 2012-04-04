@@ -162,8 +162,10 @@ namespace CircleOfLife
                                 if (species[i].Creatures[j].state == 1 && species[i].Creatures[j].Prey == species[i].prey[k].Creatures[l]) // fixme
                                 {
                                     // currently chasing something
-                                    if (distanceAway < species[i].Creatures[j].detection + 0.10 * species[i].Creatures[j].detection)
+                                    if (distanceAway < species[i].Creatures[j].detection + 0.30 * species[i].Creatures[j].detection)
                                         detected = true;
+                                    else
+                                        species[i].Creatures[j].state = 0;
                                 }
 
                                 else if (distanceAway < species[i].Creatures[j].detection)
