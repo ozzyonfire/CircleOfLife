@@ -350,7 +350,7 @@ namespace CircleOfLife
             float normalizedDistance =
                 distanceFromScreenCenter / maxDistance;
 
-            float turnToCenterSpeed = 5f * normalizedDistance * normalizedDistance *
+            float turnToCenterSpeed = 6f * normalizedDistance * normalizedDistance *
                 this.agility;
 
             // once we've calculated how much we want to turn towards the center, we can

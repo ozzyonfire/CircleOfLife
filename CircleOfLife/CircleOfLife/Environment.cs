@@ -22,6 +22,7 @@ namespace CircleOfLife
         public short state;
         public short energyValue;
         public int type;
+        public Crop theCrop;
         TimeSpan growTime;
         Random random;
 
@@ -35,7 +36,7 @@ namespace CircleOfLife
         Color color;
         float orientation;  //keep things random
 
-        public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos, int type, int randSeed)
+        public Environment(String name, short foodValue, short energyValue, short size, short xPos, short yPos, int type, int randSeed, Crop theCrop)
         {
             this.name = name;
             this.foodValue = foodValue;
@@ -45,6 +46,8 @@ namespace CircleOfLife
             this.type = type;
             this.frame = 0;
             random = new Random(randSeed);
+
+            this.theCrop = theCrop;
 
             switch (type)
             {
@@ -123,7 +126,7 @@ namespace CircleOfLife
                 }
             }
 
-            return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount);
+            return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount, theCrop);
 
             
         }

@@ -62,12 +62,6 @@ namespace CircleOfLife
             // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
-            bool prey = false;
-            bool same = false;
-
-
-
-
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -132,8 +126,8 @@ namespace CircleOfLife
                             {
                                 species[i].Creatures[j].state = 0;
                             }
-                            }
-                        
+                        }
+
                     }
 
 
@@ -247,9 +241,13 @@ namespace CircleOfLife
 
                         float newDistance;
                         float floraDistance;
-                        int goal = 0;
                         if (species[i].Creatures[j].flora == null)
                         {
+                            // we only want this on the initial one
+                            //species[i].Creatures[j].flora = flora[random.Next(flora.Count)]; // try this for now
+                            
+                            // it would be cool to get them to choose a random flower in the crop
+
                             species[i].Creatures[j].flora = flora[0];
 
                             floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
@@ -261,19 +259,19 @@ namespace CircleOfLife
                                 //newDistance += random.Next(-400, 400); 
 
                                 //new target if closer, RANDOM offset added to create some variety and stop creatures travelling in a horde
-                                if (newDistance + random.Next(0, 1000) < floraDistance)
+                                if (newDistance < floraDistance)
                                 {
                                     species[i].Creatures[j].flora = flora[k];
                                     floraDistance = newDistance;
-                                    //Console.WriteLine(k.ToString());
                                 }
 
                             }
+
+                            // choose random plant from that crop
+                            species[i].Creatures[j].flora = species[i].Creatures[j].flora.theCrop.plants[random.Next(species[i].Creatures[j].flora.theCrop.plants.Count)];
                         }
                        // Console.WriteLine(i.ToString() + ", " + j.ToString() + ": " + Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position).ToString());
                     }
-
-                    
 
                     //Not detected
 
@@ -291,8 +289,7 @@ namespace CircleOfLife
                         }
                         if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
                         {
-
-                            //What ???????????????????????
+                            //What ??????????????????????? (prevents a bug from trying to find a null flora position)
                             if (species[i].Creatures[j].flora == null)
                             {
                                 species[i].Creatures[j].flora = flora[0];
@@ -356,7 +353,7 @@ namespace CircleOfLife
 
                     float distanceToCenter = Vector2.Distance(species[i].Creatures[j].Position, map.center);
                     // avoid the boundary
-                    if (distanceToCenter > (map.height / 2 - 200))
+                    if (distanceToCenter > (map.height / 2 - 100))
                     {
                         // the max distance will be the height of the map
                         species[i].Creatures[j].turnToCenter(distanceToCenter, map.center, Math.Min(map.height, map.width));

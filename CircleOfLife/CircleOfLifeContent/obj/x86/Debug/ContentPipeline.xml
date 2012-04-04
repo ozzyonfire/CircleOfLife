@@ -2,18 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-<<<<<<< HEAD
-=======
-      <Source>spriteSheet.png</Source>
-      <Name>spriteSheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-04-04T17:59:57.171875-07:00</Time>
-    </Item>
-    <Item>
->>>>>>> 113c9930cda8ebefa807a52f6949fa11d50606b6
       <Source>BaseFont.spritefont</Source>
       <Name>BaseFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -56,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-04-04T14:17:37.5876228-04:00</Time>
+      <Time>2012-04-04T19:05:37.3201468-04:00</Time>
     </Item>
     <Item>
       <Source>bgmusic.wma</Source>
