@@ -46,6 +46,16 @@
       <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\XMLFile1.xnb</Output>
       <Time>2012-03-25T00:21:15.84375-07:00</Time>
     </Item>
+    <Item>
+      <Source>bgmusic.wma</Source>
+      <Name>bgmusic</Name>
+      <Importer>WmaImporter</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.xnb</Output>
+      <Extra>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.wma</Extra>
+      <Time>2008-04-14T05:00:00-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

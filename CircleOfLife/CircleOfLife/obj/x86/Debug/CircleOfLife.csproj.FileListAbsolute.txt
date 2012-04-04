@@ -123,3 +123,5 @@ I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleO
 I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
 I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.xnb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.wma

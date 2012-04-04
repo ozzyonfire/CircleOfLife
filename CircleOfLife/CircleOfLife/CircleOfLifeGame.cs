@@ -33,6 +33,9 @@ namespace CircleOfLife
         public Ecosystem ecosystem;
         public User user;
 
+        //Sounds
+        Song backgroundMusic;
+        bool backgroundStart = false;
 
         //Map coordinates: these variables should be moved to a more appropriate class..eventually..perhaps
         public int mapSizeX;
@@ -49,6 +52,8 @@ namespace CircleOfLife
 
         public bool menuOpen = false;
         public bool dialogOpen = false;
+
+
 
         public CircleOfLifeGame()
         {
@@ -97,6 +102,9 @@ namespace CircleOfLife
             gameFonts.Header = Content.Load<SpriteFont>("HeaderFont");
             gameFonts.Title = Content.Load<SpriteFont>("TitleFont");
 
+            backgroundMusic = Content.Load<Song>("bgmusic");
+            MediaPlayer.IsRepeating = true;
+
            // UIVisualizer = Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer.FromFile(Services, "..\\..\\..\\..\\CircleOfLifeContent\\Skin\\EntropyUISheet.xml");
             //these intialization functions must occur after sprite sheet has been loaded
             user.initializeGameScreen();
@@ -142,6 +150,13 @@ namespace CircleOfLife
                 if (scrollDown && userView.Y > -mapSizeY + graphics.PreferredBackBufferHeight)
                     userView.Y -= 7.0f * (gameTime.ElapsedGameTime.Ticks / 100000.0f);
             }
+
+            //Music stuff
+            if (!backgroundStart)
+            {
+                MediaPlayer.Play(backgroundMusic);
+                backgroundStart = true;
+            }  
 
             base.Update(gameTime);
         }
