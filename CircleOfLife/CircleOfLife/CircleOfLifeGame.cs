@@ -52,9 +52,14 @@ namespace CircleOfLife
 
         public bool menuOpen = false;
         public bool dialogOpen = false;
+        public bool createOpen = false;
+        public bool startOpen = true;
+        public bool addingSpecies = false;
+
+        public Ecosystem.speciesStats newStats;
 
         //Points!!
-        public int oPoints;
+        public int oPoints = 200;
         public int ePoints;
 
         //Real radius
@@ -83,7 +88,7 @@ namespace CircleOfLife
             
 
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         /// <summary>
@@ -95,7 +100,6 @@ namespace CircleOfLife
             //Initialize user interface system
             user = new User(this, ecosystem);
             base.Initialize();
-            this.IsMouseVisible = true; // set this to false for nice cursor
         }
 
 
@@ -122,6 +126,7 @@ namespace CircleOfLife
             //these intialization functions must occur after sprite sheet has been loaded
             user.initializeGameScreen();
             user.initializeMenuScreen();
+            user.initializeCreateScreen();
 
         }
 
@@ -144,7 +149,7 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (menuOpen)
+            if (menuOpen || createOpen || startOpen)
             {
 
             }
@@ -167,7 +172,7 @@ namespace CircleOfLife
             //Music stuff
             if (!backgroundStart)
             {
-                MediaPlayer.Play(backgroundMusic);
+               // MediaPlayer.Play(backgroundMusic);
                 backgroundStart = true;
             }  
 
@@ -183,8 +188,17 @@ namespace CircleOfLife
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-
-            if (menuOpen)
+            if (startOpen)
+            {
+                //draw menu background
+                user.drawStart(gameTime, spriteBatch, spriteSheet, gameFonts);
+            }
+            else if (createOpen)
+            {
+                //draw menu background
+                user.drawCreate(gameTime, spriteBatch, spriteSheet, gameFonts);
+            }
+            else if (menuOpen)
             {
                 //draw menu background
                 user.drawMenu(gameTime, spriteBatch, spriteSheet, gameFonts);
@@ -192,7 +206,7 @@ namespace CircleOfLife
             else
             {
                 ecosystem.draw(gameTime, spriteBatch, spriteSheet, userView);
-                spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z ), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z ), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 0, 999, 999), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.9f);
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)(userView.X * userView.Z), (int)(userView.Y * userView.Z), (int)((float)mapSizeX * userView.Z), (int)((float)mapSizeY * userView.Z)), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
                 //spriteBatch.Draw(spriteSheet, new Rectangle((int)userView.X, (int)userView.Y, mapSizeX , mapSizeY ), new Rectangle(0, 0, 1000, 1000), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
                 //spriteBatch.Draw(spriteSheet, new Rectangle(400, 400, 200, 200), new Rectangle(1000, 0, 300, 300),Color.White);
@@ -203,6 +217,9 @@ namespace CircleOfLife
             spriteBatch.End();
 
             base.Draw(gameTime);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            user.drawMouse(spriteBatch, spriteSheet);
+            spriteBatch.End();
         }
 
 

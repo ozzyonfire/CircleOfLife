@@ -44,11 +44,35 @@ namespace CircleOfLife
         Rectangle hudDestination;
 
         PerkTree perkTree;
+        PerkTree createTree;
         public Effects effects;
 
-        Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
+        #region nuclex controls
+        //Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl menuSlider;
         Nuclex.UserInterface.Controls.Desktop.ListControl speciesList;
-        Nuclex.UserInterface.Controls.LabelControl description;
+        //Nuclex.UserInterface.Controls.LabelControl description;
+
+        // Nuclex.UserInterface.Controls.LabelControl header = new Nuclex.UserInterface.Controls.LabelControl();
+        Nuclex.UserInterface.Controls.LabelControl pointsLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        Nuclex.UserInterface.Controls.LabelControl nameLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        Nuclex.UserInterface.Controls.LabelControl colorLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        Nuclex.UserInterface.Controls.LabelControl dietLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        //Nuclex.UserInterface.Controls.LabelControl sizeLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        //Nuclex.UserInterface.Controls.LabelControl speedLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        //Nuclex.UserInterface.Controls.LabelControl agilityLabel = new Nuclex.UserInterface.Controls.LabelControl();
+        //Nuclex.UserInterface.Controls.LabelControl detectionLabel = new Nuclex.UserInterface.Controls.LabelControl();
+
+        Nuclex.UserInterface.Controls.Desktop.InputControl nameInput = new Nuclex.UserInterface.Controls.Desktop.InputControl();
+        Nuclex.UserInterface.Controls.Desktop.ListControl colorInput = new Nuclex.UserInterface.Controls.Desktop.ListControl();
+        Nuclex.UserInterface.Controls.Desktop.ListControl dietInput = new Nuclex.UserInterface.Controls.Desktop.ListControl();
+
+        Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+        #endregion
+
+
+
+        //public Nuclex.UserInterface.Controls.Desktop.ButtonControl clearButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+        public GameButton clearButton = new GameButton();
 
         public User(Game game, Ecosystem ecosystem)
         {
@@ -86,17 +110,24 @@ namespace CircleOfLife
             viewport = game.GraphicsDevice.Viewport;
 
             gameScreen = new Screen(viewport.Width, viewport.Height);
-            
+
             menuScreen = new Screen(viewport.Width, viewport.Height);
+
+            createScreen = new Screen(viewport.Width, viewport.Height);
+            startScreen = new Screen(viewport.Width, viewport.Height);
 
             speciesDialog = new SpeciesDialog();
             //set clear button listener
             speciesDialog.clearButton.Pressed += new EventHandler(clearButton_Pressed);
-            gameScreen.Desktop.Children.Add(speciesDialog);
-
+            
+            
+            //DEBUG DIALOG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //gameScreen.Desktop.Children.Add(speciesDialog);
+            //DEBUG DIALOG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
 
             //GameUI gameUI = new GameUI(gameScreen, baseGame.spriteSheet);
-            gui.Screen = gameScreen;
+            gui.Screen = startScreen;
             
             //listeners
             mouse.MouseMoved += new Nuclex.Input.Devices.MouseMoveDelegate(mouse_MouseMoved);
@@ -133,19 +164,31 @@ namespace CircleOfLife
             effects.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
             spriteBatch.DrawString(gameFonts.Header, "Order: " + baseGame.oPoints.ToString() + "\nEvolution: " + baseGame.ePoints.ToString(), new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
 
-            drawMouse(spriteBatch, spriteSheet);
+            //drawMouse(spriteBatch, spriteSheet);
         }
 
         public void drawMenu(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
         {
             //Draw menu background
             spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
-            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.5f);
             //Draw menu Title
             spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), Color.Black);
             perkTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
 
-            drawMouse(spriteBatch, spriteSheet);
+            //drawMouse(spriteBatch, spriteSheet);
+        }
+
+        public void drawCreate(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
+        {
+            //Draw menu background
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            spriteBatch.DrawString(gameFonts.Title, "Species Creator", new Vector2(viewport.Width * 0.4f, viewport.Height * 0.1f), Color.Black);
+            spriteBatch.DrawString(gameFonts.Header, "Order Points: " + baseGame.oPoints.ToString() + "      Evolution Points: " + baseGame.ePoints.ToString(), new Vector2(viewport.Width * 0.4f, viewport.Height * 0.8f), Color.Black);
+            createTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
+            drawPreview(new Rectangle(1250,400,200,200),gameTime, spriteBatch, spriteSheet);
+            //drawMouse(spriteBatch, spriteSheet);
         }
 
         public void drawStart(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
@@ -155,13 +198,12 @@ namespace CircleOfLife
             spriteBatch.DrawString(gameFonts.Title, "Press Anything to Start", new Vector2(viewport.Width * 0.35f, viewport.Height * 0.75f), new Color(255, 0, 0, 50));
 
         }
-        
 
         public void drawMouse(SpriteBatch spriteBatch, Texture2D spriteSheet)
         {
             MouseState ms = mouse.GetState();
             Rectangle mouseRect;
-            if(baseGame.scrollRight)
+            if (baseGame.scrollRight)
                 mouseRect = new Rectangle(1100,300,100,100);
             else if (baseGame.scrollLeft)
                 mouseRect = new Rectangle(1200,300,100,100);
@@ -169,7 +211,7 @@ namespace CircleOfLife
                 mouseRect = new Rectangle(1300,300,100,100);
             else if (baseGame.scrollDown)
                 mouseRect = new Rectangle(1400, 300, 100, 100);
-            else if (baseGame.menuOpen)
+            else if (baseGame.addingSpecies)
                 mouseRect = new Rectangle(1500, 300, 100, 100);
             else
                 mouseRect = new Rectangle(1000,300,100,100);
@@ -219,7 +261,10 @@ namespace CircleOfLife
 
 
             //if in menu mode
-            perkTree.mouseOver((int)x, (int)y);
+            if(baseGame.menuOpen)
+                perkTree.mouseOver((int)x, (int)y);
+            else if(baseGame.createOpen)
+                createTree.mouseOver((int)x, (int)y);
         }
 
         void mouse_MouseButtonReleased(MouseButtons buttons)
@@ -232,8 +277,23 @@ namespace CircleOfLife
             {
                 perkTree.mouseClick(ms.X, ms.Y);
             }
+            else if (baseGame.createOpen)
+            {
+                createTree.mouseClick(ms.X, ms.Y);
+            }
+            else if (baseGame.startOpen)
+            {
+
+            }
+            else if (baseGame.addingSpecies)
+            {
+                Species newSpecies = ecosystem.addSpecies(nameInput.Text, baseGame.newStats);
+                newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
+                baseGame.addingSpecies = false;
+            }
             else
             {
+                /*
                 //Temporary debug stuff
                 //check not in dialog
                 if (ms.X > speciesDialog.Bounds.Left.Fraction * viewport.Width + speciesDialog.Bounds.Left.Offset &&
@@ -296,34 +356,19 @@ namespace CircleOfLife
 
                 Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, preyStats);
                 newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
-               // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y);
-               // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y + 10);
-              //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
+                // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y);
+                // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y + 10);
+                //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
 
                 speciesDialog.nameInput.Text = "Kleemo" + ecosystem.species.Count.ToString();
+                */
 
-                Console.WriteLine(ms.X.ToString() + ", " + ms.Y.ToString() + ": " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());
             }
         }
 
         void mouse_MouseWheelRotated(float ticks)
         {
-           /* if (baseGame.menuOpen)
-            {
-                //scroll perk tree if mouse is in that area
-                //TODO check mouse location
-                //TODO adjust scroll bar
-                int newOffset = perkTree.offset - (int)ticks*9;
-                if (newOffset < 0)
-                    perkTree.offset = 0;
-                else
-                    perkTree.offset = newOffset;
 
-            }
-            else
-            {
-
-            }*/
             MouseState ms = mouse.GetState();
             baseGame.userView = new Vector3(baseGame.userView.X + (viewport.Width / 2 - ms.X)* (baseGame.userView.Z), baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z), baseGame.userView.Z + 0.1f * ticks);
             //Console.WriteLine("old: " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());   
@@ -338,6 +383,15 @@ namespace CircleOfLife
             //Quit game when escape is pressed
             if (key.Equals(Keys.Escape))
                 game.Exit();
+
+            //Exit start screen
+            if (baseGame.startOpen)
+            {
+                gui.Screen = createScreen;
+                baseGame.startOpen = false;
+                baseGame.createOpen = true;
+                return;
+            }
 
             //stop scrolling if mouse is in the middle
             MouseState ms = mouse.GetState();
@@ -373,14 +427,16 @@ namespace CircleOfLife
             //debug map expansion
             if (key.Equals(Keys.E))
             {
-                baseGame.mapSizeX = baseGame.mapSizeX + 50;
-                baseGame.mapSizeY = baseGame.mapSizeY + 50;
-            }
-            //debug map contraction
-            if (key.Equals(Keys.Q))
-            {
-                baseGame.mapSizeX = baseGame.mapSizeX - 50;
-                baseGame.mapSizeY = baseGame.mapSizeY - 50;
+                if (baseGame.createOpen)
+                {
+                    baseGame.createOpen = false;
+                    gui.Screen = gameScreen;
+                }
+                else
+                {
+                    baseGame.createOpen = true;
+                    gui.Screen = createScreen;
+                }
             }
         }
 
@@ -403,9 +459,52 @@ namespace CircleOfLife
             }
         }
 
-        void drawPerview(Rectangle destination)
+        void drawPreview(Rectangle destination, GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet)
         {
-            //the art for this class not yet available
+            //float rotation = ((float)gameTime.TotalGameTime.Milliseconds)%360 /360 * 2* (float)Math.PI;
+            float rotation = 0.0f;
+            Color color;
+            if (colorInput.SelectedItems.Count == 1)
+                switch (colorInput.Items[colorInput.SelectedItems[0]])
+                {
+                    case "Red":
+                        color = Color.Red;
+                        break;
+                    case "Green":
+                        color = Color.Green;
+                        break;
+                    case "Blue":
+                        color = Color.Blue;
+                        break;
+                    case "Brown":
+                        color = Color.Brown;
+                        break;
+                    case "Orange":
+                        color = Color.Orange;
+                        break;
+                    default:
+                        color = Color.Brown;
+                        break;
+                }
+            else
+                color = Color.Brown;
+
+            if (baseGame.menuOpen)
+            {
+                
+            }
+            else if (baseGame.createOpen)
+            {
+                if (createTree.perks[1].Selected)
+                {
+                    spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, color, rotation, new Vector2(0), SpriteEffects.None, 0.0f);
+                }
+                else
+                {
+                    spriteBatch.Draw(spriteSheet, destination, Sprites.herbivore, color, rotation, new Vector2(0), SpriteEffects.None, 0.0f);
+            
+                }
+            }
             
         }
 
@@ -446,11 +545,48 @@ namespace CircleOfLife
             perkTree = new PerkTree();
             effects = new Effects();
 
+            Perk newPerk;
+
+            newPerk = perkTree.add("Herbivore", new Vector2(450, 150));
+            newPerk.effects = "Allows creature to\n consume plants";
+            newPerk.cost = "O: 100     E: 0";
+            newPerk.exclusive = perkTree.add("Carnivore", new Vector2(700, 150));
+            newPerk.exclusive.exclusive = newPerk;
+            newPerk = newPerk.exclusive;
+            newPerk.effects = "Allows creature to\nconsume creatures";
+            newPerk.cost = "O: 500     E: 1";
+            newPerk = perkTree.add("Pincer", new Vector2(200, 300));
+            newPerk.effects = "Increased attack\nFaster consumption";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = perkTree.add("Tail", new Vector2(450, 300));
+            newPerk.effects = "Increased speed";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = perkTree.add("Eyes", new Vector2(700, 300));
+            newPerk.effects = "Increased detection";
+            newPerk.cost = "O: 200    E: 5";
+            newPerk = perkTree.add("Swarm", new Vector2(950, 300));
+            newPerk.effects = "Increased birth rate";
+            newPerk.cost = "O: 1000     E: 10";
+            newPerk = perkTree.add("Hibernate", new Vector2(200, 450));
+            newPerk.effects = "Conserve energy by\nremaining still";
+            newPerk.cost = "O: 1000     E: 10";
+            newPerk = perkTree.add("Canibal", new Vector2(450, 450));
+            newPerk.effects = "Consume corpses of\nsame species";
+            newPerk.cost = "O: 200     E: 5";
+            newPerk = perkTree.add("Scent", new Vector2(700, 450));
+            newPerk.effects = "Detection of corpses";
+            newPerk.cost = "O: 500     E: 5";
+            newPerk = perkTree.add("Bulk", new Vector2(950, 450));
+            newPerk.effects = "Increased defence\nSlower speed";
+            newPerk.cost = "O: 1500     E: 5"; 
+
+
+
             //initialize elements
             speciesList = new Nuclex.UserInterface.Controls.Desktop.ListControl();
             Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
             //menuSlider = new Nuclex.UserInterface.Controls.Desktop.HorizontalSliderControl();
-            description = new Nuclex.UserInterface.Controls.LabelControl();
+            //description = new Nuclex.UserInterface.Controls.LabelControl();
 
             speciesList.Bounds = new UniRectangle(new UniScalar(0.0f, 50.0f),new UniScalar(0.0f, 200.0f),new UniScalar(0.0f, 300.0f),new UniScalar(0.0f, 300.0f));
             speciesList.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
@@ -470,6 +606,127 @@ namespace CircleOfLife
             //menuScreen.Desktop.Children.Add(createButton);
            // menuScreen.Desktop.Children.Add(description);
         }
+
+        public void initializeCreateScreen()
+        {
+            createTree = new PerkTree();
+
+            Perk newPerk = createTree.add("Herbivore", new Vector2(650, 475));
+            newPerk.effects = "Allows creature to\n consume plants";
+            newPerk.cost = "O: 100     E: 0";
+            newPerk.Selected = true;
+            newPerk = createTree.add("Carnivore", new Vector2(900, 475));
+            newPerk.effects = "Allows creature to\nconsume creatures";
+            newPerk.cost = "O: 500     E: 1";
+
+
+            nameLabel.Bounds = new UniRectangle(new UniScalar(0.4f, 10f), new UniScalar(0.1f, 125.0f), 300, 0);
+            colorLabel.Bounds = new UniRectangle(new UniScalar(0.4f, 10f), new UniScalar(0.1f, 155.0f), 300, 0);
+           // dietLabel.Bounds = new UniRectangle(new UniScalar(0.4f, 10f), new UniScalar(0.1f, 75.0f), 80, 24);
+
+
+
+            nameInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.1f, 125.0f), 300, 24);
+            colorInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.1f, 155.0f), 300, 150);
+            //dietInput.Bounds = new UniRectangle(new UniScalar(0.5f, 10f), new UniScalar(0.1f, 75.0f), 120, 24);
+
+            createButton.Bounds = new UniRectangle(new UniScalar(0.5f, -5f), new UniScalar(0.7f, 0.0f), 200, 50);
+
+            nameLabel.Text = "Species Name:";
+            colorLabel.Text = "Color:";
+            dietLabel.Text = "Diet:";
+
+            createButton.Text = "Create";
+            createButton.Pressed += new EventHandler(createButton_Pressed);
+
+            colorInput.Items.Add("Red");
+            colorInput.Items.Add("Green");
+            colorInput.Items.Add("Blue");
+            colorInput.Items.Add("Brown");
+            colorInput.Items.Add("Orange");
+            colorInput.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
+
+            dietInput.Items.Add("Herbivore");
+            dietInput.Items.Add("Carnivore");
+            dietInput.Items.Add("Omnivore");
+            dietInput.SelectionMode = Nuclex.UserInterface.Controls.Desktop.ListSelectionMode.Single;
+
+            nameInput.Text = "Kleemo";
+
+
+            createScreen.Desktop.Children.Add(nameLabel);
+            createScreen.Desktop.Children.Add(colorLabel);
+            createScreen.Desktop.Children.Add(dietLabel);
+
+            createScreen.Desktop.Children.Add(nameInput);
+            createScreen.Desktop.Children.Add(colorInput);
+            createScreen.Desktop.Children.Add(dietInput);
+
+            createScreen.Desktop.Children.Add(createButton);
+
+        }
+
+        void createButton_Pressed(object sender, EventArgs e)
+        {
+            Ecosystem.speciesStats speciesStats;
+            speciesStats.size = 40;
+            speciesStats.detection = 150;
+            speciesStats.speed = 5;
+            speciesStats.energyCap = 100;
+            speciesStats.foodCap = 100;
+            speciesStats.waterCap = 100;
+            speciesStats.energyValue = 20;
+            speciesStats.agility = 0.15f;
+
+            if (createTree.perks[1].Selected)
+            {
+                speciesStats.diet = 1;
+            }
+            else
+            {
+                speciesStats.diet = 0;
+            }
+           
+
+            // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y);
+            // newSpecies.addCreature(ms.X - (int)baseGame.userView.X + 10, ms.Y - (int)baseGame.userView.Y + 10);
+            //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
+
+           
+            
+            if (colorInput.SelectedItems.Count == 1)
+                switch (colorInput.Items[colorInput.SelectedItems[0]])
+                {
+                    case "Red":
+                        speciesStats.color = Color.Red;
+                        break;
+                    case "Green":
+                        speciesStats.color = Color.Green;
+                        break;
+                    case "Blue":
+                        speciesStats.color = Color.Blue;
+                        break;
+                    case "Brown":
+                        speciesStats.color = Color.Brown;
+                        break;
+                    case "Orange":
+                        speciesStats.color = Color.Orange;
+                        break;
+                    default:
+                        speciesStats.color = Color.Brown;
+                        break;
+                }
+            else
+                speciesStats.color = Color.Brown;
+
+
+
+            baseGame.newStats = speciesStats;
+            baseGame.addingSpecies = true;
+            baseGame.createOpen = false;
+            gui.Screen = gameScreen;
+        }
+
 
         public void dialog(string text, string title)
         {

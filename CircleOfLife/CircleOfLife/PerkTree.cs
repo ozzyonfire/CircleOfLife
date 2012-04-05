@@ -31,37 +31,7 @@ namespace CircleOfLife
 
         public PerkTree()
         {
-            Perk newPerk;
-            newPerk = add("Herbivore", new Vector2(450, 150));
-            newPerk.effects = "Allows creature to\n consume plants";
-            newPerk.cost = "O: 100     E: 0";
-            newPerk = add("Carnivore", new Vector2(700, 150));
-            newPerk.effects = "Allows creature to\nconsume creatures";
-            newPerk.cost = "O: 500     E: 1";
-            newPerk = add("Pincer", new Vector2(200, 300));
-            newPerk.effects = "Increased attack\nFaster consumption";
-            newPerk.cost = "O: 500     E: 5";
-            newPerk = add("Tail", new Vector2(450, 300));
-            newPerk.effects = "Increased speed";
-            newPerk.cost = "O: 500     E: 5";
-            newPerk = add("Eyes", new Vector2(700, 300));
-            newPerk.effects = "Increased detection";
-            newPerk.cost = "O: 200    E: 5";
-            newPerk = add("Swarm", new Vector2(950, 300));
-            newPerk.effects = "Increased birth rate";
-            newPerk.cost = "O: 1000     E: 10";
-            newPerk = add("Hibernate", new Vector2(200, 450));
-            newPerk.effects = "Conserve energy by\nremaining still";
-            newPerk.cost = "O: 1000     E: 10";
-            newPerk = add("Canibal", new Vector2(450, 450));
-            newPerk.effects = "Consume corpses of\nsame species";
-            newPerk.cost = "O: 200     E: 5";
-            newPerk = add("Scent", new Vector2(700, 450));
-            newPerk.effects = "Detection of corpses";
-            newPerk.cost = "O: 500     E: 5";
-            newPerk = add("Bulk", new Vector2(950, 450));
-            newPerk.effects = "Increased defence\nSlower speed";
-            newPerk.cost = "O: 1500     E: 5"; 
+            
         }
 
         public void showSpecies(Species target)
@@ -147,7 +117,9 @@ namespace CircleOfLife
         public int Y;
 
         public bool bought;
-        
+
+        public Perk exclusive;
+
         bool selected;
         bool hover;
 
@@ -158,7 +130,11 @@ namespace CircleOfLife
             {
                 selected = value;
                 if (value)
+                {
                     bgColor = Color.Red;
+                    if (exclusive != null)
+                        exclusive.selected = false;
+                }
             }
             get { return selected; }
         }
@@ -169,9 +145,13 @@ namespace CircleOfLife
                 hover = value;
                 if(!selected)
                     if (value && !selected)
+                    {
                         bgColor = Color.Green;
+                    }
                     else
+                    {
                         bgColor = Color.White;
+                    }
             }
             get { return selected; }
         }

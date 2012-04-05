@@ -19,7 +19,7 @@ namespace CircleOfLife
         public List<Effect> effects = new List<Effect>(50); //unsure of size
         public Effects()
         {
-
+            
         }
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)

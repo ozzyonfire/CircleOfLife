@@ -172,3 +172,7 @@ C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.xnb
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.wma
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.xnb
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.wma
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.xnb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.xnb
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.wma
+I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.wma
