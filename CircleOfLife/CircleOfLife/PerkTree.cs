@@ -27,7 +27,7 @@ namespace CircleOfLife
         public int width;
 
         //currently selected perk node
-        Perk selectedPerkNode = null;
+        public Perk selectedPerkNode = null;
 
         public PerkTree()
         {
@@ -38,8 +38,12 @@ namespace CircleOfLife
         {
             for (int i = 0; i < target.perks.Length; i++)
             {
-                perks[i].Selected = target.perks[i];
+                perks[i].bought = target.perks[i];
             }
+            if (perks[0].bought)
+                perks[1].blocked = true;
+            else
+                perks[0].blocked = true;
         }
 
         public Perk add(String name, Vector2 position)
@@ -117,6 +121,7 @@ namespace CircleOfLife
         public int Y;
 
         public bool bought;
+        public bool blocked;
 
         public Perk exclusive;
 
@@ -131,7 +136,6 @@ namespace CircleOfLife
                 selected = value;
                 if (value)
                 {
-                    bgColor = Color.Red;
                     if (exclusive != null)
                         exclusive.selected = false;
                 }
@@ -146,11 +150,9 @@ namespace CircleOfLife
                 if(!selected)
                     if (value && !selected)
                     {
-                        bgColor = Color.Green;
                     }
                     else
                     {
-                        bgColor = Color.White;
                     }
             }
             get { return selected; }
@@ -158,7 +160,6 @@ namespace CircleOfLife
 
         public int width = 200;
         public int height = 100;
-        Color bgColor = Color.White;
 
 
         Rectangle topLeft = new Rectangle(0, 1500, 5, 27);
@@ -194,6 +195,18 @@ namespace CircleOfLife
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts,int offset)
         {
+            Color bgColor;
+            if (bought)
+                bgColor = Color.Red;
+            else if (blocked)
+                bgColor = Color.Gray;
+            else if (selected)
+                bgColor = Color.Blue;
+            else if (hover)
+                bgColor = Color.Green;
+            else
+                bgColor = Color.White;
+
             spriteBatch.Draw(spriteSheet, new Rectangle(X + offset, Y, 5, 27), topLeft, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
             spriteBatch.Draw(spriteSheet, new Rectangle(X + 5 + offset, Y, width - 10, 27), top, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
             spriteBatch.Draw(spriteSheet, new Rectangle(X + width - 5 + offset, Y, 5, 27), topRight, bgColor, 0.0f, new Vector2(0, 0), SpriteEffects.None, 0.1f);
