@@ -673,7 +673,7 @@ namespace CircleOfLife
             speciesStats.detection = 150;
             speciesStats.speed = 5;
             speciesStats.energyCap = 100;
-            speciesStats.foodCap = 100;
+            speciesStats.foodCap = 20;
             speciesStats.waterCap = 100;
             speciesStats.energyValue = 20;
             speciesStats.agility = 0.15f;

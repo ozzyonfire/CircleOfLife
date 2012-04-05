@@ -225,7 +225,7 @@ namespace CircleOfLife
             // remove energy
             if (deathtimer > TimeSpan.FromSeconds(1))
             {
-                this.energy -= 5;
+                this.energy -= 2;
                 if (energy < 0)
                 {
                     // kill the creature
