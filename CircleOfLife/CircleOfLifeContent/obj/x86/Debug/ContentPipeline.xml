@@ -2,15 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>spriteSheet.png</Source>
-      <Name>spriteSheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
-      <Time>2012-04-04T17:59:57.171875-07:00</Time>
-    </Item>
-    <Item>
       <Source>BaseFont.spritefont</Source>
       <Name>BaseFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -47,6 +38,15 @@
       <Time>2012-03-25T00:21:15.84375-07:00</Time>
     </Item>
     <Item>
+      <Source>spriteSheet.png</Source>
+      <Name>spriteSheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-04-04T17:59:57.171875-07:00</Time>
+    </Item>
+    <Item>
       <Source>bgmusic.wma</Source>
       <Name>bgmusic</Name>
       <Importer>WmaImporter</Importer>
@@ -55,6 +55,26 @@
       <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.xnb</Output>
       <Extra>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.wma</Extra>
       <Time>2008-04-14T05:00:00-07:00</Time>
+    </Item>
+    <Item>
+      <Source>menu.mp3</Source>
+      <Name>menu</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.xnb</Output>
+      <Extra>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.wma</Extra>
+      <Time>2012-04-05T09:24:38.546875-07:00</Time>
+    </Item>
+    <Item>
+      <Source>turtlewoods.mp3</Source>
+      <Name>turtlewoods</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.xnb</Output>
+      <Extra>I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.wma</Extra>
+      <Time>2012-04-05T09:24:38.609375-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

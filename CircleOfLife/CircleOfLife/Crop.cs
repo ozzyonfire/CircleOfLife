@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Crop
+    public class Crop
     {
         int growTime;
         Random random;
@@ -21,13 +21,17 @@ namespace CircleOfLife
 
         public List<Environment> plants = new List<Environment>(50);
 
-        public Crop(Environment plant, int growTime, int randSeed, int maxPlants)
+        public Crop(int growTime, int randSeed, int maxPlants)
         {
-            plants.Add(plant);
             this.growTime = growTime;
             random = new Random(randSeed);
             this.maxPlants = maxPlants;
             growTimer = new TimeSpan(0, 0, 0);
+        }
+
+        public void addPlant(Environment plant)
+        {
+            plants.Add(plant);
         }
 
         public void grow(GameTime gameTime, int width, int height)

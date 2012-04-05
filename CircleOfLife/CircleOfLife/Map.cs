@@ -45,8 +45,9 @@ namespace CircleOfLife
                 }
                 else
                 {
-                    Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + i + 1);
-                    Crop field = new Crop(grass, random.Next(3, 8), System.Environment.TickCount + i, 4);
+                    Crop field = new Crop(random.Next(3, 8), System.Environment.TickCount + i, 4);
+                    Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + i + 1, field);
+                    field.addPlant(grass);
                     crops.Add(field);
                 }
             }            
@@ -70,8 +71,10 @@ namespace CircleOfLife
                     {
                         // within the circle so generate new points
                         i++;
-                        Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1);
-                        Crop field = new Crop(grass, random.Next(3, 8), System.Environment.TickCount, 4);
+                        
+                        Crop field = new Crop(random.Next(3, 8), System.Environment.TickCount, 4);
+                        Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1, field);
+                        field.addPlant(grass);
                         crops.Add(field);
                     }
 

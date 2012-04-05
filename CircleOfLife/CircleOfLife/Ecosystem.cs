@@ -62,12 +62,6 @@ namespace CircleOfLife
             // detection is based on the hysteresis methods to make transitions smoother
             bool detected = false;
             bool pred = false;
-            bool prey = false;
-            bool same = false;
-
-
-
-
 
             // iterate through all species and all creatures for each species
             for (int i = 0; i < species.Count; i++) // go through all the species
@@ -128,12 +122,17 @@ namespace CircleOfLife
 
                                 }
                             }
-                            else if (species[i].Creatures[j].state == 2 && species[i].predators[k].Creatures[l].state != 1) // evading and not detected
-                            {
+                                                        
+                            
+                            else if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator.Prey != species[i].Creatures[j] && species[i].Creatures[j].state != 1) // evading and not detected
+                            {         
+                                // this causes a lot of bugs
                                 species[i].Creatures[j].state = 0;
                             }
-                            }
-                        
+                            
+                            
+                        }
+
                     }
 
 
@@ -174,14 +173,13 @@ namespace CircleOfLife
 
                                 if (detected)
                                 {
-
-
                                     if (species[i].Creatures[j].state == 1) // chasing
                                     {
                                         if (species[i].Creatures[j].Prey == species[i].prey[k].Creatures[l]) // this is the target
                                         {
                                             //Check if killed
-                                            if (species[i].Creatures[j].body.Intersects(species[i].prey[k].Creatures[l].body))
+                                            float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Prey.Position);
+                                            if (predDistance < species[i].Creatures[j].height / 2)
                                             {
                                                 // killed it
                                                 species[i].Creatures[j].state = 3;
@@ -219,11 +217,6 @@ namespace CircleOfLife
                                         species[i].Creatures[j].Prey = species[i].prey[k].Creatures[l];
                                         if(species[i].prey[k].Creatures[l].state != 4)
                                             species[i].Creatures[j].state = 1;
-                                        else if (species[i].Creatures[j].body.Intersects(species[i].prey[k].Creatures[l].body))
-                                        {
-                                            species[i].Creatures[j].state = 3;
-                                            species[i].prey[k].Creatures[l].state = 4; // redundent probably
-                                        }
                                     }
                                 }
 
@@ -234,47 +227,56 @@ namespace CircleOfLife
 
                     // if wandering loop through members of same species so they don't overlap
                     //TODO: too much computation? further avoidance necessary?
+                    /*
                     if (species[i].Creatures[j].state == 0 || species[i].Creatures[j].state == 3)   //feeding?
                     {
                         for (int k = 0; k < species[i].Creatures.Count; k++)
                         {
                             if (k != j)
                                 if (Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[k].Position) < 10)
+                                {
                                     species[i].Creatures[j].avoid(species[i].Creatures[k].Position);
+                                }
                         }
                     }
+                    */
 
                     if (species[i].Creatures[j].diet == 0 && species[i].Creatures[j].state == 0) //if wandering herbivore, look for plants
                     {
 
                         float newDistance;
                         float floraDistance;
-                        int goal = 0;
                         if (species[i].Creatures[j].flora == null)
                         {
+                            // we only want this on the initial one
+                            //species[i].Creatures[j].flora = flora[random.Next(flora.Count)]; // try this for now
+                            
+                            // it would be cool to get them to choose a random flower in the crop
+
                             species[i].Creatures[j].flora = flora[0];
-                        }
-                        floraDistance = Vector2.Distance(species[i].Creatures[j].Position,species[i].Creatures[j].flora.position);
-                        for (int k = 0; k < flora.Count; k++)
-                        {
+
+                            floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
+                            for (int k = 0; k < flora.Count; k++)
+                            {
                                 //new distance has a 400px variance so that different creatures behave differently
                                 newDistance = Vector2.Distance(species[i].Creatures[j].Position, flora[k].position);
                                 //Console.WriteLine(newDistance.ToString());
                                 //newDistance += random.Next(-400, 400); 
-                                
+
                                 //new target if closer, RANDOM offset added to create some variety and stop creatures travelling in a horde
-                                if (newDistance + random.Next(0,10000) < floraDistance)
+                                if (newDistance < floraDistance)
                                 {
                                     species[i].Creatures[j].flora = flora[k];
                                     floraDistance = newDistance;
-                                    //Console.WriteLine(k.ToString());
                                 }
-                            
+
+                            }
+
+                            // choose random plant from that crop
+                            species[i].Creatures[j].flora = species[i].Creatures[j].flora.theCrop.plants[random.Next(species[i].Creatures[j].flora.theCrop.plants.Count)];
                         }
                        // Console.WriteLine(i.ToString() + ", " + j.ToString() + ": " + Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position).ToString());
                     }
-
-                    
 
                     //Not detected
 
@@ -292,15 +294,14 @@ namespace CircleOfLife
                         }
                         if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
                         {
-
-                            //What ???????????????????????
+                            //What ??????????????????????? (prevents a bug from trying to find a null flora position)
                             if (species[i].Creatures[j].flora == null)
                             {
                                 species[i].Creatures[j].flora = flora[0];
                             }
                             float floraDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].flora.position);
 
-                            if (species[i].Creatures[j].body.Intersects(species[i].Creatures[j].flora.body))
+                            if (floraDistance < species[i].Creatures[j].flora.width / 2 + 10)
                             {
                                 // start feeding
                                 // start the feeding timer
@@ -355,10 +356,6 @@ namespace CircleOfLife
                         }
                     }
 
-
-
-
-
                     float distanceToCenter = Vector2.Distance(species[i].Creatures[j].Position, map.center);
                     // avoid the boundary
                     if (distanceToCenter > (map.height / 2 - 100))
@@ -404,6 +401,10 @@ namespace CircleOfLife
             for (int i = 0; i < species.Count; i++)
             {
                 species[i].update(gameTime);
+                if (species[i].Creatures.Count == 0)
+                {
+                    species.RemoveAt(i);
+                }
             }
 
             // update flora

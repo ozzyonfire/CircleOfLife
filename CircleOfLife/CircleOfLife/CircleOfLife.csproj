@@ -146,6 +146,7 @@
     <Compile Include="CircleOfLifeGame.cs" />
     <Compile Include="Effects.cs" />
     <Compile Include="PerkTree.cs" />
+    <Compile Include="RotatedRectangle.cs" />
     <Compile Include="Sprites.cs" />
     <Compile Include="Crop.cs" />
     <Compile Include="Map.cs" />
