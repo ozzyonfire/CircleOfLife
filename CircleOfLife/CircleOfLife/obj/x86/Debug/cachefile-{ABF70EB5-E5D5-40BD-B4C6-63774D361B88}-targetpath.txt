@@ -5,3 +5,7 @@ Content\XMLFile1.xnb
 Content\spriteSheet.xnb
 Content\bgmusic.xnb
 Content\bgmusic.wma
+Content\menu.xnb
+Content\menu.wma
+Content\turtlewoods.xnb
+Content\turtlewoods.wma

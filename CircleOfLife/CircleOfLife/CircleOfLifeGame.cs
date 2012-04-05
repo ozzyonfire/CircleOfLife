@@ -71,7 +71,7 @@ namespace CircleOfLife
             screenSizeY = 960;
             //``
 
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false; // just for debuggin
 
             realRadius = 10000; //20k x 20k..lots to work with :)
             //map size is initially twice screen size
@@ -114,7 +114,8 @@ namespace CircleOfLife
             gameFonts.Header = Content.Load<SpriteFont>("HeaderFont");
             gameFonts.Title = Content.Load<SpriteFont>("TitleFont");
 
-            backgroundMusic = Content.Load<Song>("bgmusic");
+            backgroundMusic = Content.Load<Song>("turtlewoods");
+            
             MediaPlayer.IsRepeating = true;
 
            // UIVisualizer = Nuclex.UserInterface.Visuals.Flat.FlatGuiVisualizer.FromFile(Services, "..\\..\\..\\..\\CircleOfLifeContent\\Skin\\EntropyUISheet.xml");

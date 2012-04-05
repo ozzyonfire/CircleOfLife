@@ -168,3 +168,7 @@ C:\Devel\Entropy\CircleOfLife\CircleOfLife\obj\x86\Debug\ResolveAssemblyReferenc
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.exe
 C:\Devel\Entropy\CircleOfLife\CircleOfLife\obj\x86\Debug\CircleOfLife.pdb
+C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.xnb
+C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.wma
+C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.xnb
+C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.wma

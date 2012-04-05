@@ -258,13 +258,13 @@ namespace CircleOfLife
             float distanceToGoal = Vector2.Distance(position, goalPosition);
             float distanceToPred = Vector2.Distance(position, pred.position);
             
-            if (distanceToGoal < 100)
+            if (distanceToGoal < 200)
             {
                 // assign a new random goal position
                 randomGoal(mapWidth, mapHeight);
             }
 
-            if (distanceToPred < 100)
+            if (distanceToPred < 75)
             {
                 // high priority choose optimal, can't have full turn speed
                 orientation = TurnToFace(position, seekPosition, orientation, 3f * turnSpeed);
@@ -301,31 +301,31 @@ namespace CircleOfLife
             ref float orientation, float turnSpeed)
         {
             float distanceFromGoal = Vector2.Distance(wanderDirection, position);
-            if (distanceFromGoal < 200 && this.flora == null)
+            if (distanceFromGoal < 50 && this.flora == null)
             {
                 // new random goal position
                 randomGoal(mapWidth, mapHeight);
             }
 
             orientation = TurnToFace(position, wanderDirection, orientation,
-                .25f * turnSpeed);
+                .5f * turnSpeed);
         }
 
-        public void randomGoal(int width, int height)
+        public void randomGoal(int w, int h)
         {
-            this.mapWidth = width;
-            this.mapHeight = height;
+            this.mapWidth = w;
+            this.mapHeight = h;
             int i = 0;
             while (i == 0)
             {
 
                 // new random goal position
-                goalPosition.X = (float)random.Next(width);
-                goalPosition.Y = (float)random.Next(height);
+                goalPosition.X = (float)random.Next(100,mapWidth-100);
+                goalPosition.Y = (float)random.Next(100,mapHeight-100);
 
-                Vector2 center = new Vector2(width / 2, height / 2);
+                Vector2 center = new Vector2(mapWidth / 2, mapHeight / 2);
 
-                float minD = Math.Min(height / 2, width / 2);
+                float minD = Math.Min(mapHeight / 2, mapWidth / 2);
                 if (Vector2.Distance(goalPosition, center) < minD)
                 {
                     i++;

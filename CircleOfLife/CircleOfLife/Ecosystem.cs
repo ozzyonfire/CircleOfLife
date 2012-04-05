@@ -122,10 +122,15 @@ namespace CircleOfLife
 
                                 }
                             }
-                            else if (species[i].Creatures[j].state == 2 && species[i].predators[k].Creatures[l].state != 1) // evading and not detected
-                            {
+                                                        
+                            
+                            else if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator.Prey != species[i].Creatures[j] && species[i].Creatures[j].state != 1) // evading and not detected
+                            {         
+                                // this causes a lot of bugs
                                 species[i].Creatures[j].state = 0;
                             }
+                            
+                            
                         }
 
                     }
@@ -396,6 +401,10 @@ namespace CircleOfLife
             for (int i = 0; i < species.Count; i++)
             {
                 species[i].update(gameTime);
+                if (species[i].Creatures.Count == 0)
+                {
+                    species.RemoveAt(i);
+                }
             }
 
             // update flora

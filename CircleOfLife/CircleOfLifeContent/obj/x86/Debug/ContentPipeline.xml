@@ -56,6 +56,26 @@
       <Extra>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\bgmusic.wma</Extra>
       <Time>2012-04-04T14:17:37.5556209-04:00</Time>
     </Item>
+    <Item>
+      <Source>menu.mp3</Source>
+      <Name>menu</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.xnb</Output>
+      <Extra>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\menu.wma</Extra>
+      <Time>2012-04-04T19:59:48.243089-04:00</Time>
+    </Item>
+    <Item>
+      <Source>turtlewoods.mp3</Source>
+      <Name>turtlewoods</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.xnb</Output>
+      <Extra>C:\Devel\Entropy\CircleOfLife\CircleOfLife\bin\x86\Debug\Content\turtlewoods.wma</Extra>
+      <Time>2012-04-04T20:02:28.8052726-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
