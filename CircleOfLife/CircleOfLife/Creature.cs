@@ -79,7 +79,7 @@ namespace CircleOfLife
         int frameOffset;
 
         //Random :}
-        Random random = new Random();
+        Random random;
 
         //accesors
 
@@ -89,7 +89,7 @@ namespace CircleOfLife
         public Creature Prey { get { return prey; } set { prey = value; } }
 
         //constructor
-        public Creature(int xPos, int yPos, Ecosystem.speciesStats stats)
+        public Creature(int xPos, int yPos, Ecosystem.speciesStats stats, Random seed)
         {
             diet = stats.diet;
             switch (diet)
@@ -114,6 +114,8 @@ namespace CircleOfLife
             agility = stats.agility;
 
             color = stats.color;
+
+            random = seed;
 
             position = new Vector2(xPos, yPos);
             

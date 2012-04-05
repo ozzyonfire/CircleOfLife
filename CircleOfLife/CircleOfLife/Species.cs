@@ -22,6 +22,8 @@ namespace CircleOfLife
         public List<Species> predators = new List<Species>(10);
         public List<Species> prey = new List<Species>(10);
 
+        Random random = new Random();
+
         //accesors
         public Ecosystem.speciesStats Stats { get { return stats; } }
         public List<Creature> Creatures { get { return creatures; } }
@@ -42,10 +44,10 @@ namespace CircleOfLife
 
         public void addCreature(int xPos, int yPos)
         {
-            tempCreatures.Add(new Creature(xPos+50, yPos-50, stats));
-            tempCreatures.Add(new Creature(xPos+50, yPos+50, stats));
-            tempCreatures.Add(new Creature(xPos-50, yPos+50, stats));
-            tempCreatures.Add(new Creature(xPos-50, yPos-50, stats));
+            tempCreatures.Add(new Creature(xPos+50, yPos-50, stats, random));
+            tempCreatures.Add(new Creature(xPos+50, yPos+50, stats, random));
+            tempCreatures.Add(new Creature(xPos-50, yPos+50, stats, random));
+            tempCreatures.Add(new Creature(xPos-50, yPos-50, stats, random));
         }
 
         public void update(GameTime gameTime)
@@ -73,7 +75,7 @@ namespace CircleOfLife
 
         public void reproduce(Creature parent)
         {
-            creatures.Add(new Creature((short)parent.Position.X,(short)parent.Position.Y, stats));
+            creatures.Add(new Creature((short)parent.Position.X,(short)parent.Position.Y, stats, random));
         }
 
     }
