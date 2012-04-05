@@ -32,6 +32,8 @@ namespace CircleOfLife
         //Game screens for different modes
         Screen gameScreen;
         Screen menuScreen;
+        Screen startScreen;
+        Screen createScreen;
 
         //temporary dialog
         SpeciesDialog speciesDialog;
@@ -129,7 +131,7 @@ namespace CircleOfLife
             //only draws the background - nuclex handles the buttons
             //spriteBatch.Draw(spriteSheet, hudDestination, hudBackground, Color.White, 0.0f, new Vector2(0), SpriteEffects.None, 0.0f);
             effects.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
-            spriteBatch.DrawString(gameFonts.Header, "Score: 1337", new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
+            spriteBatch.DrawString(gameFonts.Header, "Order: " + baseGame.oPoints.ToString() + "\nEvolution: " + baseGame.ePoints.ToString(), new Vector2(viewport.Width * 0.9f, 25), Color.Magenta);
 
             drawMouse(spriteBatch, spriteSheet);
         }
@@ -140,10 +142,18 @@ namespace CircleOfLife
             spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(0, 1050, 1, 1), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
             spriteBatch.Draw(spriteSheet, new Rectangle(0, 0, viewport.Width, viewport.Height), new Rectangle(100, 100, 800, 800), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
             //Draw menu Title
-            spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), new Color(255,0,0,128));
+            spriteBatch.DrawString(gameFonts.Title, "Game Menu", new Vector2(viewport.Width * 0.45f, viewport.Height * 0.05f), Color.Black);
             perkTree.draw(gameTime, spriteBatch, spriteSheet, gameFonts);
 
             drawMouse(spriteBatch, spriteSheet);
+        }
+
+        public void drawStart(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
+        {
+            spriteBatch.Draw(spriteSheet, new Rectangle((int)(viewport.Width * 0.25f), (int)(viewport.Height * 0.25f), (int)(viewport.Width * 0.5f), (int)(viewport.Height * 0.4f)), Sprites.title, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
+            //Draw menu Title
+            spriteBatch.DrawString(gameFonts.Title, "Press Anything to Start", new Vector2(viewport.Width * 0.35f, viewport.Height * 0.75f), new Color(255, 0, 0, 50));
+
         }
         
 
@@ -291,6 +301,8 @@ namespace CircleOfLife
               //  newSpecies.addCreature(ms.X - (int)baseGame.userView.X, ms.Y - (int)baseGame.userView.Y + 10);
 
                 speciesDialog.nameInput.Text = "Kleemo" + ecosystem.species.Count.ToString();
+
+                Console.WriteLine(ms.X.ToString() + ", " + ms.Y.ToString() + ": " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());
             }
         }
 
@@ -313,11 +325,12 @@ namespace CircleOfLife
 
             }*/
             MouseState ms = mouse.GetState();
-                
+            baseGame.userView = new Vector3(baseGame.userView.X + (viewport.Width / 2 - ms.X)* (baseGame.userView.Z), baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z), baseGame.userView.Z + 0.1f * ticks);
+            //Console.WriteLine("old: " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());   
             //mouse centered zoom!
-            baseGame.userView = new Vector3((baseGame.userView.X - ms.X + viewport.Width / 2) * (baseGame.userView.Z + 0.1f * ticks), (baseGame.userView.Y + ms.Y - viewport.Height / 2) * (baseGame.userView.Z + 0.1f * ticks), baseGame.userView.Z + 0.1f * ticks);
+            //baseGame.userView = new Vector3(baseGame.userView.X - viewport.Width * (0.1f * ticks)/*+ (viewport.Width / 2 )* (baseGame.userView.Z)*/, baseGame.userView.Y - viewport.Height * (0.1f * ticks)/* + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z)*/, baseGame.userView.Z + 0.1f * ticks);
             //baseGame.userView = new Vector3(baseGame.userView.X, baseGame.userView.Y, baseGame.userView.Z + 0.1f * ticks);
-
+            //Console.WriteLine("New: " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());
         }
 
         void keyboard_KeyReleased(Keys key)
@@ -449,13 +462,13 @@ namespace CircleOfLife
             //menuSlider.ThumbSize = 0.1f;
             //menuSlider.Moved += new EventHandler(perkSliderMoved);
 
-            description.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.8f, 0), new UniScalar(0.5f, 0), new UniScalar(0.2f, 0));
-            description.Text = Sprites.description;
+            //description.Bounds = new UniRectangle(new UniScalar(0.3f, 0), new UniScalar(0.8f, 0), new UniScalar(0.5f, 0), new UniScalar(0.2f, 0));
+            //description.Text = Sprites.description;
 
             //menuScreen.Desktop.Children.Add(menuSlider);
             //menuScreen.Desktop.Children.Add(speciesList);
             //menuScreen.Desktop.Children.Add(createButton);
-            menuScreen.Desktop.Children.Add(description);
+           // menuScreen.Desktop.Children.Add(description);
         }
 
         public void dialog(string text, string title)

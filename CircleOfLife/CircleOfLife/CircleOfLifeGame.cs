@@ -53,21 +53,30 @@ namespace CircleOfLife
         public bool menuOpen = false;
         public bool dialogOpen = false;
 
+        //Points!!
+        public int oPoints;
+        public int ePoints;
 
+        //Real radius
+        public int realRadius;
 
         public CircleOfLifeGame()
         {
             graphics = new GraphicsDeviceManager(this);
           
-            //set resolution
+            //set resolution -- this stuff gets changed??
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 960;
             screenSizeX = 1440;
             screenSizeY = 960;
+            //``
+
+            graphics.IsFullScreen = true;
+
+            realRadius = 10000; //20k x 20k..lots to work with :)
             //map size is initially twice screen size
             mapSizeX = 2000;
             mapSizeY = 2000;
-            graphics.IsFullScreen = false;
             //initialize
             userView = new Vector3(-mapSizeX / 4, -mapSizeY /4,1.0f);
 

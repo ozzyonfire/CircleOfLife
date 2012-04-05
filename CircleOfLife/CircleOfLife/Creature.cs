@@ -98,7 +98,7 @@ namespace CircleOfLife
                     spriteRectangle = Sprites.carnivore;
                     break;
                 default:
-                    spriteRectangle = Sprites.flower;
+                    spriteRectangle = Sprites.mormo;
                     break;
             }
             size = stats.size;
@@ -116,7 +116,7 @@ namespace CircleOfLife
             
             orientation = new float();
 
-            Rectangle body = new Rectangle(xPos, yPos, size, size);
+            Rectangle body = new Rectangle(xPos, yPos, size/2, size/2);
 
             state = 0; //wander
             food = 0;
@@ -249,13 +249,13 @@ namespace CircleOfLife
             float distanceToGoal = Vector2.Distance(position, goalPosition);
             float distanceToPred = Vector2.Distance(position, pred.position);
             
-            if (distanceToGoal < 300)
+            if (distanceToGoal < 500)//??
             {
                 // assign a new random goal position
                 randomGoal(mapWidth, mapHeight);
             }
 
-            if (distanceToPred < 50)
+            if (distanceToPred < 200)
             {
                 // high priority choose optimal, can't have full turn speed
                 orientation = TurnToFace(position, seekPosition, orientation, 0.20f * turnSpeed);
