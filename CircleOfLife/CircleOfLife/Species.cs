@@ -42,7 +42,10 @@ namespace CircleOfLife
 
         public void addCreature(int xPos, int yPos)
         {
-            tempCreatures.Add(new Creature(xPos, yPos, stats));
+            tempCreatures.Add(new Creature(xPos+50, yPos-50, stats));
+            tempCreatures.Add(new Creature(xPos+50, yPos+50, stats));
+            tempCreatures.Add(new Creature(xPos-50, yPos+50, stats));
+            tempCreatures.Add(new Creature(xPos-50, yPos-50, stats));
         }
 
         public void update(GameTime gameTime)
