@@ -39,6 +39,7 @@ namespace CircleOfLife
             for (int i = 0; i < target.perks.Length; i++)
             {
                 perks[i].bought = target.perks[i];
+                perks[i].Selected = false;
             }
             if (perks[0].bought)
                 perks[1].blocked = true;
@@ -49,6 +50,7 @@ namespace CircleOfLife
         public Perk add(String name, Vector2 position)
         {
             Perk newPerk = new Perk(name, position);
+            newPerk.ID = perks.Count - 1;
             //checks to see if the new perk expands the bounds of the entire perk tree and adjusts
             if (x == 0) //assume this means unitialized
             {

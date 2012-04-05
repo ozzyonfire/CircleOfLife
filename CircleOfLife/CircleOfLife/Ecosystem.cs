@@ -328,7 +328,9 @@ namespace CircleOfLife
                                 species[i].Creatures[j].flora.size--;
                                 species[i].Creatures[j].energy += species[i].Creatures[j].flora.foodValue;
                                 //TODO: better position calculations
-                                baseGame.user.effects.addFloatingString("+1", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Green);
+                                string points = (species[i].Creatures[j].flora.foodValue.ToString());
+                                baseGame.oPoints += species[i].Creatures[j].flora.foodValue;
+                                baseGame.user.effects.addFloatingString(points, baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.DarkGreen);
                                 if (species[i].Creatures[j].flora.size <= 0)
                                 {
                                     // kill the plant
@@ -349,7 +351,8 @@ namespace CircleOfLife
                                 species[i].Creatures[j].Feed(15);
                                 species[i].Creatures[j].energy += 15;
                                 species[i].Creatures[j].Prey.foodValue -= 5;
-                                baseGame.user.effects.addFloatingString("+5", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
+                                baseGame.oPoints += 15;
+                                baseGame.user.effects.addFloatingString("+15", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
                             }
                             else //wander away
                                 species[i].Creatures[j].state = 0;
@@ -393,7 +396,7 @@ namespace CircleOfLife
                         species[i].reproduce(species[i].Creatures[j]);
                         species[i].Creatures[j].food = 0;
                         //up points
-                        baseGame.oPoints += 10;
+                        baseGame.ePoints += 1;
                     }
                 }
             }

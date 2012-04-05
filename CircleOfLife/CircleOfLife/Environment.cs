@@ -54,6 +54,9 @@ namespace CircleOfLife
                 case 0:
                     spriteRectangle = Sprites.flower;
                     break;
+                case 1:
+                    spriteRectangle = Sprites.flower;
+                    break;
                 default:
                     spriteRectangle = Sprites.flower;
                     break;
@@ -94,10 +97,10 @@ namespace CircleOfLife
             //float x = offset.Z * offset.Z / 2 * tx * (tx / 2 - position.X + offset.X);
             //float y = offset.Z * offset.Z / 2 * ty * (ty / 2 - position.Y + offset.Y);
             //switch between different flower types based on orientation for example purposes
-            if(orientation < 4.5f)
-                spriteRectangle.X = 300 + 100 * ((frame) % 4);
+            if (type == 0)
+                spriteRectangle.X = (100 * frame);
             else
-                spriteRectangle.X = 100 * ((frame) % 4);
+                spriteRectangle.X = 100 * (frame+3);
 
             spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.1f * size * offset.Z, SpriteEffects.None, 0.9f);
             //spriteBatch.Draw(spriteSheet, new Rectangle(body.X + (int)offset.X, body.Y + (int)offset.Y, body.Width, body.Height), Color.Blue);

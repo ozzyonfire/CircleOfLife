@@ -16,6 +16,9 @@ namespace CircleOfLife
 {
     public class Creature
     {
+
+        public Species parent;
+
         //species characteristics
         public byte diet;
         private int size;
@@ -79,7 +82,7 @@ namespace CircleOfLife
         int frameOffset;
 
         //Random :}
-        Random random = new Random();
+        Random random;
 
         //accesors
 
@@ -89,8 +92,9 @@ namespace CircleOfLife
         public Creature Prey { get { return prey; } set { prey = value; } }
 
         //constructor
-        public Creature(int xPos, int yPos, Ecosystem.speciesStats stats)
+        public Creature(int xPos, int yPos, Ecosystem.speciesStats stats, Random seed, Species parent)
         {
+            this.parent = parent;
             diet = stats.diet;
             switch (diet)
             {
@@ -114,6 +118,8 @@ namespace CircleOfLife
             agility = stats.agility;
 
             color = stats.color;
+
+            random = seed;
 
             position = new Vector2(xPos, yPos);
             
@@ -225,7 +231,7 @@ namespace CircleOfLife
             // remove energy
             if (deathtimer > TimeSpan.FromSeconds(1))
             {
-                this.energy -= 5;
+                this.energy -= 2;
                 if (energy < 0)
                 {
                     // kill the creature
@@ -413,6 +419,14 @@ namespace CircleOfLife
             }
             else
             {
+                if (this.parent.perks[2] && diet==1)
+                    spriteRectangle = Sprites.carnivoreTail;
+                else if (this.parent.perks[3] && diet == 1)
+                    spriteRectangle = Sprites.carnivoreEyes;
+                else if (this.parent.perks[2] && diet == 0)
+                    spriteRectangle = Sprites.herbivoreTail;
+                else if (this.parent.perks[3] && diet == 0)
+                    spriteRectangle = Sprites.herbivoreEyes;
                 spriteRectangle.X = 1001 + 150 * ((frame + frameOffset) % 4);
                 spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
             }

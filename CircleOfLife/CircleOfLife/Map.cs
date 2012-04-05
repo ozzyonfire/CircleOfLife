@@ -46,7 +46,15 @@ namespace CircleOfLife
                 else
                 {
                     Crop field = new Crop(random.Next(3, 8), System.Environment.TickCount + i, 4);
-                    Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + i + 1, field);
+                    Environment grass;
+                    if (random.Next(0, 2) == 0)
+                    {
+                        grass = new Environment("grass", 5, 5, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1, field);
+                    }
+                    else
+                    {
+                        grass = new Environment("grass", 2, 2, 5, (short)x, (short)y, 1, System.Environment.TickCount + 1, field);
+                    }
                     field.addPlant(grass);
                     crops.Add(field);
                 }
@@ -73,7 +81,15 @@ namespace CircleOfLife
                         i++;
                         
                         Crop field = new Crop(random.Next(3, 8), System.Environment.TickCount, 4);
-                        Environment grass = new Environment("grass", 10, 10, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1, field);
+                        Environment grass;
+                        if (random.Next(0, 2) == 0)
+                        {
+                            grass = new Environment("grass", 2, 2, 5, (short)x, (short)y, 1, System.Environment.TickCount + 1, field);
+                        }
+                        else
+                        {
+                            grass = new Environment("grass", 5, 5, 5, (short)x, (short)y, 0, System.Environment.TickCount + 1, field);
+                        }
                         field.addPlant(grass);
                         crops.Add(field);
                     }

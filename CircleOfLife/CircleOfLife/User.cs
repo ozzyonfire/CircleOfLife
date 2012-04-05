@@ -513,10 +513,40 @@ namespace CircleOfLife
                     selected = ecosystem.species[speciesList.SelectedItems[0]];
 
                 if(selected.Stats.diet == 1)
-                    spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+                    if(perkTree.selectedPerkNode == null)
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+
+                    else if(perkTree.selectedPerkNode.ID == 2)
+                    {
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivoreTail, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+               
+                    }
+                    else if (perkTree.selectedPerkNode.ID == 3)
+                    {
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivoreEyes, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+               
+                    }
+                    else
+                       
+                            spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+
+                        
                 else
                 {
+                    if(perkTree.selectedPerkNode == null)
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+                
+                    else if (perkTree.selectedPerkNode.ID == 2)
+                    {
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivoreTail, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
 
+                    }
+                    else if (perkTree.selectedPerkNode.ID == 3)
+                    {
+                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivoreEyes, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+                
+                    }
+                    else
                     spriteBatch.Draw(spriteSheet, destination, Sprites.herbivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
                 }
 
@@ -699,7 +729,21 @@ namespace CircleOfLife
 
         void upgradeButton_Pressed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (perkTree.selectedPerkNode != null)
+            {
+                int n = perkTree.selectedPerkNode.ID;
+                perkTree.selectedPerkNode.bought = true;
+                int s;
+                if(speciesList.SelectedItems.Count == 0)
+                    s = 0;
+                else
+                    s = speciesList.SelectedItems[0];
+                Species selected = ecosystem.species[s];
+                selected.perks[n] = true;
+
+                baseGame.menuOpen = false;
+                gui.Screen = gameScreen;
+            }
         }
 
         void cancelButton_Pressed(object sender, EventArgs e)
@@ -782,7 +826,7 @@ namespace CircleOfLife
             speciesStats.detection = 150;
             speciesStats.speed = 5;
             speciesStats.energyCap = 100;
-            speciesStats.foodCap = 100;
+            speciesStats.foodCap = 20;
             speciesStats.waterCap = 100;
             speciesStats.energyValue = 20;
             speciesStats.agility = 0.15f;
