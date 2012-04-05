@@ -287,7 +287,8 @@ namespace CircleOfLife
             }
             else if (baseGame.addingSpecies)
             {
-                baseGame.newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
+                Species newSpecies = ecosystem.addSpecies(nameInput.Text, baseGame.newStats);
+                newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
                 baseGame.addingSpecies = false;
             }
             else
@@ -719,9 +720,8 @@ namespace CircleOfLife
                 speciesStats.color = Color.Brown;
 
 
-            Species newSpecies = ecosystem.addSpecies(speciesDialog.nameInput.Text, speciesStats);
-            
-            baseGame.newSpecies = newSpecies;
+
+            baseGame.newStats = speciesStats;
             baseGame.addingSpecies = true;
             baseGame.createOpen = false;
             gui.Screen = gameScreen;

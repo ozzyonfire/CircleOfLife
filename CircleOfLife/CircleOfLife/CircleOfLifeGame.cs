@@ -56,7 +56,7 @@ namespace CircleOfLife
         public bool startOpen = true;
         public bool addingSpecies = false;
 
-        public Species newSpecies;
+        public Ecosystem.speciesStats newStats;
 
         //Points!!
         public int oPoints = 200;
