@@ -442,7 +442,7 @@ namespace CircleOfLife
                 baseGame.scrollDown = false;
             
             //
-            if (key.Equals(Keys.M))
+            if (false/*key.Equals(Keys.M)*/)
             {
                 if (baseGame.menuOpen)
                 {
@@ -824,6 +824,7 @@ namespace CircleOfLife
             Ecosystem.speciesStats speciesStats;
             speciesStats.size = 40;
             speciesStats.detection = 150;
+            
             speciesStats.speed = 5;
             speciesStats.energyCap = 100;
             speciesStats.foodCap = 20;
@@ -834,10 +835,12 @@ namespace CircleOfLife
             if (createTree.perks[1].Selected)
             {
                 speciesStats.diet = 1;
+                speciesStats.speed = 5;
             }
             else
             {
                 speciesStats.diet = 0;
+                speciesStats.speed = 10;
             }
            
 

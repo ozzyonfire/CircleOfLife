@@ -26,7 +26,7 @@ namespace CircleOfLife
         //Random :}
         Random random = new Random();
 
-
+        public bool die = false;
 
         public Ecosystem(Game game, int width, int height)
         {
@@ -126,8 +126,9 @@ namespace CircleOfLife
                             
                             else if (species[i].Creatures[j].state == 2 && species[i].Creatures[j].Predator.Prey != species[i].Creatures[j] && species[i].Creatures[j].state != 1) // evading and not detected
                             {         
-                                // this causes a lot of bugs
+                                // this caused a lot of bugs - fixed
                                 species[i].Creatures[j].state = 0;
+                                species[i].Creatures[j].flora = null;
                             }
                             
                             
@@ -292,6 +293,12 @@ namespace CircleOfLife
                             species[i].Creatures[j].flora = null;
                             species[i].Creatures[j].randomGoal(map.width, map.height);
                         }
+                        if (species[i].Creatures[j].Prey != null && species[i].Creatures[j].Prey.state == 4)
+                        {
+                            // new random goal
+                            species[i].Creatures[j].Prey = null;
+                            species[i].Creatures[j].randomGoal(map.width, map.height);
+                        }
                         if (species[i].Creatures[j].diet == 0 && flora.Count > 0)
                         {
                             //What ??????????????????????? (prevents a bug from trying to find a null flora position)
@@ -309,7 +316,7 @@ namespace CircleOfLife
                                 species[i].Creatures[j].state = 3;
                             }
 
-
+                           // species[i].Creatures[j].Prey = null;
                         }
                     }
                     else if (species[i].Creatures[j].state == 3) // feeding
@@ -348,11 +355,11 @@ namespace CircleOfLife
                             //carnivore feeding
                             else if (species[i].Creatures[j].diet == 1 && species[i].Creatures[j].Prey.state == 4)
                             {
-                                species[i].Creatures[j].Feed(15);
+                                species[i].Creatures[j].Feed(1);
                                 species[i].Creatures[j].energy += 15;
                                 species[i].Creatures[j].Prey.foodValue -= 5;
                                 baseGame.oPoints += 15;
-                                baseGame.user.effects.addFloatingString("+15", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
+                                baseGame.user.effects.addFloatingString("5", baseGame.realToRelative(species[i].Creatures[j].Position - Vector2.UnitY * 20), Color.Red);
                             }
                             else //wander away
                                 species[i].Creatures[j].state = 0;

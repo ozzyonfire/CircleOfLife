@@ -172,7 +172,7 @@ namespace CircleOfLife
             //Music stuff
             if (!backgroundStart)
             {
-               // MediaPlayer.Play(backgroundMusic);
+                MediaPlayer.Play(backgroundMusic);
                 backgroundStart = true;
             }  
 
