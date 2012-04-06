@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CircleOfLife
 {
-    class Map
+    public class Map
     {
         public List<Crop> crops = new List<Crop>(100);
         public List<Water> water = new List<Water>(50);

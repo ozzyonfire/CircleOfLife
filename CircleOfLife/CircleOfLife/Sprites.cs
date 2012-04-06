@@ -22,6 +22,7 @@ namespace CircleOfLife
         public static Rectangle flower = new Rectangle(0, 1700, 100, 100);
         public static Rectangle plant = new Rectangle(300, 1700, 100, 100);
         public static Rectangle title = new Rectangle(1300, 0, 900, 300);
+        public static Rectangle leak = new Rectangle(1000, 0, 300, 300);
 
 
         public static String description = "Here lies a description of a perk.\n I sure hope it works";

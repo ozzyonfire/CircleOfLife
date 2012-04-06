@@ -224,8 +224,17 @@ namespace CircleOfLife
 
         public void newMapSize(int s)
         {
+            Console.WriteLine(s.ToString());
+            float offset = (mapSizeX - s)/2;
             mapSizeX = s;
             mapSizeY = s;
+            userView.X += offset;
+            userView.Y += offset;
+            ecosystem.map.height = s;
+            ecosystem.map.width = s;
+
+            ecosystem.reposition(offset);
+
         }
 
 
@@ -239,6 +248,11 @@ namespace CircleOfLife
         public Vector2 realToRelative(Vector2 realPosition)
         {
             Vector2 result = new Vector2((realPosition.X + userView.X) * userView.Z, (realPosition.Y + userView.Y) * userView.Z);
+            return result;
+        }
+        public Vector2 relativeToReal(Vector2 relativePosition)
+        {
+            Vector2 result = new Vector2((relativePosition.X / userView.Z - userView.X), (relativePosition.Y / userView.Z - userView.Y));
             return result;
         }
     }

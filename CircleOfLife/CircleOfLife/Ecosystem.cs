@@ -17,7 +17,7 @@ namespace CircleOfLife
         //references
         Game game;
         CircleOfLifeGame baseGame;
-        Map map;
+        public Map map;
 
         public List<Species> species = new List<Species>(50);
         public List<Species> speciesTemp = new List<Species>(50);
@@ -26,7 +26,8 @@ namespace CircleOfLife
         //Random :}
         Random random = new Random();
 
-
+        public bool leakActive = false;
+        public Vector2 leakPosition;
 
         public Ecosystem(Game game, int width, int height)
         {
@@ -68,7 +69,13 @@ namespace CircleOfLife
             {
                 for (int j = 0; j < species[i].Creatures.Count; j++) // go through the population of creatures for each species
                 {
-
+                    if (leakActive)
+                    {
+                        if (Vector2.Distance(species[i].Creatures[j].Position,baseGame.relativeToReal(leakPosition)) < 150)
+                        {
+                            species[i].Creatures[j].state = 6;
+                        }
+                    }
                     //Assess potential predators
                     for (int k = 0; k < species[i].predators.Count; k++)
                     {
@@ -413,6 +420,7 @@ namespace CircleOfLife
             // update flora
             for (int i = 0; i < flora.Count; i++)
             {
+
                 if (flora[i].state == 1)
                 {
                     // dead
@@ -430,9 +438,17 @@ namespace CircleOfLife
             {
                 for (int j = 0; j < map.crops[i].plants.Count; j++)
                 {
+                    if ((leakActive && Vector2.Distance(map.crops[i].plants[j].position, baseGame.relativeToReal(leakPosition)) < 150))
+                        map.crops[i].plants[j].state = 1;
                     flora.Add(map.crops[i].plants[j]);
                 }
             }
+
+            if (leakActive)
+            {
+                leakActive = false;
+            }
+
         }
                 
             
@@ -476,6 +492,29 @@ namespace CircleOfLife
                 }
             }
         }
+
+        public void reposition(float offset)
+        {
+
+            for (int i = 0; i < species.Count; i++)
+            {
+                for (int j = 0; j < species[i].Creatures.Count; j++)
+                {
+                    species[i].Creatures[j].position.X -= offset;
+                    species[i].Creatures[j].position.Y -= offset;
+                }
+            }
+
+            
+            for (int i = 0; i < flora.Count; i++)
+			{
+                   flora[i].position.X -= offset;
+                   flora[i].position.Y -= offset;
+			    
+			}
+
+        }
+
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset)
         {

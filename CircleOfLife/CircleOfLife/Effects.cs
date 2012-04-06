@@ -42,6 +42,12 @@ namespace CircleOfLife
         {
             effects.Add(new floatingString(text,position,color));
         }
+
+
+        public void addLeak(Vector2 position, float scale)
+        {
+            effects.Add(new Leak(position,scale));
+        }
     }
 
     public interface Effect
@@ -76,6 +82,36 @@ namespace CircleOfLife
             pos.Y = pos.Y -1; //guessed effect
             color.A = (byte)(255 - 8 *frame );
             spriteBatch.DrawString(gameFonts.Header, text, pos, color,0.0f,Vector2.Zero,1.0f,SpriteEffects.None,0.1f);
+
+            frame++;
+            if (frame == frames)
+                finished = true;
+        }
+    }
+
+    class Leak : Effect
+    {
+        public bool Finished
+        { get { return finished; } }
+
+        bool finished = false;
+        int frame = 0;
+        int frames = 30;
+        Vector2 pos;
+        float scale;
+
+        public Leak(Vector2 pos,float scale)
+        {
+            this.pos = pos;
+            this.scale = scale;
+        }
+
+        public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, CircleOfLifeGame.GameFonts gameFonts)
+        {
+            //TODO integrate game time into frame calculation
+
+
+            spriteBatch.Draw(spriteSheet,pos,Sprites.leak,Color.White,6.2f*frame/frames,new Vector2(150,150),scale,SpriteEffects.None,0.1f);
 
             frame++;
             if (frame == frames)

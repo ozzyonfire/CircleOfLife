@@ -320,6 +320,9 @@ namespace CircleOfLife
             }
             else if (baseGame.addingSpecies)
             {
+                if (baseGame.mapSizeX * 0.45 < Math.Sqrt((baseGame.mapSizeX / 2 - (ms.X / baseGame.userView.Z - baseGame.userView.X)) * (baseGame.mapSizeX / 2 - (ms.X / baseGame.userView.Z - baseGame.userView.X)) +
+                     (baseGame.mapSizeY / 2 - (ms.Y / baseGame.userView.Z - baseGame.userView.Y)) * (baseGame.mapSizeY / 2 - (ms.Y / baseGame.userView.Z - baseGame.userView.Y))))
+                    return;
                 Species newSpecies = ecosystem.addSpecies(nameInput.Text, baseGame.newStats);
                 if (baseGame.newStats.diet == 1)
                 {
@@ -335,6 +338,13 @@ namespace CircleOfLife
             }
             else
             {
+                if (buttons == MouseButtons.Right)
+                {
+                    //effects.addFloatingString("CAT!!", new Vector2(ms.X, ms.Y), Color.Red);
+                    effects.addLeak(new Vector2(ms.X, ms.Y), baseGame.userView.Z);
+                    ecosystem.leakActive = true;
+                    ecosystem.leakPosition = new Vector2(ms.X, ms.Y);
+                }
                 /*
                 //Temporary debug stuff
                 //check not in dialog
@@ -462,50 +472,54 @@ namespace CircleOfLife
                 baseGame.createOpen = true;
                 return;
             }
-
-            //stop scrolling if mouse is in the middle
-            MouseState ms = mouse.GetState();
-            if (key.Equals(Keys.Right) && !(ms.X > viewport.Width * 0.95))
-                baseGame.scrollRight = false;
-            if (key.Equals(Keys.Left) && !(ms.X < viewport.Width * 0.05))
-                baseGame.scrollLeft = false;
-            if (key.Equals(Keys.Up) && !(ms.Y < viewport.Height * 0.05))
-                baseGame.scrollUp = false;
-            if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
-                baseGame.scrollDown = false;
-            
-            //
-            if (key.Equals(Keys.M))
+            if (!baseGame.menuOpen && !baseGame.createOpen)
             {
-                if (baseGame.menuOpen)
-                {
-                    baseGame.menuOpen = false;
-                    gui.Screen = gameScreen;
-                }
-                else
+                //stop scrolling if mouse is in the middle
+                MouseState ms = mouse.GetState();
+                if (key.Equals(Keys.Right) && !(ms.X > viewport.Width * 0.95))
+                    baseGame.scrollRight = false;
+                if (key.Equals(Keys.Left) && !(ms.X < viewport.Width * 0.05))
+                    baseGame.scrollLeft = false;
+                if (key.Equals(Keys.Up) && !(ms.Y < viewport.Height * 0.05))
+                    baseGame.scrollUp = false;
+                if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
+                    baseGame.scrollDown = false;
+
+                //
+
+                if (key.Equals(Keys.M))
                 {
                     enterMenu();
                 }
-            }
-            if (key.Equals(Keys.Space))
-            {
-                effects.addFloatingString("CAT!!",new Vector2(ms.X,ms.Y),Color.Red);
-            }
-
-
-
-            //debug map expansion
-            if (key.Equals(Keys.E))
-            {
-                if (baseGame.createOpen)
+                if (key.Equals(Keys.Space))
                 {
-                    baseGame.createOpen = false;
-                    gui.Screen = gameScreen;
                 }
-                else
+
+
+
+                //debug map expansion
+                if (key.Equals(Keys.Q))
                 {
-                    baseGame.createOpen = true;
-                    gui.Screen = createScreen;
+                    baseGame.newMapSize(baseGame.mapSizeX - 100);
+                }
+                if (key.Equals(Keys.W))
+                {
+                    baseGame.newMapSize(baseGame.mapSizeX + 100);
+                }
+
+
+                if (key.Equals(Keys.E))
+                {
+                    if (baseGame.createOpen)
+                    {
+                        baseGame.createOpen = false;
+                        gui.Screen = gameScreen;
+                    }
+                    else
+                    {
+                        baseGame.createOpen = true;
+                        gui.Screen = createScreen;
+                    }
                 }
             }
         }

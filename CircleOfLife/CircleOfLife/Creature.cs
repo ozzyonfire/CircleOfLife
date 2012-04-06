@@ -61,7 +61,7 @@ namespace CircleOfLife
         public Environment flora;
 
         //position
-        private Vector2 position;
+        public Vector2 position;
         private float orientation;
         public Vector2 goalPosition;
         public Vector2 origin;
