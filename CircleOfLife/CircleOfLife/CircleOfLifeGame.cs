@@ -222,6 +222,12 @@ namespace CircleOfLife
             spriteBatch.End();
         }
 
+        public void newMapSize(int s)
+        {
+            mapSizeX = s;
+            mapSizeY = s;
+        }
+
 
         public struct GameFonts
         {

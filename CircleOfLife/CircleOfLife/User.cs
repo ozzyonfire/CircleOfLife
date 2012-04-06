@@ -71,6 +71,9 @@ namespace CircleOfLife
         Nuclex.UserInterface.Controls.Desktop.ListControl dietInput = new Nuclex.UserInterface.Controls.Desktop.ListControl();
 
         Nuclex.UserInterface.Controls.Desktop.ButtonControl createButton = new Nuclex.UserInterface.Controls.Desktop.ButtonControl();
+
+        GameButton menuButton;
+        GameButton addButton;
         #endregion
 
 
@@ -264,6 +267,8 @@ namespace CircleOfLife
             {
                 //check to see if the mouse has been moved to a position that indicates the user wants to scroll
 
+                if (menuButton.MouseHovering || addButton.MouseHovering)
+                    return;
 
                 if (x < viewport.Width * 0.05)
                     baseGame.scrollLeft = true;
@@ -399,15 +404,43 @@ namespace CircleOfLife
 
                 speciesDialog.nameInput.Text = "Kleemo" + ecosystem.species.Count.ToString();
                 */
-
+                
             }
         }
 
         void mouse_MouseWheelRotated(float ticks)
         {
+            //control magnitude
+            if (ticks > 3)
+                ticks = 3;
+            else if(ticks < -3)
+                ticks = -3;
 
             MouseState ms = mouse.GetState();
-            baseGame.userView = new Vector3(baseGame.userView.X + (viewport.Width / 2 - ms.X)* (baseGame.userView.Z), baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z), baseGame.userView.Z + 0.1f * ticks);
+            if (ticks < 0 && baseGame.userView.Z * baseGame.mapSizeY < viewport.Height)
+                baseGame.userView = new Vector3((viewport.Width - baseGame.userView.Z * baseGame.mapSizeX), (viewport.Height - baseGame.userView.Z * baseGame.mapSizeY), baseGame.userView.Z);
+            else
+            {
+                float xOffset;
+                float yOffset;
+
+                if (baseGame.userView.X + (viewport.Width / 2 - ms.X) * (baseGame.userView.Z) > 100)
+                    xOffset = 100;
+                else if (baseGame.userView.X + (viewport.Width / 2 - ms.X) * (baseGame.userView.Z) < -baseGame.mapSizeX*0.55f)
+                    xOffset = -baseGame.mapSizeX * 0.55f;
+                else
+                    xOffset = baseGame.userView.X + (viewport.Width / 2 - ms.X) * (baseGame.userView.Z);
+                baseGame.userView = new Vector3(xOffset, baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z), baseGame.userView.Z + 0.1f * ticks);
+
+                if (baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z) > 100)
+                    yOffset = 100;
+                else if (baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z) < -baseGame.mapSizeY * 0.55f)
+                    yOffset = -baseGame.mapSizeY * 0.55f;
+                else
+                    yOffset = baseGame.userView.Y + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z);
+
+                baseGame.userView = new Vector3(xOffset, yOffset, baseGame.userView.Z + 0.1f * ticks);
+            }
             //Console.WriteLine("old: " + baseGame.userView.X.ToString() + ", " + baseGame.userView.Y.ToString());   
             //mouse centered zoom!
             //baseGame.userView = new Vector3(baseGame.userView.X - viewport.Width * (0.1f * ticks)/*+ (viewport.Width / 2 )* (baseGame.userView.Z)*/, baseGame.userView.Y - viewport.Height * (0.1f * ticks)/* + (viewport.Height / 2 - ms.Y) * (baseGame.userView.Z)*/, baseGame.userView.Z + 0.1f * ticks);
@@ -596,26 +629,26 @@ namespace CircleOfLife
         //The following builds and initializes the games gui's seperated from the user class mainly for organizational purposes
         public void initializeGameScreen()
         {
-            GameButton torchButton = new GameButton(new UniRectangle(
+            menuButton = new GameButton(new UniRectangle(
                     new UniScalar(0.11f, 0.0f),
                     new UniScalar(0.91f, 0.0f),
                     new UniScalar(0.09f, 0.0f),
                     new UniScalar(0.09f, 0.0f)),
                     baseGame.spriteSheet, new RectangleF(
-                        Sprites.torchButton.X,
-                        Sprites.torchButton.Y,
-                        Sprites.torchButton.Width,
-                        Sprites.torchButton.Height));
-                torchButton.hoverSourceRect = new RectangleF(
-                        Sprites.torchButton.X + 150,
-                        Sprites.torchButton.Y,
-                        Sprites.torchButton.Width,
-                        Sprites.torchButton.Height);
+                        Sprites.menuButton.X,
+                        Sprites.menuButton.Y,
+                        Sprites.menuButton.Width,
+                        Sprites.menuButton.Height));
+                menuButton.hoverSourceRect = new RectangleF(
+                        Sprites.menuButton.X + 150,
+                        Sprites.menuButton.Y,
+                        Sprites.menuButton.Width,
+                        Sprites.menuButton.Height);
 
-                torchButton.Text = "Menu";
-                torchButton.Pressed += new EventHandler(torchButton_Pressed);
+                menuButton.Text = "Menu";
+                menuButton.Pressed += new EventHandler(menuButton_Pressed);
 
-                GameButton addButton = new GameButton(new UniRectangle(
+                addButton = new GameButton(new UniRectangle(
                         new UniScalar(0.0f, 0.0f),
                         new UniScalar(0.91f, 0.0f),
                         new UniScalar(0.09f, 0.0f),
@@ -636,7 +669,7 @@ namespace CircleOfLife
 
 
                 gameScreen.Desktop.Children.Add(addButton);
-                gameScreen.Desktop.Children.Add(torchButton);
+                gameScreen.Desktop.Children.Add(menuButton);
         }
 
         void addButton_Pressed(object sender, EventArgs e)
@@ -644,7 +677,7 @@ namespace CircleOfLife
             enterCreate();
         }
 
-        void torchButton_Pressed(object sender, EventArgs e)
+        void menuButton_Pressed(object sender, EventArgs e)
         {
             enterMenu();
         }

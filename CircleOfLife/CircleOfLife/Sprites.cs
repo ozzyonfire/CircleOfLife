@@ -17,7 +17,7 @@ namespace CircleOfLife
         public static Rectangle carnivoreEyes = new Rectangle(1000, 1150, 150, 150);
         public static Rectangle mormo = new Rectangle(0, 1400, 100, 100);
         public static Rectangle hudBackground = new Rectangle(0, 1000, 50, 150);
-        public static Rectangle torchButton = new Rectangle(50, 1000, 150, 150);
+        public static Rectangle menuButton = new Rectangle(50, 1000, 150, 150);
         public static Rectangle addButton = new Rectangle(700, 1000, 150, 150);
         public static Rectangle flower = new Rectangle(0, 1700, 100, 100);
         public static Rectangle plant = new Rectangle(300, 1700, 100, 100);
