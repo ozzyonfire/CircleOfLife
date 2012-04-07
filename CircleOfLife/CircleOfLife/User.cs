@@ -294,7 +294,6 @@ namespace CircleOfLife
                         baseGame.scrollDown = false;
                 }
             }
-            
 
 
             
@@ -509,6 +508,10 @@ namespace CircleOfLife
                     baseGame.newMapSize(baseGame.mapSizeX + 100);
                 }
 
+                if (key.Equals(Keys.A))
+                {
+                    dialog(Sprites.description,"cat");
+                }
 
                 if (key.Equals(Keys.E))
                 {
@@ -935,6 +938,8 @@ namespace CircleOfLife
 
         public void dialog(string text, string title)
         {
+            if (gameDialog != null && gameDialog.IsOpen)
+                return;
             float w = menuScreen.Width;
             float h = menuScreen.Height;
             UniRectangle bounds = new UniRectangle(w * 0.35f, h * 0.4f, w * 0.3f, h * 0.2f);
@@ -944,6 +949,10 @@ namespace CircleOfLife
             if (baseGame.menuOpen)
             {
                 menuScreen.Desktop.Children.Add(gameDialog);
+            }
+            if (baseGame.createOpen)
+            {
+                createScreen.Desktop.Children.Add(gameDialog);
             }
             else
             {
