@@ -51,7 +51,6 @@ namespace CircleOfLife
         public Perk add(String name, Vector2 position)
         {
             Perk newPerk = new Perk(name, position);
-            newPerk.ID = perks.Count - 1;
             //checks to see if the new perk expands the bounds of the entire perk tree and adjusts
             if (x == 0) //assume this means unitialized
             {
@@ -79,6 +78,7 @@ namespace CircleOfLife
                     height = (int)position.Y + newPerk.height - y;
             }
             perks.Add(newPerk);
+            newPerk.ID = perks.Count - 1;
             return newPerk;
         }
         public void mouseOver(int x, int y)
@@ -117,6 +117,8 @@ namespace CircleOfLife
         public String name;
         public String effects = "Effects\nMore Effects";
         public String cost = "Cost";
+        public int oCost;
+        public int eCost;
         public int ID;
         public String info;
         //public int cost;

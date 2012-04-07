@@ -153,6 +153,8 @@ namespace CircleOfLife
             {
 
             }
+            else if (oPoints <= 0)
+                GameOver();
             else
             {
                 ecosystem.Update(gameTime);
@@ -237,6 +239,27 @@ namespace CircleOfLife
 
         }
 
+        public void GameOver()
+        {
+            ecosystem.clearEcosystem();
+
+            scrollLeft = false;
+        scrollRight = false;
+        scrollDown = false;
+        scrollUp = false;
+
+        menuOpen = false;
+        dialogOpen = false;
+        createOpen = false;
+        startOpen = true;
+        addingSpecies = false;
+
+       oPoints = 200;
+       ePoints =0;
+
+       user.gui.Screen = user.startScreen;
+       user.dialog("You ran out of Order points and your ecosystem failed!", "GAME OVER");
+        }
 
         public struct GameFonts
         {

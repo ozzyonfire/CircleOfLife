@@ -21,7 +21,7 @@ namespace CircleOfLife
         Viewport viewport;
 
         //Nuclex Stuff
-        GuiManager gui;
+        public GuiManager gui;
         InputManager input;
         Nuclex.Game.States.GameStateManager state;  //?
 
@@ -30,10 +30,10 @@ namespace CircleOfLife
         Nuclex.Input.Devices.IMouse mouse;
 
         //Game screens for different modes
-        Screen gameScreen;
-        Screen menuScreen;
-        Screen startScreen;
-        Screen createScreen;
+        public Screen gameScreen;
+        public Screen menuScreen;
+        public Screen startScreen;
+        public Screen createScreen;
 
         //temporary dialog
         SpeciesDialog speciesDialog;
@@ -341,6 +341,7 @@ namespace CircleOfLife
                 {
                     //effects.addFloatingString("CAT!!", new Vector2(ms.X, ms.Y), Color.Red);
                     effects.addLeak(new Vector2(ms.X, ms.Y), baseGame.userView.Z);
+                    baseGame.oPoints -= 50;
                     ecosystem.leakActive = true;
                     ecosystem.leakPosition = new Vector2(ms.X, ms.Y);
                 }
@@ -559,48 +560,68 @@ namespace CircleOfLife
             if (baseGame.menuOpen)
             {
                 Species selected;
+                Rectangle spriteRectangle;
                 if (speciesList.SelectedItems.Count == 0)
                     selected = ecosystem.species[0];
                 else
                     selected = ecosystem.species[speciesList.SelectedItems[0]];
+                int ID;
+                if (perkTree.selectedPerkNode != null)
+                    ID = perkTree.selectedPerkNode.ID;
+                else
+                    ID = -1;
 
-                if(selected.Stats.diet == 1)
-                    if(perkTree.selectedPerkNode == null)
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
-
-                    else if(perkTree.selectedPerkNode.ID == 2)
-                    {
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivoreTail, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
-               
-                    }
-                    else if (perkTree.selectedPerkNode.ID == 3)
-                    {
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.carnivoreEyes, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
-               
-                    }
+                if (selected.perks[7] || ID == 7)
+                {
+                 //   destination.Width *= 2;
+                 //   destination.Height *= 2;
+                }
+                if (selected.Stats.diet == 1)
+                {
+                    if ((selected.perks[2] || ID == 2) && (selected.perks[3] || ID == 3) && (selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.carnivoreTailEyesPincer;
+                    else if ((selected.perks[2] || ID == 2) && (selected.perks[3] || ID == 3))
+                        spriteRectangle = Sprites.carnivoreTailPincer;
+                    else if ((selected.perks[2] || ID == 2) && (selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.carnivoreEyesPincer;
+                    else if (selected.perks[3] && selected.perks[4])
+                        spriteRectangle = Sprites.carnivoreTailEyes;
+                    else if ((selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.carnivoreEyes;
+                    else if ((selected.perks[2] || ID == 2))
+                        spriteRectangle = Sprites.carnivorePincer;
+                    else if ((selected.perks[3] || ID == 3))
+                        spriteRectangle = Sprites.carnivoreTail;
                     else
-                       
-                            spriteBatch.Draw(spriteSheet, destination, Sprites.carnivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+                        spriteRectangle = Sprites.carnivore;
 
-                        
+
+                }
                 else
                 {
-                    if(perkTree.selectedPerkNode == null)
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
-                
-                    else if (perkTree.selectedPerkNode.ID == 2)
-                    {
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivoreTail, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
 
-                    }
-                    else if (perkTree.selectedPerkNode.ID == 3)
-                    {
-                        spriteBatch.Draw(spriteSheet, destination, Sprites.herbivoreEyes, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
-                
-                    }
+                    if ((selected.perks[2] || ID == 2) && (selected.perks[3] || ID == 3) && (selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.herbivoreTailEyesPincer;
+                    else if ((selected.perks[2] || ID == 2) && (selected.perks[3] || ID == 3))
+                        spriteRectangle = Sprites.herbivoreTailPincer;
+                    else if ((selected.perks[2] || ID == 2) && (selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.herbivoreEyesPincer;
+                    else if (selected.perks[3] && selected.perks[4])
+                        spriteRectangle = Sprites.herbivoreTailEyes;
+                    else if ((selected.perks[4] || ID == 4))
+                        spriteRectangle = Sprites.herbivoreEyes;
+                    else if ((selected.perks[2] || ID == 2))
+                        spriteRectangle = Sprites.herbivorePincer;
+                    else if ((selected.perks[3] || ID == 3))
+                        spriteRectangle = Sprites.herbivoreTail;
                     else
-                    spriteBatch.Draw(spriteSheet, destination, Sprites.herbivore, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+                        spriteRectangle = Sprites.herbivore;
+
                 }
+                spriteBatch.Draw(spriteSheet, destination, spriteRectangle, selected.Stats.color, rotation, new Vector2(destination.Width / 2, destination.Height / 2), SpriteEffects.None, 0.0f);
+
+
+                
 
             }
             else if (baseGame.createOpen)
@@ -712,39 +733,53 @@ namespace CircleOfLife
             newPerk = perkTree.add("Herbivore", new Vector2(650, 150));
             newPerk.effects = "Allows creature to\n consume plants";
             newPerk.cost = "O: 100     E: 0";
-            newPerk.exclusive = perkTree.add("Carnivore", new Vector2(900, 150));
-            newPerk.exclusive.exclusive = newPerk;
-            newPerk = newPerk.exclusive;
+            newPerk.oCost = 100;
+            newPerk.eCost = 0;
+            newPerk = perkTree.add("Carnivore", new Vector2(900, 150));
             newPerk.effects = "Allows creature to\nconsume creatures";
             newPerk.cost = "O: 500     E: 1";
+            newPerk.oCost = 500;
+            newPerk.eCost = 1;
             newPerk = perkTree.add("Pincer", new Vector2(650, 450));
             newPerk.effects = "Increased attack\nFaster consumption";
             newPerk.cost = "O: 500     E: 5";
-            newPerk.blocked = true;
+            newPerk.oCost = 500;
+            newPerk.eCost = 5;
             newPerk = perkTree.add("Tail", new Vector2(650, 300));
             newPerk.effects = "Increased speed";
             newPerk.cost = "O: 500     E: 5";
+            newPerk.oCost = 500;
+            newPerk.eCost = 5;
             newPerk = perkTree.add("Eyes", new Vector2(900, 300));
             newPerk.effects = "Increased detection";
             newPerk.cost = "O: 200    E: 5";
+            newPerk.oCost = 200;
+            newPerk.eCost = 5;
             newPerk = perkTree.add("Swarm", new Vector2(1150, 300));
             newPerk.effects = "Increased birth rate";
             newPerk.cost = "O: 1000     E: 10";
-            newPerk.blocked = true;
+            newPerk.oCost = 1000;
+            newPerk.eCost = 10;
             newPerk = perkTree.add("Scent", new Vector2(900, 450));
             newPerk.effects = "Detection of corpses";
             newPerk.cost = "O: 500     E: 5";
+            newPerk.oCost = 500;
+            newPerk.eCost = 5;
             newPerk = perkTree.add("Bulk", new Vector2(1150, 450));
             newPerk.effects = "Increased defence\nSlower speed";
             newPerk.cost = "O: 1500     E: 5";
+            newPerk.oCost = 1500;
+            newPerk.eCost = 5;
             newPerk = perkTree.add("Hibernate", new Vector2(650, 600));
             newPerk.effects = "Conserve energy by\nremaining still";
             newPerk.cost = "O: 1000     E: 10";
-            newPerk.blocked = true;
+            newPerk.oCost = 1000;
+            newPerk.eCost = 10;
             newPerk = perkTree.add("Canibal", new Vector2(900, 600));
             newPerk.effects = "Consume corpses of\nsame species";
             newPerk.cost = "O: 200     E: 5";
-            newPerk.blocked = true;
+            newPerk.oCost = 200;
+            newPerk.eCost = 5;
 
 
             //initialize elements
@@ -781,7 +816,7 @@ namespace CircleOfLife
 
         void upgradeButton_Pressed(object sender, EventArgs e)
         {
-            if (perkTree.selectedPerkNode != null)
+            if (perkTree.selectedPerkNode != null && baseGame.oPoints > perkTree.selectedPerkNode.oCost && baseGame.ePoints > perkTree.selectedPerkNode.eCost)
             {
                 int n = perkTree.selectedPerkNode.ID;
                 perkTree.selectedPerkNode.bought = true;
@@ -792,6 +827,9 @@ namespace CircleOfLife
                     s = speciesList.SelectedItems[0];
                 Species selected = ecosystem.species[s];
                 selected.perks[n] = true;
+
+                baseGame.oPoints -= perkTree.selectedPerkNode.oCost;
+                baseGame.ePoints -= perkTree.selectedPerkNode.eCost;
 
                 baseGame.menuOpen = false;
                 gui.Screen = gameScreen;
@@ -950,9 +988,13 @@ namespace CircleOfLife
             {
                 menuScreen.Desktop.Children.Add(gameDialog);
             }
-            if (baseGame.createOpen)
+            else if (baseGame.createOpen)
             {
                 createScreen.Desktop.Children.Add(gameDialog);
+            }
+            else if (baseGame.startOpen)
+            {
+                startScreen.Desktop.Children.Add(gameDialog);
             }
             else
             {

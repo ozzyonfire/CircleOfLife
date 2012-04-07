@@ -412,6 +412,9 @@ namespace CircleOfLife
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
+            float sizeMod = 0.01f;
+            if (this.parent.perks[7])
+                sizeMod = 0.02f;
             if (state == 4)
             {
                 spriteRectangle.X = 1600 + 150 * rotStage;
@@ -419,16 +422,51 @@ namespace CircleOfLife
             }
             else
             {
-                if (this.parent.perks[2] && diet==1)
-                    spriteRectangle = Sprites.carnivoreTail;
-                else if (this.parent.perks[3] && diet == 1)
-                    spriteRectangle = Sprites.carnivoreEyes;
-                else if (this.parent.perks[2] && diet == 0)
-                    spriteRectangle = Sprites.herbivoreTail;
-                else if (this.parent.perks[3] && diet == 0)
-                    spriteRectangle = Sprites.herbivoreEyes;
+                if (diet == 1)
+                {
+                    if (this.parent.perks[2] && this.parent.perks[3] && this.parent.perks[4])
+                        spriteRectangle = Sprites.carnivoreTailEyesPincer;
+                    else if (this.parent.perks[2] && this.parent.perks[3])
+                        spriteRectangle = Sprites.carnivoreTailPincer;
+                    else if (this.parent.perks[2] && this.parent.perks[4])
+                        spriteRectangle = Sprites.carnivoreEyesPincer;
+                    else if (this.parent.perks[3] && this.parent.perks[4])
+                        spriteRectangle = Sprites.carnivoreTailEyes;
+                    else if (this.parent.perks[4])
+                        spriteRectangle = Sprites.carnivoreEyes;
+                    else if (this.parent.perks[2])
+                        spriteRectangle = Sprites.carnivorePincer;
+                    else if (this.parent.perks[3])
+                        spriteRectangle = Sprites.carnivoreTail;
+                    else
+                        spriteRectangle = Sprites.carnivore;
+
+
+                }
+                else
+                {
+
+                    if (this.parent.perks[2] && this.parent.perks[3] && this.parent.perks[4])
+                        spriteRectangle = Sprites.herbivoreTailEyesPincer;
+                    else if (this.parent.perks[2] && this.parent.perks[3])
+                        spriteRectangle = Sprites.herbivoreTailPincer;
+                    else if (this.parent.perks[2] && this.parent.perks[4])
+                        spriteRectangle = Sprites.herbivoreEyesPincer;
+                    else if (this.parent.perks[3] && this.parent.perks[4])
+                        spriteRectangle = Sprites.herbivoreTailEyes;
+                    else if (this.parent.perks[4])
+                        spriteRectangle = Sprites.herbivoreEyes;
+                    else if (this.parent.perks[2])
+                        spriteRectangle = Sprites.herbivorePincer;
+                    else if (this.parent.perks[3])
+                        spriteRectangle = Sprites.herbivoreTail;
+                    else
+                        spriteRectangle = Sprites.herbivore;
+                }
+
+
                 spriteRectangle.X = 1001 + 150 * ((frame + frameOffset) % 4);
-                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, origin, sizeMod * size * offset.Z, SpriteEffects.None, 0.9f);
             }
         }     
 
