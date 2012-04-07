@@ -64,6 +64,8 @@ namespace CircleOfLife
         public void update(GameTime gameTime)
         {
             // if there are less than the required number of crops then add some new ones
+            cropNumber = width / 150;
+
             if (crops.Count < cropNumber)
             {
                 int i = 0;
@@ -84,7 +86,7 @@ namespace CircleOfLife
                         Environment grass;
                         if (random.Next(0, 2) == 0)
                         {
-                            grass = new Environment("grass", 2, 2, 5, (short)x, (short)y, 1, System.Environment.TickCount + 1, field);
+                            grass = new Environment("plant", 2, 2, 5, (short)x, (short)y, 1, System.Environment.TickCount + 1, field);
                         }
                         else
                         {
