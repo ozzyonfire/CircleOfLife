@@ -129,7 +129,7 @@ namespace CircleOfLife
                 }
             }
 
-            return new Environment(this.name, this.foodValue, this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), this.type, System.Environment.TickCount, theCrop);
+            return new Environment(this.name, (short)random.Next(2,5), this.energyValue, this.size, (short)(this.position.X + x), (short)(this.position.Y + y), random.Next(0,2), System.Environment.TickCount, theCrop);
 
             
         }

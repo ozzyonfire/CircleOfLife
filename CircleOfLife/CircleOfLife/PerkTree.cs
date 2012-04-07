@@ -36,6 +36,7 @@ namespace CircleOfLife
 
         public void showSpecies(Species target)
         {
+            selectedPerkNode = null;
             for (int i = 0; i < target.perks.Length; i++)
             {
                 perks[i].bought = target.perks[i];

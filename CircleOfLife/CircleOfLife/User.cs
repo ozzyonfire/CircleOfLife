@@ -474,18 +474,20 @@ namespace CircleOfLife
             }
             if (!baseGame.menuOpen && !baseGame.createOpen)
             {
-                //stop scrolling if mouse is in the middle
-                MouseState ms = mouse.GetState();
-                if (key.Equals(Keys.Right) && !(ms.X > viewport.Width * 0.95))
-                    baseGame.scrollRight = false;
-                if (key.Equals(Keys.Left) && !(ms.X < viewport.Width * 0.05))
-                    baseGame.scrollLeft = false;
-                if (key.Equals(Keys.Up) && !(ms.Y < viewport.Height * 0.05))
-                    baseGame.scrollUp = false;
-                if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
-                    baseGame.scrollDown = false;
 
-                //
+            //stop scrolling if mouse is in the middle
+            MouseState ms = mouse.GetState();
+            if (key.Equals(Keys.Right) && !(ms.X > viewport.Width * 0.95))
+                baseGame.scrollRight = false;
+            if (key.Equals(Keys.Left) && !(ms.X < viewport.Width * 0.05))
+                baseGame.scrollLeft = false;
+            if (key.Equals(Keys.Up) && !(ms.Y < viewport.Height * 0.05))
+                baseGame.scrollUp = false;
+            if (key.Equals(Keys.Down) && !(ms.Y > viewport.Height * 0.95))
+                baseGame.scrollDown = false;
+            
+            //
+
 
                 if (key.Equals(Keys.M))
                 {
@@ -871,6 +873,7 @@ namespace CircleOfLife
             Ecosystem.speciesStats speciesStats;
             speciesStats.size = 40;
             speciesStats.detection = 150;
+            
             speciesStats.speed = 5;
             speciesStats.energyCap = 100;
             speciesStats.foodCap = 20;
@@ -881,10 +884,12 @@ namespace CircleOfLife
             if (createTree.perks[1].Selected)
             {
                 speciesStats.diet = 1;
+                speciesStats.speed = 5;
             }
             else
             {
                 speciesStats.diet = 0;
+                speciesStats.speed = 10;
             }
            
 
