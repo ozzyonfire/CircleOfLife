@@ -38,7 +38,30 @@ namespace CircleOfLife
 
 
 
-        public static String description = "Here lies a description of a perk.\n I sure hope it works";
 
+
+        public static String extinct = "You let a species go extinct! You lose 1000 Order points!";
+        public static String gameOver = "You ran out of Order points and your ecosystem failed!";
+
+
+        public static String goodMorning = "You are Order. You wake up from a millenia long\n" +
+                                            "cat nap to discover that the world has been overun by chaos.\n\n" +
+                                            "Furious, you set out to restore order by creating an ecosystem, \n" +
+                                            "starting with your first creature";
+
+        public static String placeCreature = "You have cleaved out a small section of order from\n " +
+                                            "the shadowy chaos. Life has already began to spring \n" +
+                                            "up from this order. Place your creatures anywhere in\n"+
+                                            "your realm and watch as it thrives!";
+
+
+        public static String gameInstructions1 = "As your ecosystem grows so will your power!\n(shown in the top right corner)\n" +
+                                            "You can influence the world by adding or altering species \nin the menus in" +
+                                            "the bottom right corner. \nMove around the world by moving the mouse to the \nedges or zooming with the scroll wheel";
+
+        public static String gameInstructions2 = "You can also directly influence the world by allowing some\n chaos " +
+                                            "into your realm, using the right mouse button,\n to clear a small section" +
+                                            "This power costs 100 Order Points\n\n"+
+                                            "Careful: If your Order drops to zero chaos will conquer!";
     }
 }

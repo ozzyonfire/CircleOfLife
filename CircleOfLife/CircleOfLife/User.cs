@@ -313,7 +313,7 @@ namespace CircleOfLife
             {
                 createTree.mouseClick(ms.X, ms.Y);
             }
-            else if (baseGame.startOpen)
+            else if (baseGame.startOpen || baseGame.dialogOpen)
             {
 
             }
@@ -334,14 +334,15 @@ namespace CircleOfLife
 
                 newSpecies.addCreature((int)((ms.X) / baseGame.userView.Z - baseGame.userView.X), (int)((ms.Y) / baseGame.userView.Z - baseGame.userView.Y));
                 baseGame.addingSpecies = false;
+                
             }
             else
             {
-                if (buttons == MouseButtons.Right)
+                if (buttons == MouseButtons.Right && baseGame.oPoints > 100)
                 {
                     //effects.addFloatingString("CAT!!", new Vector2(ms.X, ms.Y), Color.Red);
                     effects.addLeak(new Vector2(ms.X, ms.Y), baseGame.userView.Z);
-                    baseGame.oPoints -= 50;
+                    baseGame.oPoints -= 100;
                     ecosystem.leakActive = true;
                     ecosystem.leakPosition = new Vector2(ms.X, ms.Y);
                 }
@@ -465,11 +466,12 @@ namespace CircleOfLife
                 game.Exit();
 
             //Exit start screen
-            if (baseGame.startOpen)
+            if (baseGame.startOpen && (gameDialog == null || !gameDialog.IsOpen))
             {
-                gui.Screen = createScreen;
-                baseGame.startOpen = false;
-                baseGame.createOpen = true;
+
+                dialog(Sprites.goodMorning, "GOOD MORNING");
+                gameDialog.proceedButton.Pressed += new EventHandler(goodMorning_pressed);
+                
                 return;
             }
             if (!baseGame.menuOpen && !baseGame.createOpen)
@@ -493,41 +495,43 @@ namespace CircleOfLife
                 {
                     enterMenu();
                 }
-                if (key.Equals(Keys.Space))
-                {
-                }
 
 
 
                 //debug map expansion
-                if (key.Equals(Keys.Q))
-                {
-                    baseGame.newMapSize(baseGame.mapSizeX - 100);
-                }
-                if (key.Equals(Keys.W))
-                {
-                    baseGame.newMapSize(baseGame.mapSizeX + 100);
-                }
+                //if (key.Equals(Keys.Q))
+                //{
+                //    baseGame.newMapSize(baseGame.mapSizeX - 100);
+                //}
+                //if (key.Equals(Keys.W))
+                //{
+                //    baseGame.newMapSize(baseGame.mapSizeX + 100);
+                //}
 
-                if (key.Equals(Keys.A))
-                {
-                    dialog(Sprites.description,"cat");
-                }
 
-                if (key.Equals(Keys.E))
-                {
-                    if (baseGame.createOpen)
-                    {
-                        baseGame.createOpen = false;
-                        gui.Screen = gameScreen;
-                    }
-                    else
-                    {
-                        baseGame.createOpen = true;
-                        gui.Screen = createScreen;
-                    }
-                }
+                //if (key.Equals(Keys.E))
+                //{
+                //    if (baseGame.createOpen)
+                //    {
+                //        baseGame.createOpen = false;
+                //        gui.Screen = gameScreen;
+                //    }
+                //    else
+                //    {
+                //        baseGame.createOpen = true;
+                //        gui.Screen = createScreen;
+                //    }
+                //}
             }
+        }
+
+        void goodMorning_pressed(object sender, EventArgs e)
+        {
+            gui.Screen = createScreen;
+
+            baseGame.startOpen = false;
+            baseGame.createOpen = true;
+            baseGame.tutorialStage = 1;
         }
 
 
@@ -833,6 +837,7 @@ namespace CircleOfLife
 
                 baseGame.menuOpen = false;
                 gui.Screen = gameScreen;
+                ecosystem.rescanSpecies();
             }
         }
 
@@ -911,6 +916,18 @@ namespace CircleOfLife
 
         void createButton_Pressed(object sender, EventArgs e)
         {
+            if((createTree.perks[1].Selected && baseGame.oPoints > 500 && baseGame.ePoints > 1) || (createTree.perks[0].Selected && baseGame.oPoints > 100 ))
+            {
+                if (createTree.perks[1].Selected)
+                {
+                    baseGame.oPoints -= 500;
+                    baseGame.ePoints -= 1;
+                }
+                else
+                {
+                    baseGame.oPoints -= 100;
+                }
+
             Ecosystem.speciesStats speciesStats;
             speciesStats.size = 40;
             speciesStats.detection = 150;
@@ -971,16 +988,45 @@ namespace CircleOfLife
             baseGame.addingSpecies = true;
             baseGame.createOpen = false;
             gui.Screen = gameScreen;
+
+            if (baseGame.tutorialStage < 2)
+            {
+                dialog(Sprites.placeCreature, "And there was life!");
+                gameDialog.proceedButton.Pressed += new EventHandler(placeCreature_pressed);
+            }
+        }
+        }
+
+        void placeCreature_pressed(object sender, EventArgs e)
+        {
+            baseGame.tutorialStage = 2;
+            dialog(Sprites.gameInstructions1, "Influence the world!");
+            gameDialog.proceedButton.Pressed +=new EventHandler(instructions1);
+        }
+
+        void instructions1(object sender, EventArgs e)
+        {
+            dialog(Sprites.gameInstructions2, "Destroy the world!");
+            gameDialog.proceedButton.Pressed += new EventHandler(instructions2);
         }
 
 
+        void instructions2(object sender, EventArgs e)
+        {
+            gameDialog.Close();
+            baseGame.dialogOpen = false;
+        }
+
         public void dialog(string text, string title)
         {
-            if (gameDialog != null && gameDialog.IsOpen)
-                return;
+                
             float w = menuScreen.Width;
             float h = menuScreen.Height;
-            UniRectangle bounds = new UniRectangle(w * 0.35f, h * 0.4f, w * 0.3f, h * 0.2f);
+            UniRectangle bounds = new UniRectangle(w * 0.35f, h * 0.4f, w * 0.4f, h * 0.3f);
+
+            if (gameDialog != null && gameDialog.IsOpen)
+                gameDialog.Close();
+            
             gameDialog = new GameDialog(text, title, bounds);
             baseGame.dialogOpen = true;
             gameDialog.proceedButton.Pressed += new EventHandler(proceedButton_Pressed);

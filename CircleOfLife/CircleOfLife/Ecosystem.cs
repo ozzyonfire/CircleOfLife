@@ -421,6 +421,9 @@ namespace CircleOfLife
                 species[i].update(gameTime);
                 if (species[i].Creatures.Count == 0)
                 {
+                    //Extinct!
+                    baseGame.user.dialog(Sprites.extinct, "Extinction");
+                    baseGame.oPoints -= 1000;
                     species.RemoveAt(i);
                 }
             }
@@ -475,22 +478,22 @@ namespace CircleOfLife
                     if (species[i] != species[j])
                     {
                         // check prey
-                        if (species[i].Stats.size > species[j].Stats.size && species[i].Stats.diet == 1)
+                        if (species[i].Stats.size > species[j].Stats.size  && species[i].Stats.diet == 1)
                         {
                             // it can feed on the other species
                             species[i].prey.Add(species[j]);
                         }
-                        else if (species[i].Stats.size < species[j].Stats.size && species[j].Stats.diet == 1)
+                        else if (species[i].Stats.size < species[j].Stats.size  && species[j].Stats.diet == 1)
                         {
                             // it will be hunted by the other species
                             species[i].predators.Add(species[j]);
                         }
-                        else if (species[i].Stats.size == species[j].Stats.size && species[i].Stats.diet == 1 && species[j].Stats.diet == 0)
+                        else if (species[i].Stats.size == species[j].Stats.size && species[i].Stats.diet == 1 && species[j].Stats.diet == 0 && (!species[j].perks[7] || species[i].perks[2]) && (!species[j].perks[2] || species[i].perks[7])) 
                         {
                             // it can feed on the herbivore
                             species[i].prey.Add(species[j]);
                         }
-                        else if (species[i].Stats.size == species[j].Stats.size && species[j].Stats.diet == 1 && species[i].Stats.diet == 0)
+                        else if (species[i].Stats.size == species[j].Stats.size && species[j].Stats.diet == 1 && species[i].Stats.diet == 0 && (!species[i].perks[7] || species[j].perks[2]) && (!species[i].perks[2] || species[j].perks[7]))
                         {
                             // it can be fed on by the carnivore
                             species[i].predators.Add(species[j]);

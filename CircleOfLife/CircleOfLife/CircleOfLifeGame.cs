@@ -33,6 +33,8 @@ namespace CircleOfLife
         public Ecosystem ecosystem;
         public User user;
 
+
+        public int tutorialStage = 0;
         //Sounds
         Song backgroundMusic;
         bool backgroundStart = false;
@@ -149,7 +151,7 @@ namespace CircleOfLife
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (menuOpen || createOpen || startOpen)
+            if (menuOpen || createOpen || startOpen || dialogOpen)
             {
 
             }
@@ -258,7 +260,7 @@ namespace CircleOfLife
        ePoints =0;
 
        user.gui.Screen = user.startScreen;
-       user.dialog("You ran out of Order points and your ecosystem failed!", "GAME OVER");
+       user.dialog(Sprites.gameOver, "GAME OVER");
         }
 
         public struct GameFonts
