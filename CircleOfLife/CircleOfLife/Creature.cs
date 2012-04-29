@@ -87,7 +87,7 @@ namespace CircleOfLife
                     spriteRectangle = Sprites.carnivore;
                     break;
                 default:
-                    spriteRectangle = Sprites.mormo;
+                    spriteRectangle = Sprites.flower;
                     break;
             }
             size = stats.size;
