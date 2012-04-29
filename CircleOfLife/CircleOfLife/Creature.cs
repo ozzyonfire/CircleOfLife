@@ -43,6 +43,12 @@ namespace CircleOfLife
         public int energy;
         private float currSpeed;
 
+        //Dead?
+      //  public bool dead;      //when killed by natural causes(predator or starvation) and there is a corpse
+       // public bool erased;    //when killed by a mormo or power and disappear nearly instantly
+        public int foodValue;
+
+
         //creatures
         private Creature predator;
         private Creature prey;
@@ -118,8 +124,10 @@ namespace CircleOfLife
             restTime = new TimeSpan(0, 0, 0);
             this.stamina = 6;
 
-            this.mapWidth = 1920;
+            this.mapWidth = 1920;   //hmm
             this.mapHeight = 1920;
+
+            foodValue = size * 2;//Should be tweeked
 
             //animation offset
             frameOffset = random.Next(4);
@@ -127,7 +135,9 @@ namespace CircleOfLife
 
         public void update(GameTime gameTime)
         {
-            if (state == 1) // chase
+            if (state == 4)
+                return;
+            else if (state == 1) // chase
             {
                 this.sprintTime += gameTime.ElapsedGameTime;
                 Chase(position, ref prey, ref orientation, agility);
@@ -162,7 +172,7 @@ namespace CircleOfLife
             else if (state == 2) // evade
             {
                 this.sprintTime += gameTime.ElapsedGameTime;
-                Evade(position, ref predator, ref orientation, agility);                
+                Evade(position, ref predator, ref orientation, agility);
                 Vector2 heading = new Vector2(
                    (float)Math.Cos(orientation), (float)Math.Sin(orientation));
 
@@ -360,10 +370,16 @@ namespace CircleOfLife
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
-            spriteRectangle.X = 100 * ((frame + frameOffset)%4);
-
-            spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
-
+            if (state == 4)
+            {
+                spriteRectangle.X = 400;
+                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+            }
+            else
+            {
+                spriteRectangle.X = 100 * ((frame + frameOffset) % 4);
+                spriteBatch.Draw(spriteSheet, new Vector2((int)(offset.Z * (position.X + offset.X)), (int)(offset.Z * (position.Y + offset.Y))), spriteRectangle, color, orientation, new Vector2(0), 0.01f * size * offset.Z, SpriteEffects.None, 0.9f);
+            }
         }     
 
 

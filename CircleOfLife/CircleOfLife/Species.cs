@@ -49,7 +49,7 @@ namespace CircleOfLife
             for (int i = 0; i < creatures.Count; i++)
             {
                 creatures[i].update(gameTime);
-                if (creatures[i].state == 4)
+                if (creatures[i].state == 6)
                 {
                     // dead
                     creatures.RemoveAt(i);
