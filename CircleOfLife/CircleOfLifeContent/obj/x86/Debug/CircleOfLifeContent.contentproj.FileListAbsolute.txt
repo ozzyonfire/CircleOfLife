@@ -5,3 +5,4 @@ Q:\226\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemb
 C:\Devel\Entropy\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Devel\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
 I:\Documents and Settings\Peter\My Documents\Visual Studio 2010\Projects\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Documents and Settings\Peter\Desktop\col\CircleOfLife\CircleOfLife\CircleOfLifeContent\obj\x86\Debug\ResolveAssemblyReference.cache

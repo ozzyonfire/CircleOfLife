@@ -104,27 +104,47 @@ namespace CircleOfLife
                                     species[i].Creatures[j].Predator = species[i].predators[k].Creatures[l];
                                 }
 
-                                //????????????????????????????????????????random goal??
-
-
-                            }
-                            else if (species[i].Creatures[j].state == 2) // evading
-                            {
-                                // check what it is evading
-                                // compare it to target predator
-                                //if new predator is closer evade it, otherwise continue evading original predator
-                                if (species[i].Creatures[j].Predator != species[i].predators[k].Creatures[l])
+                                else if (species[i].Creatures[j].state == 2) // evading
                                 {
-                                    float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position);
-                                    if (distanceAway < predDistance)
+                                    // check what it is evading
+                                    // compare it to target predator
+                                    if (species[i].Creatures[j].Predator == species[i].predators[k].Creatures[l])
                                     {
-                                        // new predator
-                                        species[i].Creatures[j].Predator = species[i].predators[k].Creatures[l];
+                                        // keep evading
+                                    }
+                                    else if (pred && species[i].Creatures[j].Predator != null) // hopefully this will fix the crash
+                                    {
+                                        float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position); // still crashing here
+                                        if (distanceAway < predDistance)
+                                        {
+                                            // new predator
+                                            species[i].Creatures[j].Predator = species[i].predators[k].Creatures[l];
+                                        }
+                                    }
+
+                                    //????????????????????????????????????????random goal??
+
+
+                                }
+                                else if (species[i].Creatures[j].state == 2) // evading
+                                {
+                                    // check what it is evading
+                                    // compare it to target predator
+                                    //if new predator is closer evade it, otherwise continue evading original predator
+                                    if (species[i].Creatures[j].Predator != species[i].predators[k].Creatures[l])
+                                    {
+                                        float predDistance = Vector2.Distance(species[i].Creatures[j].Position, species[i].Creatures[j].Predator.Position);
+                                        if (distanceAway < predDistance)
+                                        {
+                                            // new predator
+                                            species[i].Creatures[j].Predator = species[i].predators[k].Creatures[l];
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+
 
 
 
@@ -168,13 +188,13 @@ namespace CircleOfLife
                                         if (species[i].Creatures[j].Prey == species[i].prey[k].Creatures[l]) // this is the target
                                         {
                                             //Check if killed
-                                            if (species[i].Creatures[j].body.Intersects(species[k].Creatures[l].body))
+                                            if (species[i].Creatures[j].body.Intersects(species[i].prey[k].Creatures[l].body))
                                             {
                                                 // killed it
                                                 species[i].Creatures[j].state = 0;
                                                 species[i].Creatures[j].Feed(species[i].Creatures[j].Prey.EnergyValue);
                                                 species[i].Creatures[j].energy += species[i].Creatures[j].Prey.EnergyValue;
-                                                species[k].Creatures[l].state = 4; // dead
+                                                species[i].prey[k].Creatures[l].state = 4; // dead
                                             }
                                             // todo: switch to feed state
                                             // doing the feeding in here for now
@@ -370,11 +390,13 @@ namespace CircleOfLife
                 }
             }
         }
+                
+            
+            
 
 
         public void rescanSpecies()
         {
-
             // this method iterates through the species and sets what is prey and what is predator
             for (int i = 0; i < species.Count; i++)
             {

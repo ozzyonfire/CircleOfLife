@@ -93,7 +93,7 @@ namespace CircleOfLife
                     spriteRectangle = Sprites.carnivore;
                     break;
                 default:
-                    spriteRectangle = Sprites.mormo;
+                    spriteRectangle = Sprites.flower;
                     break;
             }
             size = stats.size;
@@ -108,7 +108,7 @@ namespace CircleOfLife
             color = stats.color;
 
             position = new Vector2(xPos, yPos);
-            goalPosition = new Vector2((float)random.NextDouble() * 1024f, (float)random.NextDouble() * 768f);
+            
             orientation = new float();
 
             Rectangle body = new Rectangle(xPos, yPos, size, size);
@@ -129,6 +129,7 @@ namespace CircleOfLife
 
             foodValue = size * 2;//Should be tweeked
 
+            randomGoal(mapWidth, mapHeight);
             //animation offset
             frameOffset = random.Next(4);
         }
@@ -365,8 +366,6 @@ namespace CircleOfLife
         {
             this.food += value;
         }
-
-
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D spriteSheet, Vector3 offset, int frame)
         {
